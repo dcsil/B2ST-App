@@ -1,0 +1,18 @@
+.signup_container{
+    padding: 100px;
+    
+
+    border: 1px solid black ;
+    display: inline-block;
+}
+
+.current_state_container{
+    padding: 10px;
+    
+
+    border: 1px solid black ;
+    display: inline-block;
+}
+input{
+    
+}

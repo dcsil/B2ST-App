@@ -7,8 +7,6 @@ const PhoneInput = ({ handleSubmit}) => {
 
   return(
     <Box
-        component="form"
-        onSubmit={()=>handleSubmit(value)}
         noValidate
         sx={{ mt: 1, mr:5,ml:5}}
     >
@@ -26,6 +24,7 @@ const PhoneInput = ({ handleSubmit}) => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={()=>handleSubmit(value)}
         >
             Continue
         </Button>

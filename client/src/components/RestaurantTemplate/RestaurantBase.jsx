@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Footer from './Footer';
 import Navigation from './Navigation';
 
@@ -26,9 +26,9 @@ export default function RestaurantBase(props) {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <Navigation/>
-      <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+      <Box disableGutters sx={{m:0,width:'100%',maxWidth:'100%'}}>
         {props.children}
-      </Container>
+      </Box>
       <Footer>
         <Copyright sx={{ mt: 5 }} />
       </Footer>

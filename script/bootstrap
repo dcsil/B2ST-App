@@ -1,7 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Exit immediately if any subcommand fails
 set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -9,7 +11,7 @@ set -e
 brew update
 
 # Install dependencies from Brewfile
-cd "$(dirname "$0")/../.."
+cd "$DIR/.."
 pwd
 
 brew bundle check >/dev/null 2>&1  || {
@@ -18,14 +20,14 @@ brew bundle check >/dev/null 2>&1  || {
 }
 
 # React
-cd "$(dirname "$0")/../client"
+cd "$DIR/../client"
 pwd
 # Install dependencies from npm
 echo "==> Installing frontend npm dependencies…"
 npm install
 
 # Node js dependencies
-cd "$(dirname "$0")/../../server"
+cd "$DIR/../server"
 pwd
 # Install dependencies from npm
 echo "==> Installing backend npm dependencies…"

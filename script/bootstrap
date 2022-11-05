@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Exit immediately if any subcommand fails
+set -e
+
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew update
+
+# Install dependencies from Brewfile
+cd "$(dirname "$0")/../.."
+pwd
+
+brew bundle check >/dev/null 2>&1  || {
+    echo "==> Installing Homebrew dependencies…"
+    brew bundle
+}
+
+# React
+cd "$(dirname "$0")/../client"
+pwd
+# Install dependencies from npm
+echo "==> Installing frontend npm dependencies…"
+npm install
+
+# Node js dependencies
+cd "$(dirname "$0")/../../server"
+pwd
+# Install dependencies from npm
+echo "==> Installing backend npm dependencies…"
+npm install
+
+# Copy env variables if env file does not exist
+echo "==> Updating .env variables"
+cp -r -n .env.example .env

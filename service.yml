@@ -1,0 +1,18 @@
+tools:
+  exceptions: https://...
+  logging: https://...
+  ci: https://github.com/dcsil/B2ST-App/actions
+
+services:
+  production: https://...
+
+docs:
+  getting_started: https://github.com/dcsil/B2ST-app
+  
+commands:
+  bootstrap: script/bootstrap
+  database: https://...
+  server:
+    backend: "cd server && npm run start"
+    frontend: "cd client && npm run start"
+  test: https://...

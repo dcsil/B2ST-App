@@ -36,3 +36,9 @@ npm install
 # Copy env variables if env file does not exist
 echo "==> Updating .env variables"
 cp -r -n .env.example .env
+
+# Docker Compose
+cd "$DIR/.."
+pwd
+echo "==> Docker Compose"
+docker-compose up -d

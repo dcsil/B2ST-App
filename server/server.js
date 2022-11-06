@@ -2,12 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
-require("dotenv").config();
+require("dotenv").config({path: "./.env"});
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 Sentry.init({
+  dsn: process.env.SENTRY_DSN,
   integrations: [
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),

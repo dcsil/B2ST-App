@@ -27,6 +27,13 @@ command -v "docker" > /dev/null 2>&1 || {
   fi
 }
 
+# React js dependencies
+cd "$DIR/../client"
+pwd
+# Copy env variables if env file does not exist
+echo "==> Updating .env variables"
+cp -r -n .env.example .env
+
 # Node js dependencies
 cd "$DIR/../server"
 pwd

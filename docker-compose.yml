@@ -1,0 +1,45 @@
+# Version of Docker-compose
+version: '3.8'
+services:
+  # Service name
+  node:
+    # Creating a custom image
+    build:
+      # Location to the Dockerfile
+      context: ./server
+      # Name of the Dockerfile
+      dockerfile: Dockerfile
+    ports:
+        # External port:Internal port
+      - 5000:8000
+    volumes:
+      # Syntax <nameOfVolume>:<directorInDocker>
+      # ADD THE CONFIGURATION FROM THIS POINT to sync the working directory
+      # for the application to the /app directory in the container
+      - /server
+      - /server/node_modules
+  # Add the react service
+  react:
+    build:
+      # Location to the dockerfile
+      context: ./client
+      # Name of the dockerfile
+      dockerfile: Dockerfile
+    volumes:
+        # Bind-mounts configuration
+      - /client/public
+        # Ignoring any changes made in "node_modules" folder
+      - /client/node_modules
+    ports:
+        # External port:Internal port
+      - 3000:3000
+    depends_on:
+        # Starts up the node service before starting up the react service
+      - node
+    environment:
+      # Enabling hot reload
+      - CHOKIDAR_USEPOLLING=true
+# Making the node service volume accessible to other services.
+volumes:
+  # Declaring the node service volume.
+  nodeVolume:

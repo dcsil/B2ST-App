@@ -1,3 +1,6 @@
 brew "node@16"
-brew "docker"
 brew "mongodb/brew/mongodb-community"
+if !OS.mac?
+  brew "docker"
+  brew "docker-compose"
+end

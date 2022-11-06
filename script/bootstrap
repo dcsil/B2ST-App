@@ -5,34 +5,37 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+docker -v
 
-brew update
+command -v "docker" > /dev/null 2>&1 || {
+  if [$(uname -s) = 'Darwin']; then
+    # Install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install dependencies from Brewfile
-cd "$DIR/.."
-pwd
+    brew update
 
-brew bundle check >/dev/null 2>&1  || {
-    echo "==> Installing Homebrew dependencies…"
-    brew bundle
+    # Install dependencies from Brewfile
+    cd "$DIR/.."
+    pwd
+
+    brew bundle check >/dev/null 2>&1  || {
+        echo "==> Installing Homebrew dependencies…"
+        brew bundle
+    }
+  else
+    sh "$DIR/install-docker.sh"
+  fi
 }
-
-# React
-cd "$DIR/../client"
-pwd
-# Install dependencies from npm
-echo "==> Installing frontend npm dependencies…"
-npm install
 
 # Node js dependencies
 cd "$DIR/../server"
 pwd
-# Install dependencies from npm
-echo "==> Installing backend npm dependencies…"
-npm install
 
 # Copy env variables if env file does not exist
 echo "==> Updating .env variables"
 cp -r -n .env.example .env
+
+cd "$DIR/.."
+pwd 
+echo "==> Docker Compose"
+docker-compose up -d --build

@@ -1,3 +1,4 @@
 /client/package-lock.json filter=lfs diff=lfs merge=lfs -text
 /client/frontend/package-lock.json filter=lfs diff=lfs merge=lfs -text
 /client/frontend/yarn.lock filter=lfs diff=lfs merge=lfs -text
+/server/package-lock.json filter=lfs diff=lfs merge=lfs -text

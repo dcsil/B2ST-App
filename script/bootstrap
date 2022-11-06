@@ -33,7 +33,7 @@ npm install
 
 # Copy env variables if env file does not exist
 echo "==> Updating .env variables"
-if [[ ! -f .env]]; then
+if [[ ! -f "$DIR/../server/.env" ]]; then
     cp .env.example .env
 fi
 

@@ -8,8 +8,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew update
-
 # Install dependencies from Brewfile
 cd "$DIR/.."
 pwd
@@ -35,4 +33,12 @@ npm install
 
 # Copy env variables if env file does not exist
 echo "==> Updating .env variables"
-cp -r -n .env.example .env
+if [[ ! -f "$DIR/../server/.env" ]]; then
+    cp .env.example .env
+fi
+
+# Docker Compose
+cd "$DIR/.."
+pwd
+echo "==> Docker Compose"
+docker-compose up -d

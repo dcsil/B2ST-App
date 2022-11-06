@@ -2,11 +2,15 @@ tools:
   exceptions:
     frontend: https://sentry.io/organizations/dcsil/projects/b2st-frontend/?project=4504109347831808
     backend: https://sentry.io/organizations/dcsil/projects/b2st-backend/?project=6735017
-  logging: https://...
+  logging:
+    frontend: https://service.us2.sumologic.com/ui/?appName=b2st-app
+    frontend: https://service.us2.sumologic.com/ui/?appName=b2st-server
   ci: https://github.com/dcsil/B2ST-App/actions
 
 services:
-  production: https://...
+  production:
+    frontend: https://b2st-app.herokuapp.com/
+    backend: https://b2st-server.herokuapp.com/
 
 docs:
   getting_started: https://github.com/dcsil/B2ST-App

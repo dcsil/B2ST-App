@@ -1,0 +1,14 @@
+# Frontend Build
+FROM node:16-alpine AS frontend-build
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4000
+
+CMD ["node", "server.js"]

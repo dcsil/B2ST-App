@@ -34,6 +34,10 @@ app.use(Sentry.Handlers.errorHandler());
 
 app.use(cors());
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
  
 app.listen(port, () => {
   // perform a database connection when server starts

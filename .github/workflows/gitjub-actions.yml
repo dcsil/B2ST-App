@@ -28,8 +28,8 @@ jobs:
 
     - name: Build
       run:  |
-      cd client
-      npm run build
+        cd client
+        npm run build
   build-client:
     runs-on: ubuntu-latest
     strategy:
@@ -54,5 +54,5 @@ jobs:
 
     - name: Build
       run:  |
-      cd client
-      npm run build
+        cd client
+        npm run build

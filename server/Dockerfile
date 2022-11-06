@@ -1,14 +1,16 @@
-# Frontend Build
-FROM node:16-alpine AS frontend-build
+# Sets the base image of the application to the node’s official image.
+FROM node:17
 
-WORKDIR /app
+# Sets the Working Directory as "/server"
+WORKDIR /server
+# Copies the package.json file into "/server" and runs npm i
+COPY package.json /server
+RUN npm i
+# Copies the entire source code into "/server"
+COPY . /server
 
-COPY package.json .
+# Specifies the port the node app will be running on
+EXPOSE 8000
 
-RUN npm install
-
-COPY . .
-
-EXPOSE 4000
-
+# Runs "node server.js" after the above step is completed
 CMD ["node", "server.js"]

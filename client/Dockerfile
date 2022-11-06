@@ -1,13 +1,14 @@
-From node:16-alpine
+# Official node image
+FROM node:17
+# Setting the working directory to "/client"
+WORKDIR /client
 
-WORKDIR /app
-
-COPY package.json .
-
+# Copies the package.json file into "/client" and run npm i
+COPY package.json /client
 RUN npm install
+# Copies the entire react source code into "/client"
+COPY . /client
 
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+EXPOSE 8000
+# Starting the react app
+CMD [ "npm", "start"]

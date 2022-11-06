@@ -18,5 +18,6 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_PROD}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           usedocker: true
+          docker_heroku_process_type: web
     env:
       NODE_ENV: production

@@ -1,5 +1,7 @@
 tools:
-  exceptions: https://...
+  exceptions:
+    frontend: https://sentry.io/organizations/dcsil/projects/b2st-frontend/?project=4504109347831808
+    backend: https://sentry.io/organizations/dcsil/projects/b2st-backend/?project=6735017
   logging: https://...
   ci: https://github.com/dcsil/B2ST-App/actions
 
@@ -7,7 +9,7 @@ services:
   production: https://...
 
 docs:
-  getting_started: https://github.com/dcsil/B2ST-app
+  getting_started: https://github.com/dcsil/B2ST-App
   
 commands:
   bootstrap: script/bootstrap

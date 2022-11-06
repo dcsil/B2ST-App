@@ -8,9 +8,28 @@ services:
     volumes:
       - ./server:/app
       - /app/node_modules
+    environment:
+      - MONGO_INITDB_PORT=4000
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=b2st
+    env_file:
+      - ./server/.env
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=b2st
+    env_file:
+      - ./server/.env
+    volumes:
+      - mongoDB:/data/db
   client:
     build: ./client
-    container_name: api_frontend
+    container_name: client_frontend
     ports:
       - '3000:3000'
     volumes:

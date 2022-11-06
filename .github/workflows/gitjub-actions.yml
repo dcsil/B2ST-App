@@ -8,6 +8,7 @@ on:
 jobs:
   build-client:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       matrix:
         node-version: [14.x]
@@ -35,6 +36,7 @@ jobs:
 
   build-server:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       matrix:
         node-version: [14.x]

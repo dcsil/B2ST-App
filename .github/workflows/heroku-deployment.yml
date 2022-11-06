@@ -10,6 +10,7 @@ on:
 jobs:
   deploy-client:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       # Check-out your repository.
       - name: Checkout
@@ -52,6 +53,7 @@ jobs:
           process_type: web
   deploy-server:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       # Check-out your repository.
       - name: Checkout

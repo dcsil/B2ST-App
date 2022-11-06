@@ -9,7 +9,6 @@ docker -v
 
 command -v "docker" > /dev/null 2>&1 || {
   if [$(uname -s) = 'Darwin']; then
-  
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -22,6 +21,7 @@ command -v "docker" > /dev/null 2>&1 || {
     brew bundle check >/dev/null 2>&1  || {
         echo "==> Installing Homebrew dependencies…"
         brew bundle
+    }
   else
     sh "$DIR/install-docker.sh"
   fi

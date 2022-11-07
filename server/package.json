@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon"
+    "server": "nodemon",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,8 @@
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.1",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "jest": "^29.3.0"
   }
 }

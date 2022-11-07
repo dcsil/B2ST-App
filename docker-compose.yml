@@ -51,6 +51,7 @@ services:
       - 27017:27017
     volumes:
       - ./server/data:/data/db
+      - ./config/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 # Making the node service volume accessible to other services.
 volumes:
   # Declaring the node service volume.

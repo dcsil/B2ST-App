@@ -4,7 +4,7 @@
 
 ### Development
 
-1. Install Docker/Docker Compose. Make sure docker daemon is running.
+1. On macOs, install Docker/Docker Compose. Make sure docker daemon is running. If is LINUX, go to next step.
 2. At root folder, run `script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.
 3. The web app should run at http://localhost:3000.
 
@@ -39,3 +39,12 @@ We use Github Actions for our repo's CI, the setup can be found in /.github/work
     - Run `docker-compose exec -it mongo bash` to access the local DB.
     - Or go to mongo atlas https://cloud.mongodb.com/v2/63695112df3f17664fbf5b86.
 
+## Deployment and Production
+
+- Deployed to Heroku automatically once CI is green on master, using github workflow `heroku-deployment.ymml`.
+
+- Production is available with Heroku.
+
+    - Client: https://b2st-app.herokuapp.com/
+
+    - Server: https://b2st-server.herokuapp.com/

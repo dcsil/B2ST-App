@@ -47,6 +47,8 @@ services:
     image: mongo
     env_file:
       - ./server/.env
+    ports:
+      - 27017:27017
     volumes:
       - ./server/data:/data/db
 # Making the node service volume accessible to other services.

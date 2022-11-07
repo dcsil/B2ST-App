@@ -53,13 +53,13 @@ jobs:
 
     - name: Install dependencies
       run:  |
-        cd server
+        cd client
         npm install
 
     - name: Run the tests
       run:  |
-        cd server
-        npm install
+        cd client
+        npm test
 
     # - name: Build
     #   run:  |

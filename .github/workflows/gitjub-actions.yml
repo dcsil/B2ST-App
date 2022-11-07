@@ -29,7 +29,7 @@ jobs:
     - name: Run the tests
       run:  |
         cd client
-        npm install
+        npm test
 
     - name: Build
       run:  |

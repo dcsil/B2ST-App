@@ -6,8 +6,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # test frontend
 cd "$DIR/../client"
-npm run test
+npm test
 
 # test backend
 cd "$DIR/../server"
-npm run test
+npm test

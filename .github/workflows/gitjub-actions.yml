@@ -26,8 +26,8 @@ jobs:
         cd client
         npm install
 
-    # - name: Run the tests
-    #   run: npm test
+    - name: Run the tests
+      run: npm test
 
     - name: Build
       run:  |
@@ -54,8 +54,8 @@ jobs:
         cd client
         npm install
 
-    # - name: Run the tests
-    #   run: npm test
+    - name: Run the tests
+      run: npm test
 
     # - name: Build
     #   run:  |

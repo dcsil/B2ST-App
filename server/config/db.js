@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({path: "./.env"});
 const print = console.log
 
-const db = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}?retryWrites=true&w=majority`;
+const db = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?retryWrites=true&w=majority`;
 
 const connectDB = async() =>{
     try{

@@ -21,4 +21,5 @@ commands:
   server:
     backend: "cd server && npm run start"
     frontend: "cd client && npm run start"
-  test: "cd server && npm test"
+    test-backend: "cd server && npm test"
+    test-frontedn: "cd client && npm test"

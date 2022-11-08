@@ -9,6 +9,6 @@ RUN npm install
 # Copies the entire react source code into "/client"
 COPY . /client
 
-EXPOSE 8000
+EXPOSE 3000
 # Starting the react app
 CMD [ "npm", "start"]

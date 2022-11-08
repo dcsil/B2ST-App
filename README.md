@@ -44,7 +44,7 @@ The tests are in:
 
         For more details check mongodb atlas documentation: https://www.mongodb.com/docs/atlas/getting-started/ 
 - Database
-    - Run `docker-compose exec -it mongo bash` to access the local DB.
+    - After setup with bootstrap, run `docker-compose exec -it b2st-app_mongo_1 mongosh` to access the local DB.
 
 ## Deployment and Production
 

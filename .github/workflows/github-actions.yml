@@ -9,6 +9,9 @@ jobs:
   Frontend Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
     - name: Install Jest 
       run: |
@@ -22,6 +25,9 @@ jobs:
   Backend Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
     - name: Install Jest
       run: |

@@ -6,44 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  # Frontend-Testcases:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 25
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x]
-  #   steps:
-  #   - name: Install Jest 
-  #     run: |
-  #       cd client
-  #       npm install --save-dev jest
-  #   - name: Run Frontend Testcases
-  #     run: |
-  #       cd client
-  #       npm run test
-
-  # Backend-Testcases:
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 25
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x]
-  #   steps:
-  #   - name: Install Jest
-  #     run: |
-  #       cd server
-  #       npm install --save-dev jest
-  #   - name: Run Backend Testcases
-  #     run: |
-  #       cd server
-  #       npm run test
-      
 
 
 
-  build-client:
+  Frontend-Testcases:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     strategy:
       matrix:
         node-version: [14.x]
@@ -66,14 +34,9 @@ jobs:
         cd client
         npm test
 
-    - name: Build
-      run:  |
-        cd client
-        npm run build
-
-  build-server:
+  Backend-Testcases:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     strategy:
       matrix:
         node-version: [14.x]
@@ -95,8 +58,3 @@ jobs:
       run:  |
         cd server
         npm test
-
-    # - name: Build
-    #   run:  |
-    #     cd client
-    #     npm run build

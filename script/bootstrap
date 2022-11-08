@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit immediately if any subcommand fails
-# set -e
+set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -35,7 +35,9 @@ echo "==> Client dependencies installed"
 
 # Copy env variables if env file does not exist
 echo "==> Updating client .env variables"
-cp -r -n .env.example .env
+if [[ ! -f .env]]; then
+  cp -r .env.example .env
+fi
 echo "==> Client .env variables updated"
 
 # Node js dependencies
@@ -46,7 +48,9 @@ echo "==> Server dependencies installed"
 
 # Copy env variables if env file does not exist
 echo "==> Updating server .env variables"
-cp -r -n .env.example .env
+if [[ ! -f .env]]; then
+  cp -r .env.example .env
+fi
 echo "==> Server .env variables updated"
 cd "$DIR/.."
 pwd 

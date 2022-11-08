@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit immediately if any subcommand fails
-set -e
+# set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -31,20 +31,23 @@ command -v "docker" > /dev/null 2>&1 || {
 cd "$DIR/../client"
 echo "==> Installing client dependencies"
 npm install
+echo "==> Client dependencies installed"
 
 # Copy env variables if env file does not exist
-echo "==> Updating .env variables"
+echo "==> Updating client .env variables"
 cp -r -n .env.example .env
+echo "==> Client .env variables updated"
 
 # Node js dependencies
 cd "$DIR/../server"
 echo "==> Installing server dependencies"
 npm install
+echo "==> Server dependencies installed"
 
 # Copy env variables if env file does not exist
-echo "==> Updating .env variables"
+echo "==> Updating server .env variables"
 cp -r -n .env.example .env
-
+echo "==> Server .env variables updated"
 cd "$DIR/.."
 pwd 
 echo "==> Docker Compose"

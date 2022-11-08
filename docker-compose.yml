@@ -18,11 +18,6 @@ services:
       # for the application to the /app directory in the container
       - /server
       - /server/node_modules
-    environment:
-      - MONGO_INITDB_PORT=4000
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=b2st
     env_file:
       - ./server/.env
     depends_on:
@@ -50,12 +45,10 @@ services:
       - CHOKIDAR_USEPOLLING=true
   mongo:
     image: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=b2st
     env_file:
       - ./server/.env
+    ports:
+      - 27017:27017
     volumes:
       - ./server/data:/data/db
 # Making the node service volume accessible to other services.

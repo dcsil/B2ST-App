@@ -10,7 +10,7 @@ RUN npm i
 COPY . /server
 
 # Specifies the port the node app will be running on
-EXPOSE 8000
+EXPOSE 5000
 
 # Runs "node server.js" after the above step is completed
 CMD ["node", "server.js"]

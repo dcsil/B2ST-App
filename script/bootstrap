@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit immediately if any subcommand fails
-set -e
+set -ea
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -11,7 +11,7 @@ command -v "docker" > /dev/null 2>&1 || {
   if [$(uname -s) = 'Darwin']; then
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
+    
     brew update
 
     # Install dependencies from Brewfile
@@ -29,20 +29,43 @@ command -v "docker" > /dev/null 2>&1 || {
 
 # React js dependencies
 cd "$DIR/../client"
-pwd
+echo "==> Installing client dependencies"
+npm install
+echo "==> Client dependencies installed"
+
 # Copy env variables if env file does not exist
-echo "==> Updating .env variables"
-cp -r -n .env.example .env
+echo "==> Updating client .env variables"
+if [ ! -f .env ]
+then
+  cp -r .env.example .env
+fi
+echo "==> Client .env variables updated"
 
 # Node js dependencies
 cd "$DIR/../server"
-pwd
+echo "==> Installing server dependencies"
+npm install
+echo "==> Server dependencies installed"
+
 
 # Copy env variables if env file does not exist
-echo "==> Updating .env variables"
-cp -r -n .env.example .env
+echo "==> Updating server .env variables"
+if [ ! -f .env ]
+then
+  cp -r .env.example .env
+fi
+echo "==> Server .env variables updated"
+
+echo "==> Source ENV variables"
+source .env
+echo "==> ENV variables sourced"
+
+
 
 cd "$DIR/.."
 pwd 
+
+
 echo "==> Docker Compose"
 docker-compose up -d --build
+echo "==> Docker Compose done"

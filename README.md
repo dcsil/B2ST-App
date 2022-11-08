@@ -22,7 +22,7 @@ We setup a Node-Express server in our /server directory.
 
 We use Github Actions for our repo's CI, the setup can be found in `./github/workflows`
 
-## Test
+### Test
 
 Run `sh script/root` and follow instructions. We are using Jest for testing our Javascript based app.
 

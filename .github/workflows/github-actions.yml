@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  Frontend Testcases:
+  Frontend-Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -22,7 +22,7 @@ jobs:
         cd client
         npm run test
 
-  Backend Testcases:
+  Backend-Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:

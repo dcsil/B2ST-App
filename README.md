@@ -20,7 +20,15 @@ We setup a Node-Express server in our /server directory.
 
 ### CI
 
-We use Github Actions for our repo's CI, the setup can be found in /.github/workflows
+We use Github Actions for our repo's CI, the setup can be found in `./github/workflows`
+
+## Test
+
+Run `sh script/root` and follow instructions. We are using Jest for testing our Javascript based app.
+
+The tests are in:
+    - `./server/tests` for backend tests
+    - `./client/src/tests` for frontend tests
 
 ### Other Details
 
@@ -37,7 +45,6 @@ We use Github Actions for our repo's CI, the setup can be found in /.github/work
         For more details check mongodb atlas documentation: https://www.mongodb.com/docs/atlas/getting-started/ 
 - Database
     - Run `docker-compose exec -it mongo bash` to access the local DB.
-    - Or go to mongo atlas https://cloud.mongodb.com/v2/63695112df3f17664fbf5b86.
 
 ## Deployment and Production
 

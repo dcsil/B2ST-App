@@ -11,14 +11,17 @@ services:
   production:
     frontend: https://b2st-app.herokuapp.com/
     backend: https://b2st-server.herokuapp.com/
+  production_dashboard:
+    frontend: https://dashboard.heroku.com/apps/b2st-app
+    backedn: https://dashboard.heroku.com/apps/b2st-server
 
 docs:
   getting_started: https://github.com/dcsil/B2ST-App
   
 commands:
-  bootstrap: script/bootstrap
-  database: https://cloud.mongodb.com/v2/63695112df3f17664fbf5b86
+  bootstrap: sh script/bootstrap
+  database: docker-compose exec -it mongo bash
   server:
-    backend: "cd server && npm run start"
-    frontend: "cd client && npm run start"
-  test: "cd server && npm test"
+    backend: cd server; npm run start
+    frontend: cd client; npm run start
+  test: sh script/test

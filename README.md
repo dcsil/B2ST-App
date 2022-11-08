@@ -5,7 +5,7 @@
 ### Development
 
 1. On macOs, install Docker/Docker Compose. Make sure docker daemon is running. If is LINUX, go to next step.
-2. At root folder, run `script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.
+2. At root folder, run `sh script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.
 3. The web app should run at http://localhost:3000.
 
 ## Project Setup
@@ -20,7 +20,15 @@ We setup a Node-Express server in our /server directory.
 
 ### CI
 
-We use Github Actions for our repo's CI, the setup can be found in /.github/workflows
+We use Github Actions for our repo's CI, the setup can be found in `./github/workflows`
+
+## Test
+
+Run `sh script/root` and follow instructions. We are using Jest for testing our Javascript based app.
+
+The tests are in:
+    - `./server/tests` for backend tests
+    - `./client/src/tests` for frontend tests
 
 ### Other Details
 

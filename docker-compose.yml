@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile
     ports:
         # External port:Internal port
-      - 5000:8000
+      - 5000:5000
     volumes:
       # Syntax <nameOfVolume>:<directorInDocker>
       # ADD THE CONFIGURATION FROM THIS POINT to sync the working directory
@@ -46,19 +46,19 @@ services:
   mongo:
     image: mongo
     environment:
-      MONGODB_USER: "$$DB_USER"
-      MONGODB_PASS: "$$DB_PASSWORD"
-      MONGODB_DATABASE: "$$DB_DATABASE"
-      MONGO_INITDB_ROOT_USERNAME: "$$MONGO_INITDB_ROOT_USERNAME"
-      MONGO_INITDB_ROOT_PASSWORD: "$$MONGO_INITDB_ROOT_PASSWORD"
-      MONGO_INITDB_DATABASE: "$$MONGO_INITDB_DATABASE"
+      MONGODB_USER: "$DB_USER"
+      MONGODB_PASS: "$DB_PASSWORD"
+      MONGODB_DATABASE: "$DB_DATABASE"
+      MONGO_INITDB_ROOT_USERNAME: "$MONGO_INITDB_ROOT_USERNAME"
+      MONGO_INITDB_ROOT_PASSWORD: "$MONGO_INITDB_ROOT_PASSWORD"
+      MONGO_INITDB_DATABASE: "$MONGO_INITDB_DATABASE"
     env_file:
       - ./server/.env
     ports:
       - 27017:27017
     volumes:
       - mongo:/data/db
-      - ./server/config/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./server/config/mongo_setup.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 # Making the node service volume accessible to other services.
 volumes:
   # Declaring the node service volume.

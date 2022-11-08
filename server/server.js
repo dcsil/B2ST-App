@@ -3,10 +3,9 @@ const cors = require("cors");
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 require("dotenv").config({path: "./.env"});
-
 const app = express();
 const port = process.env.PORT || 5000;
-
+const db = require("./config/db");
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   integrations: [
@@ -35,14 +34,14 @@ app.use(Sentry.Handlers.errorHandler());
 app.use(cors());
 app.use(express.json());
 
-const connectDB = require("./config/db")
-connectDB();
-app.use("/user", require("./Routes/user"))
-app.get("/", (req, res)=>{
-  res.send("Api Running")
-})
- 
-app.listen(port, () => {
-  // perform a database connection when server starts
-  console.log(`Server is running on port: ${port}`)
+
+db.connect(() => {
+  app.use("/users", require("./routes/user"))
+  app.get("/", (req, res)=>{
+    res.send("Api Running")
+  })
+  app.listen(port, () => {
+    // perform a database connection when server starts
+    console.log(`Server is running on port: ${port}`)
+  });
 });

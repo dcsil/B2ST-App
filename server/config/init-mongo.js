@@ -1,14 +1,23 @@
-const { db } = require("../module/User");
-
-require("dotenv").config({path: "./.env"});
-db.createUser(
-    {
-        user: process.env.DB_USER,
-        pwd: process.env.DB_PASSWORD,
-        roles: [
-            { role: 'readWrite', db: process.env.DB_DATABASE }
-        ]
+const User = require("../module/User");
+const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config({ path: "../.env" });
+var db;
+MongoClient.connect(
+  process.env.URL,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err, client) => {
+    if (err) {
+      return console.log(err);
     }
-)
 
-db.createCollection("users");
+    // Specify the database you want to access
+    
+    db = client;
+    console.log(`MongoDB Connected: ${url}`);
+  }
+);
+
+module.exports = db;

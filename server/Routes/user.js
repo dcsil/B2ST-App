@@ -2,41 +2,36 @@ const express = require("express");
 const router = express.Router();
 const print = console.log
 const User = require("../module/User")
-// @route POST Route/users
-
-router.post("/",[
-    // not defined
-    // check("name", "Name is required").not().isEmpty(),
-    // check("email", "Please include a valid email").isEmail(),
-    // check("password", "Please enter a password with 6 or more characters").isLength({min:6})
-], async (req, res)=>{
-    const error = validationResult(req);
-    print("Now Start")
-    if (!error.isEmpty()){
-        return res.status(400).json({ error: error.array() });
-    }
-    else{
-        print(req.body)
-    }
-
-    const {name, email, password} = req.body
+router.post("/", async (req, res)=>{
+    const { name, email, password } = req.body;
     try{
         let user = await User.findOne({email});
-        if (user){
-            res.status(400).json({error: [{msg: "User already exists"}]});
-            //see if user exists
+        if(user){
+            return res.status(400).json({msg: "User already exists"});
         }
         user = new User({
-            name, email, password
-        })
-        user.password = password
+            name,
+            email,
+            password
+        });
         await user.save();
-
-
-    }catch(error){
-        print(error.message);
-        res.status(500).send("Server Error");
+        res.send("User saved");
+    }catch(err){
+        print(err.message);
+        res.status(500).send("Error in Saving");
     }
-})
+}
+);
 
-module.exports = router
+router.get("/", async (req, res)=>{
+    try{
+        const users = await User.find();
+        res.json(users);
+    }catch(err){
+        print(err.message);
+        res.status(500).send("Error in Getting users");
+    }
+}
+);
+
+module.exports = router;

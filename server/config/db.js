@@ -1,20 +1,29 @@
+require("dotenv").config({ path: "../.env" });
 const mongoose = require("mongoose");
-require("dotenv").config({path: "./.env"});
-const print = console.log
+const mongoDbUrl = process.env.MONGO_URL;
+let mongodb;
 
-const db = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
-
-const connectDB = async() =>{
-    try{
-        await mongoose.connect(db,{
-            useNewUrlParser: true
-        });
-        print("MongoDB connected");
-
-    }catch(error){
-        print(error.message);
-        process.exit(1);
+function connect(callback) {
+  mongoose.connect(mongoDbUrl, (err, db) => {
+    if (err) {
+      console.log(err);
+      process.exit(1);
     }
+    console.log("Connected to MongoDB");
+    mongodb = db;
+    callback();
+  });
+}
+function get() {
+  return mongodb;
 }
 
-module.exports = connectDB
+function close() {
+  mongodb.close();
+}
+
+module.exports = {
+  connect,
+  get,
+  close,
+};

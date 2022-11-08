@@ -1,0 +1,92 @@
+name: CI/CD
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  Jest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+    - name: Install Jest 
+      run: |
+        cd client
+        npm install --save-dev jest
+    - name: Run Frontend Testcases based on Jest
+      run: |
+        cd client
+        npm run test
+
+    - name: Install Jest
+      run: |
+        cd server
+        npm install --save-dev jest
+    - name: Run Backend Testcases based on Jest
+      run: |
+        cd server
+        npm run test
+      
+
+
+
+  build-client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run:  |
+        cd client
+        npm install
+
+    - name: Run the tests
+      run:  |
+        cd client
+        npm test
+
+    - name: Build
+      run:  |
+        cd client
+        npm run build
+
+  build-server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run:  |
+        cd server
+        npm install
+
+    - name: Run the tests
+      run:  |
+        cd server
+        npm test
+
+    # - name: Build
+    #   run:  |
+    #     cd client
+    #     npm run build

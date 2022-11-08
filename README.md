@@ -5,7 +5,7 @@
 ### Development
 
 1. On macOs, install Docker/Docker Compose. Make sure docker daemon is running. If is LINUX, go to next step.
-2. At root folder, run `script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.
+2. At root folder, run `sh script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.
 3. The web app should run at http://localhost:3000.
 
 ## Project Setup

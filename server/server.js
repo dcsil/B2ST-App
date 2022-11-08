@@ -35,11 +35,14 @@ app.use(Sentry.Handlers.errorHandler());
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const connectDB = require("./config/db")
+connectDB();
+app.use("/user", require("./Routes/user"))
+app.get("/", (req, res)=>{
+  res.send("Api Running")
+})
  
 app.listen(port, () => {
   // perform a database connection when server starts
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`)
 });

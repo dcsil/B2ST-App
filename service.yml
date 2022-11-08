@@ -17,8 +17,8 @@ docs:
   
 commands:
   bootstrap: script/bootstrap
-  database: https://...
+  database: https://cloud.mongodb.com/v2/63695112df3f17664fbf5b86
   server:
     backend: "cd server && npm run start"
     frontend: "cd client && npm run start"
-  test: https://...
+  test: script/test

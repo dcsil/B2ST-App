@@ -26,8 +26,18 @@ We use Github Actions for our repo's CI, the setup can be found in /.github/work
 
 - Configuration
     - Credentials are mostly provided by running `script/bootstrap`.
+    - You can setup your own credentials in .env, or credentials will be copied from `.env.example` when setup.
+    - For mongo atlas credentials,
+        1. Create a mongodb atlas account
+        2. After login, create a cluster.
+        3. On `security/database access`, create a user
+        4. On `deployment/database`, click `browse collections` and create a database
+        5. Now on this repo, copy `.env.example` as `.env` in `server` folder, replace with your credentials including username and password of the user you created, database name and cluster name.
+
+        For more details check mongodb atlas documentation: https://www.mongodb.com/docs/atlas/getting-started/ 
 - Database
-    - Run `docker-compose exec -it mongo bash` to access the DB.
+    - Run `docker-compose exec -it mongo bash` to access the local DB.
+    - Or go to mongo atlas https://cloud.mongodb.com/v2/63695112df3f17664fbf5b86.
 
 ## Deployment and Production
 

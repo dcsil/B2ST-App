@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  Jest:
+  Frontend Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -14,16 +14,20 @@ jobs:
       run: |
         cd client
         npm install --save-dev jest
-    - name: Run Frontend Testcases based on Jest
+    - name: Run Frontend Testcases
       run: |
         cd client
         npm run test
 
+  Backend Testcases:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
     - name: Install Jest
       run: |
         cd server
         npm install --save-dev jest
-    - name: Run Backend Testcases based on Jest
+    - name: Run Backend Testcases
       run: |
         cd server
         npm run test

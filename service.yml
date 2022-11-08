@@ -20,7 +20,7 @@ docs:
   
 commands:
   bootstrap: sh script/bootstrap
-  database: docker-compose exec -it mongo bash
+  database: docker-compose exec -it mongo mongosh
   server:
     backend: cd server; npm run start
     frontend: cd client; npm run start

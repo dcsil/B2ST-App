@@ -73,7 +73,9 @@ export default function Home() {
               justifyContent="center"
             >
               <Button variant="contained">Dashboard</Button>
-              <Button variant="outlined">Pricing</Button>
+              <Link to="/pricing">
+                <Button variant="outlined" >Pricing</Button>
+              </Link>
             </Stack>
           </Container>
         </Box>

@@ -7,7 +7,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 const db = require("./config/db");
 //import sms.js
-const {sendSMS,getSMS }= require("./routes/sms");
+const {sendSMS,getSMS,router }= require("./routes/sms");
+
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   integrations: [
@@ -35,6 +36,8 @@ app.use(Sentry.Handlers.errorHandler());
 
 app.use(cors());
 app.use(express.json());
+app.use(router);
+
 
 
 db.connect(() => {
@@ -45,5 +48,7 @@ db.connect(() => {
   app.listen(port, () => {
     // perform a database connection when server starts
     console.log(`Server is running on port: ${port}`)
+    // getSMS({datesent:"2022-11-16", limit:10}).then((messages) => {console.log(messages)});
+    // sendSMS("Hello World", "");
   });
 });

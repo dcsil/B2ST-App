@@ -39,6 +39,7 @@ app.use(express.json());
 
 db.connect(() => {
   app.use("/users", require("./routes/user"))
+  app.use("/marketing", require("./routes/marketing"))
   app.get("/", (req, res)=>{
     res.send("Api Running")
   })

@@ -30,6 +30,15 @@ The tests are in:
     - `./server/tests` for backend tests
     - `./client/src/tests` for frontend tests
 
+### Datasets
+
+We used datasets from Kaggle to train our marketing system which originated at the following links:
+
+- https://www.kaggle.com/datasets/mkechinov/ecommerce-purchase-history-from-electronics-store
+- https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-electronics-store
+
+These can be found at `server/datasets`
+
 ### Other Details
 
 - Configuration

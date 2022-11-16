@@ -72,7 +72,7 @@ export default function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Dashboard</Button>
+              <Button href="/dashboard" variant="contained">Dashboard</Button>
               <Button variant="outlined">Pricing</Button>
             </Stack>
           </Container>

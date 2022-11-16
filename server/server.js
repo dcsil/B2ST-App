@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const db = require("./config/db");
 //import sms.js
-const sendSMS = require("./Routes/sms");
+const sendSMS = require("./routes/sms");
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   integrations: [

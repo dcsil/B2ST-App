@@ -24,11 +24,11 @@ const tiers = [
     description: [
       '10 users included',
       '2 GB of storage',
+      '100 texts per month',
       'Help center access',
       'Email support',
+      'Free installation',
     ],
-    buttonText: 'Free trial for 14 days',
-    buttonVariant: 'outlined',
   },
   {
     title: 'Pro',
@@ -37,11 +37,11 @@ const tiers = [
     description: [
       '20 users included',
       '10 GB of storage',
+      '1000 texts per month',
       'Help center access',
       'Priority email support',
+      'Free installation',
     ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
   },
   {
     title: 'Enterprise',
@@ -49,11 +49,11 @@ const tiers = [
     description: [
       '50 users included',
       '30 GB of storage',
+      '10000+ texts per month',
       'Help center access',
       'Phone & email support',
+      'Free installation',
     ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
   },
 ];
 
@@ -83,7 +83,7 @@ function PricingContent() {
           </Link>
         </Toolbar>
       </AppBar>
-      <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+      <Container disableGutters maxWidth="sm" component="main" align="center" sx={{ pt: 8, pb: 6 }}>
         <Typography
           component="h1"
           variant="h2"
@@ -98,6 +98,9 @@ function PricingContent() {
           this layout. It&apos;s built with default MUI components with little
           customization.
         </Typography>
+        <Button sx={{margin:1}} variant="outlined">
+            Start free trial for 14 days
+        </Button>
       </Container>
       {/* End hero unit */}
       <Container maxWidth="md" component="main">
@@ -156,11 +159,6 @@ function PricingContent() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
               </Card>
             </Grid>
           ))}

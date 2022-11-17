@@ -35,14 +35,9 @@ The tests are in:
 - Configuration
     - Credentials are mostly provided by running `script/bootstrap`.
     - You can setup your own credentials in .env, or credentials will be copied from `.env.example` when setup.
-    - For mongo atlas credentials,
-        1. Create a mongodb atlas account
-        2. After login, create a cluster.
-        3. On `security/database access`, create a user
-        4. On `deployment/database`, click `browse collections` and create a database
-        5. Now on this repo, copy `.env.example` as `.env` in `server` folder, replace with your credentials including username and password of the user you created, database name and cluster name.
-
-        For more details check mongodb atlas documentation: https://www.mongodb.com/docs/atlas/getting-started/ 
+    - For twilio credentials
+     - Go to https://www.twilio.com/, sign up an account
+     - Fill in the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and PHONE_NUMBER in `server/env`
 - Database
     - After setup with bootstrap, run `docker-compose exec -it b2st-app_mongo_1 mongosh` to access the local DB.
 

@@ -15,7 +15,7 @@ function SMSBoardContent() {
   const [selected, setSelected] = React.useState([]);
   const [success, setSuccess] = React.useState(false);
   const sendText = async (text,time) => {
-    const request = new Request(`http://localhost:5000/sms/sendAll`, {
+    const request = new Request(`${api_url}/sms/sendAll`, {
       method: 'post',
       body: JSON.stringify({ mes:text, to:selected, sendAt:time}),
       headers: {

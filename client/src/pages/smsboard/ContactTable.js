@@ -28,11 +28,12 @@ function createData(name, phone) {
 }
 
 const rows = [
-  createData('Virginia Barnard', "+1 559-490-1025"),
-  createData('Alicia Holloway', "+1 267-978-5992"),
-  createData('Emily Oliver', "+1 262-497-0119"),
-  createData('Doris Johnson', "+1 778-388-3262"),
-  createData('Kenneth M. Parham', "+1 705-644-0182"),
+  createData('Virginia Barnard', "+15594901025"),
+  createData('Alicia Holloway', "+12679785992"),
+  createData('Emily Oliver', "+12624970119"),
+  createData('Doris Johnson', "+17783883262"),
+  createData('Kenneth M. Parham', "+17056440182"),
+  createData('Kyle Smith', "+16479948024"),
 ];
 
 function descendingComparator(a, b, orderBy) {

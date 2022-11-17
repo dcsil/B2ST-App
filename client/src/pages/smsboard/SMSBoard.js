@@ -1,20 +1,40 @@
 import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import DashboardAppBar from '../dashboard/DashboardAppBar';
 import EnhancedTable from './ContactTable';
+import TextDialog from './TextDialog';
+import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const mdTheme = createTheme();
+const api_url = process.env.REACT_APP_API_URL;
 
 function SMSBoardContent() {
-
-  const sendText = (selected) => {
-    console.log(selected);
+  const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState([]);
+  const [success, setSuccess] = React.useState(false);
+  const sendText = async (text) => {
+    const request = new Request(`http://localhost:5000/sms/sendAll`, {
+      method: 'post',
+      body: JSON.stringify({ mes:text, to:selected }),
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+    });
+    fetch(request)
+      .then(res => {
+        if (res.status === 200) {
+          console.log(res);
+          setSuccess(true);
+        } else {
+          console.log('Text failed to send!');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   return (
@@ -36,19 +56,34 @@ function SMSBoardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <EnhancedTable sendText={sendText}/>
-                </Paper>
-              </Grid>
+            <Grid container spacing={3} padding={2}>
+              <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
             </Grid>
           </Container>
+          <TextDialog
+            open={open}
+            closeDialog={() => setOpen(false)}
+            sendText={(text) => sendText(text)}
+          />
+          <Collapse in={success} sx={{position:"fixed",bottom:0}}>
+            <Alert
+              action={
+                <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setSuccess(false)
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              Successfully sent text!
+            </Alert>
+          </Collapse>
         </Box>
       </Box>
     </ThemeProvider>

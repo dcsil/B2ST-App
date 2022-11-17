@@ -37,14 +37,13 @@ app.use(cors());
 app.use(express.json());
 
 
-db.connect(() => {
-  app.use("/users", require("./routes/user"))
-  app.use("/marketing", require("./routes/marketing"))
-  app.get("/", (req, res)=>{
-    res.send("Api Running")
-  })
-  app.listen(port, () => {
-    // perform a database connection when server starts
-    console.log(`Server is running on port: ${port}`)
-  });
+app.use("/users", require("./routes/user"))
+app.use("/marketing", require("./routes/marketing"))
+app.use("/sms", router);
+app.get("/", (req, res)=>{
+  res.send("Api Running")
+})
+app.listen(port, () => {
+  // perform a database connection when server starts
+  console.log(`Server is running on port: ${port}`)
 });

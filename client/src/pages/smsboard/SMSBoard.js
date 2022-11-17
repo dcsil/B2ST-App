@@ -14,10 +14,10 @@ function SMSBoardContent() {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   const [success, setSuccess] = React.useState(false);
-  const sendText = async (text) => {
+  const sendText = async (text,time) => {
     const request = new Request(`http://localhost:5000/sms/sendAll`, {
       method: 'post',
-      body: JSON.stringify({ mes:text, to:selected }),
+      body: JSON.stringify({ mes:text, to:selected, sendAt:time}),
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function SMSBoardContent() {
           <TextDialog
             open={open}
             closeDialog={() => setOpen(false)}
-            sendText={(text) => sendText(text)}
+            sendText={(text,time) => sendText(text,time)}
           />
           <Collapse in={success} sx={{position:"fixed",bottom:0}}>
             <Alert

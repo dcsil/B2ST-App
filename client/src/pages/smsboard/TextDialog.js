@@ -1,15 +1,29 @@
 import React from 'react';
-import { Dialog,DialogActions,DialogContent,DialogTitle,Box, TextField} from '@mui/material';
+import { Dialog,DialogActions,DialogContent,DialogTitle,Box, TextField, FormControlLabel,Switch, FormGroup} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
 const defaultText = "Hi, this is a message from B2ST!";
 
 const TextDialog = (props) => {
     const [text,setText] = React.useState(defaultText);
     const [loading,setLoading] = React.useState(false);
+    const [time, setTime] = React.useState(dayjs());
+    const [now, setNow] = React.useState(true);
     const sendText = () => {
+        if (time.isBefore(dayjs().add(20,'minute')) && !now) {
+            alert("You can't schedule a text for less than 20 minutes from now!");
+            return;
+        }
+        if (time.isAfter(dayjs().add(7,'day')) && !now) {
+            alert("You can't schedule a text for more than 7 days in the future!");
+            return;
+        }
         setLoading(true);
-        props.sendText(text)
+        const scheduletime= now ? "" : time.toDate();
+        props.sendText(text, scheduletime)
         .then(() => {
             setLoading(false);
             props.closeDialog();
@@ -31,7 +45,30 @@ const TextDialog = (props) => {
                 fullWidth
                 rows={8}
                 onChange={(e)=>{setText(e.target.value)}}
+                sx={{mb:2}}
             />
+            <FormGroup sx={{mb:2}}>
+                <FormControlLabel
+                   control={
+                    <Switch checked={!now} onChange={()=>setNow(!now)} name="now" />
+                  }
+                  label="schedule a text?"
+                />
+            </FormGroup>
+            { !now &&
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    label="Date & Time"
+                    value={time}
+                    onChange={(newValue) => {
+                        setTime(newValue);
+                    }}
+                    minTime={dayjs()}
+                    maxTime={dayjs().add(200,'day')}
+                />
+            </LocalizationProvider>
+            }
         </DialogContent>
         <DialogActions>
           <LoadingButton

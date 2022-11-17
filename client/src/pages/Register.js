@@ -105,8 +105,8 @@ const Register = ()=> {
           </Typography>
           <Box
             component="form"
-            noValidate
             onSubmit={onSubmit}
+            noValidate
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>

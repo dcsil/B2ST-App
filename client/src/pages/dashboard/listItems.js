@@ -10,6 +10,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
+import MessageIcon from '@mui/icons-material/Message';
 
 export const mainListItems = (
   <React.Fragment>
@@ -42,6 +43,12 @@ export const mainListItems = (
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Campaigns" />
+    </ListItemButton>
+    <ListItemButton href='/dashboard/sms'>
+      <ListItemIcon>
+        <MessageIcon />
+      </ListItemIcon>
+      <ListItemText primary="SMS" />
     </ListItemButton>
     <ListItemButton href='/dashboard/integrations'>
       <ListItemIcon>

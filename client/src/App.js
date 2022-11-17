@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Pricing from './pages/Pricing';
 import Dashboard from "./pages/dashboard/Dashboard";
+import SMSBoard from "./pages/smsboard/SMSBoard";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/pricing" element={<Pricing/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/dashboard/sms" element={<SMSBoard/>} />
       </Routes>
     </BrowserRouter>
   );

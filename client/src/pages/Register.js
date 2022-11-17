@@ -108,6 +108,7 @@ export default function Register() {
                   autoComplete="new-password"
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={

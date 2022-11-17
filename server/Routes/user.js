@@ -3,14 +3,13 @@ const router = express.Router();
 const print = console.log
 const User = require("../module/User")
 router.post("/", async (req, res)=>{
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
     try{
         let user = await User.findOne({email});
         if(user){
             return res.status(400).json({msg: "User already exists"});
         }
         user = new User({
-            name,
             email,
             password
         });

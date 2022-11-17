@@ -38,7 +38,7 @@ app.use(express.json());
 db.connect(() => {
   app.use("/users", require("./routes/user"))
   app.get("/", (req, res)=>{
-    res.send("Api Running")
+    res.send("Api is Running")
   })
   app.listen(port, () => {
     // perform a database connection when server starts

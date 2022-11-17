@@ -6,6 +6,13 @@ WORKDIR /server
 # Copies the package.json file into "/server" and runs npm i
 COPY package.json /server
 RUN npm i
+
+# Install python and its packages
+RUN apt-get update || : && apt-get install python -y
+RUN apt-get install python3-pip -y
+RUN pip install pandas
+RUN pip install matplotlib
+RUN pip install scikit-learn
 # Copies the entire source code into "/server"
 COPY . /server
 

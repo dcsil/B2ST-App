@@ -21,6 +21,8 @@ command -v "docker" > /dev/null 2>&1 || {
     brew bundle check >/dev/null 2>&1  || {
         echo "==> Installing Homebrew dependencies…"
         brew bundle
+        # Install Python libraries
+        pip install pandas
     }
   else
     sh "$DIR/install-docker.sh"

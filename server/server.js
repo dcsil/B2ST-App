@@ -5,7 +5,7 @@ const Tracing = require('@sentry/tracing');
 require("dotenv").config({path: "./.env"});
 const app = express();
 const port = process.env.PORT || 5000;
-const db = require("./config/db");
+const db = require("./db/connect")
 //import sms.js
 // const {sendSMS,getSMS,router }= require("./routes/sms");
 
@@ -36,19 +36,30 @@ app.use(Sentry.Handlers.errorHandler());
 
 app.use(cors());
 app.use(express.json());
-// app.use(router);
+app.use(require("./Routes/record"))
 
-
-
-db.connect(() => {
-  app.use("/users", require("./routes/user"))
-  app.get("/", (req, res)=>{
-    res.send("Api is Running")
-  })
-  app.listen(port, () => {
-    // perform a database connection when server starts
-    console.log(`Server is running on port: ${port}`)
-    // getSMS({datesent:"2022-11-16", limit:10}).then((messages) => {console.log(messages)});
-    // sendSMS("Hello World", "");
+app.listen(port, () => {
+  // perform a database connection when server starts
+  db.connectToServer(function (err) {
+    if (err) console.error(err);
+ 
   });
+  console.log(`Server is running on port: ${port}`);
 });
+
+
+// db.connect(() => {
+//   app.use("/users", require("./routes/user"))
+//   app.use("record",require("./routes/record"));
+
+//   app.get("/", (req, res)=>{
+//     res.send("Api is Running")
+//   })
+//   app.listen(port, () => {
+//     // perform a database connection when server starts
+//     console.log(`Server is running on port: ${port}`)
+//     // getSMS({datesent:"2022-11-16", limit:10}).then((messages) => {console.log(messages)});
+//     // sendSMS("Hello World", "");
+//   });
+// });
+

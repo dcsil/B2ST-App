@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,18 +15,55 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import {useHistory} from "react-router-dom";
+import { useNavigate } from "react-router";
+
 
 const theme = createTheme();
+const print = console.log
 
-export default function Register() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+
+
+
+const Register = ()=> {
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  function updateForm(value) {
+    return setForm((prev) => {
+      return { ...prev, ...value };
     });
+  }
+
+ 
+  
+  
+  
+  const onSubmit = async  (event) => {
+    event.preventDefault();
+    const newPerson = { ...form };
+    print(newPerson)
+
+    await fetch("http://localhost:5000/record/add",{
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(newPerson),
+    }).catch(error => {
+      window.alert(error);
+      return;
+    });
+    setForm({ firstName: "", lastName: "", email: "", password: "" });
+
+
   };
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,6 +82,12 @@ export default function Register() {
       </AppBar>
 
       <Container component="main" maxWidth="xs">
+        <div>
+          {form.firstName}
+          {form.lastName}
+          {form.email}
+          {form.password}
+        </div>
         <CssBaseline />
         <Box
           sx={{
@@ -62,7 +106,7 @@ export default function Register() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -74,6 +118,8 @@ export default function Register() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  value = {form.firstName}
+                  onChange={(e)=>updateForm({firstName: e.target.value})}
                   autoFocus
                 />
               </Grid>
@@ -85,6 +131,8 @@ export default function Register() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value = {form.lastName}
+                  onChange={(e)=>updateForm({lastName: e.target.value})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,6 +143,8 @@ export default function Register() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value = {form.email}
+                  onChange={(e)=>updateForm({email: e.target.value})}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -106,6 +156,8 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value = {form.password}
+                  onChange={(e)=>updateForm({password: e.target.value})}
                 />
               </Grid>
 
@@ -123,6 +175,7 @@ export default function Register() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // onClick={postData}
             >
               Sign Up
             </Button>
@@ -139,3 +192,4 @@ export default function Register() {
     </ThemeProvider>
   );
 }
+export default Register

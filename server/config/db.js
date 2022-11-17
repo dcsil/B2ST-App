@@ -10,7 +10,7 @@ function connect(callback) {
       console.log(err);
       process.exit(1);
     }
-    console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB!");
     mongodb = db;
     callback();
   });

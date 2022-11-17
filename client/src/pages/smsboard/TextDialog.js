@@ -64,8 +64,9 @@ const TextDialog = (props) => {
                     onChange={(newValue) => {
                         setTime(newValue);
                     }}
-                    minTime={dayjs()}
-                    maxTime={dayjs().add(200,'day')}
+                    minTime={dayjs().add(20,'minute')}
+                    minDate={dayjs().add(20,'minute')}
+                    maxDate={dayjs().add(200,'day')}
                 />
             </LocalizationProvider>
             }

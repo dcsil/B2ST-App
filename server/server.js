@@ -48,3 +48,4 @@ db.connect(() => {
     // perform a database connection when server starts
     console.log(`Server is running on port: ${port}`)
   });
+});

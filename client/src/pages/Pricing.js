@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import LandingAppBar from './LandingAppBar';
 
 const theme = createTheme();
 
@@ -60,28 +61,7 @@ function PricingContent() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          <Typography
-            href="/"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            <a href="/">B2ST</a>
-          </Typography>
-          <Link to="/login">
-            <Button variant="contained" color="primary">
-              Login
-            </Button>
-          </Link>
-          <Link to="/register">
-            <Button variant="contained" color="primary">
-              Register
-            </Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
+      <LandingAppBar />
       <Container disableGutters maxWidth="sm" component="main" align="center" sx={{ pt: 8, pb: 6 }}>
         <Typography
           component="h1"

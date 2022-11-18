@@ -8,14 +8,23 @@ const { MessagingResponse } = require('twilio').twiml;
 const router = express.Router();
 
 const sendSMS = async (mes, to,sendAt) => {
+  const req= {
+    body: mes,
+    from: phone,
+    to: to,
+    statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
+  }
+  if (sendAt){
+    req={
+      body: mes,
+      from: phone,
+      to: to,
+      sendAt: sendAt,
+      statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
+    }
+  }
     await client.messages
-    .create({
-       body: mes,
-       from: phone,
-       to: to,
-       sendAt: sendAt,
-       statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
-     })
+    .create(req)
     .then(message => console.log(message.sid))
     .catch(err => console.log(err));
 }

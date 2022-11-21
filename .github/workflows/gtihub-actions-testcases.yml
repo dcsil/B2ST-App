@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-
-
-
   Frontend-Testcases:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -57,4 +54,20 @@ jobs:
     - name: Run the tests
       run:  |
         cd server
-        npm test
+        npm test 
+  coverage:
+    needs: [ Frontend-Testcases, Backend-Testcases ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v3.2.0
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      with:
+        coverageLocations: |
+          ${{github.workspace}}/client/coverage/lcov.info:lcov
+          ${{github.workspace}}/server/coverage/lcov.info:lcov

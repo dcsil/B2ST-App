@@ -13,17 +13,16 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
-
+import {useState} from "react"
 const theme = createTheme();
-
+const print = console.log
 export default function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    print(email, password)
   };
 
   return (
@@ -61,6 +60,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e)=>{setEmail(e.target.value)}}
             />
             <TextField
               margin="normal"
@@ -71,6 +71,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

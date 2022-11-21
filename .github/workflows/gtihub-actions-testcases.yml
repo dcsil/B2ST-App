@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  Frontend-Testcases:
+  Coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
@@ -21,61 +21,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run:  |
-        cd client
-        npm install
-
-    - name: Run the tests
-      run:  |
-        cd client
-        npm test
-
-  Backend-Testcases:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run:  |
-        cd server
-        npm install
-
-    - name: Run the tests
-      run:  |
-        cd server
-        npm test 
-  coverage:
-    needs: [ Frontend-Testcases, Backend-Testcases ]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Coverage Frontend
+    - name: Test Coverage Frontend
       run: |
         cd server
+        npm install
         npm test
 
-    - name: Coverage Backend
+    - name: Test Coverage Backend
       run: |
         cd client
+        npm install
         npm test
         
     - name: Test & publish code coverage

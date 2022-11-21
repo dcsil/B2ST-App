@@ -53,6 +53,19 @@
     "react-router-dom": "^6.4.3"
   },
   "jest": {
-    "coverageReporters": [["lcov", { "projectRoot": ".." }]]
+    "coverageReporters": [
+      [
+        "lcov",
+        {
+          "projectRoot": ".."
+        }
+      ]
+    ]
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   }
 }

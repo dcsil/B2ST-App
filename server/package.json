@@ -25,9 +25,23 @@
     "twilio": "^3.83.2"
   },
   "devDependencies": {
-    "jest": "^29.3.0"
+    "jest": "^29.3.0",
+    "nyc": "^15.1.0"
   },
   "jest": {
-    "coverageReporters": [["lcov", { "projectRoot": ".." }]]
+    "coverageReporters": [
+      [
+        "lcov",
+        {
+          "projectRoot": ".."
+        }
+      ]
+    ]
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   }
 }

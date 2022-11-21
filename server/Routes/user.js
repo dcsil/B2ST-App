@@ -1,37 +1,17 @@
-const express = require("express");
-const router = express.Router();
+const User = require("../models/UserModel")
+// const jwt = require("jsonwebtoken")
+// const bcrypt = require("bcrypt")
+const express = require("express")
+const router = express.Router()
 const print = console.log
-const User = require("../module/User")
-router.post("/", async (req, res)=>{
-    const { name, email, password } = req.body;
-    try{
-        let user = await User.findOne({email});
-        if(user){
-            return res.status(400).json({msg: "User already exists"});
-        }
-        user = new User({
-            name,
-            email,
-            password
-        });
-        await user.save();
-        res.send("User saved");
-    }catch(err){
-        print(err.message);
-        res.status(500).send("Error in Saving");
-    }
-}
-);
+// log in 
+router.post("/login", (req, res)=>{
+    res.status(200).json({msg: "post for log in "})
+})
 
-router.get("/", async (req, res)=>{
-    try{
-        const users = await User.find();
-        res.json(users);
-    }catch(err){
-        print(err.message);
-        res.status(500).send("Error in Getting users");
-    }
-}
-);
+// sign up
+router.post("/signup", (req, res)=>{
+    res.status(200).json({msg: "post for signup "})
+})
 
-module.exports = router;
+module.exports = router

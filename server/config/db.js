@@ -4,6 +4,7 @@ const mongoDbUrl = process.env.MONGO_URL;
 let mongodb;
 
 function connect(callback) {
+  console.log(mongoDbUrl)
   mongoose.connect(mongoDbUrl, (err, db) => {
     if (err) {
       console.log(err);

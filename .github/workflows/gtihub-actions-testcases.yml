@@ -23,13 +23,13 @@ jobs:
 
     - name: Test Coverage Frontend
       run: |
-        cd server
+        cd client
         npm install
         npm test
 
     - name: Test Coverage Backend
       run: |
-        cd client
+        cd server
         npm install
         npm test
         

@@ -28,8 +28,6 @@
     "jest": "^29.3.0"
   },
   "jest": {
-    "coverageReporters": [["lcov", { "projectRoot": ".." }]],
-    "coverageDirectory": "coverage",
-    "verbose": true
+    "coverageReporters": [["lcov", { "projectRoot": ".." }]]
   }
 }

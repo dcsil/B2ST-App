@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
 import {useState} from "react"
 import {useLogin} from "../hooks/useLogin"
+import {Link} from 'react-router-dom'
 const theme = createTheme();
 const print = console.log
 export default function Login() {
@@ -85,17 +86,19 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign In
             </Button>
+            {error && <div className="error">{error}</div>}
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -4,8 +4,15 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import {useLogout} from "../hooks/useLogout"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 export default function LandingAppBar() {
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
+  const handleLogout = ()=>{
+    logout()
+  }
   return (
     <AppBar position="static">
         <Toolbar>
@@ -17,6 +24,11 @@ export default function LandingAppBar() {
           >
             <a href="/">B2ST</a>
           </Typography>
+          <Link to="/">
+            <Button variant="contained" color="primary" onClick={handleLogout}>
+              Log out
+            </Button>
+          </Link>
           <Link to="/login">
             <Button variant="contained" color="primary">
               Login

@@ -14,15 +14,18 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
 import {useState} from "react"
+import {useLogin} from "../hooks/useLogin"
 const theme = createTheme();
 const print = console.log
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
-  const handleSubmit = (event) => {
+  const {login, error, isLoading} = useLogin()
+  const handleSubmit = async (event) => {
     event.preventDefault();
     print(email, password)
+    await login(email, password)
+
   };
 
   return (

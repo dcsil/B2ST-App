@@ -11,6 +11,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
+import Person2Icon from '@mui/icons-material/Person2';
 
 export const mainListItems = (
   <React.Fragment>
@@ -55,6 +56,12 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
+    </ListItemButton>
+    <ListItemButton href='/dashboard/profile'>
+      <ListItemIcon>
+        <Person2Icon />
+      </ListItemIcon>
+      <ListItemText primary="Profile" />
     </ListItemButton>
   </React.Fragment>
 );

@@ -20,7 +20,8 @@ export default function LandingAppBar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            <a href="/">B2ST</a>
+            {/* <Link to={user? "/dashboard":"/"}>B2ST</Link> */}
+            <h3>B2ST</h3>
           </Typography>
           <Link to="/">
           </Link>

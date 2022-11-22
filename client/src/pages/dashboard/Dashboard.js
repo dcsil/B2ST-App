@@ -10,16 +10,23 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
-
+import {useLogout} from "../../hooks/useLogout"
 const mdTheme = createTheme();
 
 function DashboardContent() {
-
+  const {logout} = useLogout()
+  const handleLogout = async ()=>{
+    logout()
+  }
   return (
     <ThemeProvider theme={mdTheme}>
+      <button variant="contained" color="primary" onClick={handleLogout}> Log out</button>
       <Box sx={{ display: 'flex' }}>
+      
         <CssBaseline />
-        <DashboardAppBar name="Dashboard"/>
+        
+        <DashboardAppBar name="DashBoard"/>
+        
         <Box
           component="main"
           sx={{

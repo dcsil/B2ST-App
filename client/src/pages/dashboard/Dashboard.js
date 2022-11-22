@@ -19,13 +19,15 @@ function DashboardContent() {
     logout()
   }
   return (
+    
     <ThemeProvider theme={mdTheme}>
-      <button variant="contained" color="primary" onClick={handleLogout}> Log out</button>
+      
       <Box sx={{ display: 'flex' }}>
       
         <CssBaseline />
         
-        <DashboardAppBar name="DashBoard"/>
+        <DashboardAppBar name="Log Out" onClick={handleLogout} />
+        <button onClick={handleLogout}> Log out</button>
         
         <Box
           component="main"

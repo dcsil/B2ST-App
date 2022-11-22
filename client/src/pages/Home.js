@@ -44,6 +44,16 @@ export default function Home() {
               algorithms and seamless integratino give us a competitive
               advantage over our competitors.
             </Typography>
+
+            <Typography
+              variant="h5"
+              align="center"
+              color="primary"
+              paragraph
+            >
+              Please Login/Register to use our service.
+            </Typography>
+
             <Stack
               sx={{ pt: 4 }}
               direction="row"

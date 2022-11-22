@@ -51,7 +51,7 @@ export default function Home() {
               color="primary"
               paragraph
             >
-              Please Login/Register to use our service.
+              
             </Typography>
 
             <Stack

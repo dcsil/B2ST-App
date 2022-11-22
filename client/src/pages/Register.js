@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
 import {useState} from "react"
+import {useSignup} from "../hooks/useSignup"
 const theme = createTheme();
 
 export default function Register() {
@@ -22,9 +23,10 @@ export default function Register() {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log( firstname, lastname, email, password)
+    
   };
 
   return (

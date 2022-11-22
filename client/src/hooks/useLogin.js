@@ -10,7 +10,7 @@ export const useLogin = ()=>{
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("/api/user/login", { //localhost:4000 is included in package.json
+        const response = await fetch("http://localhost:5000/user/login", { //localhost:4000 is included in package.json
             method: "POST",
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({email, password})

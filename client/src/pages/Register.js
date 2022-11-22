@@ -71,6 +71,7 @@ export default function Register() {
                   label="First Name"
                   autoFocus
                   onChange={(e)=>{setFirstname(e.target.value)}}
+                  value={firstname}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -82,6 +83,7 @@ export default function Register() {
                   name="lastName"
                   autoComplete="family-name"
                   onChange={(e)=>{setLastname(e.target.value)}}
+                  value = {lastname}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,6 +95,7 @@ export default function Register() {
                   name="email"
                   autoComplete="email"
                   onChange={(e)=>{setEmail(e.target.value)}}
+                  value = {email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +108,7 @@ export default function Register() {
                   id="password"
                   autoComplete="new-password"
                   onChange={(e)=>{setPassword(e.target.value)}}
+                  value={password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -121,9 +125,11 @@ export default function Register() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign Up
             </Button>
+            {error && <div className="error">{error}</div>}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">

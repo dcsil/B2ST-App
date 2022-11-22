@@ -22,11 +22,16 @@ export default function Register() {
   const [password, setPassword] = useState("")
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
+  const {signup, error, isLoading} = useSignup()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log( firstname, lastname, email, password)
-    
+    await signup(firstname, lastname, email, password)
+    setEmail("")
+    setPassword("")
+    setFirstname("")
+    setLastname("")
   };
 
   return (

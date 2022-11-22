@@ -9,8 +9,13 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import {useLogout} from "../../hooks/useLogout"
+
+
 
 export const mainListItems = (
+
+
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
@@ -62,11 +67,18 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Last quarter" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
+    <ListItemButton >
+      <ListItemIcon onClick={()=>{
+      useLogout()
+    }}>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
     </ListItemButton>
   </React.Fragment>
 );
+// function DashboardContent() {
+//   const {logout} = useLogout()
+//   const handleLogout = async ()=>{
+//     logout()
+//   }

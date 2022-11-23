@@ -19,7 +19,7 @@ function App() {
         <Route path="/register" element={user? <Navigate to="/"></Navigate>: <Register></Register>} />
         <Route path="/pricing" element={<Pricing/>}/>
         <Route path="/dashboard" element={user? <Dashboard></Dashboard>: <Navigate to="/"></Navigate>}/>
-        <Route path="/dashboard/sms" element={user? <SMSBoard/> : <Navigate to="/"></Navigate>} />
+        <Route path="/dashboard/sms" element={<SMSBoard/>} />
       </Routes>
     </BrowserRouter>
   );

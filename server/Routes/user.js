@@ -7,8 +7,8 @@ const print = console.log
 
 
 const createToken = (_id)=>{
-    // jwt.sign({_id: _id}, "this should be secrete")
-    return jwt.sign({_id: _id}, process.env.SECRET, {expiresIn: "3d"})
+//     return jwt.sign({_id: _id}, process.env.SECRET, {expiresIn: "3d"})
+    return jwt.sign({_id: _id}, "secretCode", {expiresIn: "3d"})
 }
 
 router.post("/login",async (req, res)=>{

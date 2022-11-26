@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,17 +13,25 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
-
+import {useState} from "react"
+import {useSignup} from "../hooks/useSignup"
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [firstname, setFirstname] = useState("")
+  const [lastname, setLastname] = useState("")
+  const {signup, error, isLoading} = useSignup()
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log( firstname, lastname, email, password)
+    await signup(firstname, lastname, email, password)
+    setEmail("")
+    setPassword("")
+    setFirstname("")
+    setLastname("")
   };
 
   return (
@@ -62,6 +70,8 @@ export default function Register() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={(e)=>{setFirstname(e.target.value)}}
+                  value={firstname}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -72,6 +82,8 @@ export default function Register() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e)=>{setLastname(e.target.value)}}
+                  value = {lastname}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -82,6 +94,8 @@ export default function Register() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e)=>{setEmail(e.target.value)}}
+                  value = {email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,6 +107,8 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e)=>{setPassword(e.target.value)}}
+                  value={password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,12 +125,14 @@ export default function Register() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign Up
             </Button>
+            {error && <div className="error">{error}</div>}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

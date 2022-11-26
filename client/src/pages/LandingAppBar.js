@@ -4,8 +4,13 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import {useLogout} from "../hooks/useLogout"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 export default function LandingAppBar() {
+
+  const {user} = useAuthContext()
+  
   return (
     <AppBar position="static">
         <Toolbar>
@@ -15,8 +20,11 @@ export default function LandingAppBar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            <a href="/">B2ST</a>
+            <Link to={!user? "/dashboard":"/"}>B2ST</Link>
+           
           </Typography>
+          <Link to="/">
+          </Link>
           <Link to="/login">
             <Button variant="contained" color="primary">
               Login

@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,17 +13,20 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "./LandingAppBar";
-
+import {useState} from "react"
+import {useLogin} from "../hooks/useLogin"
+import {Link} from 'react-router-dom'
 const theme = createTheme();
-
+const print = console.log
 export default function Login() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const {login, error, isLoading} = useLogin()
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    print(email, password)
+    await login(email, password)
+
   };
 
   return (
@@ -61,6 +64,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e)=>{setEmail(e.target.value)}}
             />
             <TextField
               margin="normal"
@@ -71,6 +75,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -81,17 +86,19 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign In
             </Button>
+            {error && <div className="error">{error}</div>}
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="/" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

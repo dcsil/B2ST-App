@@ -5,6 +5,7 @@ import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import App from './App';
 
+import { AuthContextProvider } from "./context/AuthContext"
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new BrowserTracing()],
@@ -15,4 +16,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <AuthContextProvider>
+    <App />
+  </AuthContextProvider>
+
+, document.getElementById('root'));

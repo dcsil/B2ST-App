@@ -16,12 +16,14 @@
     "@sentry/tracing": "^7.17.4",
     "config": "^3.3.8",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.1",
     "request": "^2.88.2",
+    "supertest": "^6.3.1",
     "twilio": "^3.83.2"
   },
   "devDependencies": {
@@ -35,7 +37,10 @@
     "modulePaths": [
       "<rootDir>/routes"
     ],
-    "moduleDirectories": ["node_modules", "routes"],
+    "moduleDirectories": [
+      "node_modules",
+      "routes"
+    ],
     "testEnvironment": "node",
     "moduleFileExtensions": [
       "js",

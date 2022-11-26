@@ -26,13 +26,9 @@
     "mongoose": "^6.7.1",
     "package.json": "^2.0.1",
     "request": "^2.88.2",
-<<<<<<< HEAD
     "supertest": "^6.3.1",
-    "twilio": "^3.83.2"
-=======
     "twilio": "^3.83.2",
     "validator": "^13.7.0"
->>>>>>> 834be9762c2acc3f5505810950665dd81bea4f70
   },
   "devDependencies": {
     "jest": "^29.3.0",

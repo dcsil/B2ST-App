@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 const mongoose = require("mongoose");
-const mongoDbUrl = process.env.MONGO_URL;
+const mongoDbUrl = process.env.NODE_ENV === "test" ? process.env.MONGO_TEST_URL : process.env.MONGO_URL;
 let mongodb;
 
 function connect(callback) {

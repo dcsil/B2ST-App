@@ -8,16 +8,23 @@ const { MessagingResponse } = require('twilio').twiml;
 const router = express.Router();
 
 const sendSMS = async (mes, to,sendAt) => {
+  try{
+    const req = {
+      body: mes,
+      from: phone,
+      to: to,
+      statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
+    };
+    if (sendAt) {
+      req.sendAt = sendAt;
+    }
     await client.messages
-    .create({
-       body: mes,
-       from: phone,
-       to: to,
-       sendAt: sendAt,
-       statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
-     })
-    .then(message => console.log(message.sid))
-    .catch(err => console.log(err));
+    .create(req)
+    .then(message => {return message})
+    .catch(err => {throw err});
+  } catch (err) {
+    throw err;
+  }
 }
 
 const getSMS = async (req) => {
@@ -34,13 +41,17 @@ router.post("/", (req, res) => {
 });
 
 router.post("/sendAll", async (req, res) => {
-  console.log(req.body);
   try {
     const { mes, to,sendAt } = req.body;
-    const list = await to.forEach((num) => {
-      sendSMS(mes, num,sendAt);
+    Promise.all(to.map(async (number) => {
+      await sendSMS(mes, number,sendAt);
+    }))
+    .then(() => {
+      res.status(200).send("Messages sent");
     })
-    res.send(list);
+    .catch((err) => {
+      res.status(err.status).send(err);
+    });
   } catch (error) {
     res.sendStatus(500);
   }

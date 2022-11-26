@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +51,35 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
-    "react-router-dom": "^6.4.3"
+    "nyc": "^15.1.0",
+    "react-router-dom": "^6.4.3",
+    "react-test-renderer": "^18.2.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!src/index.js",
+      "!src/reportWebVitals.js",
+      "!src/setupTests.js",
+      "!src/hooks/**",
+      "!src/context/**"
+    ],
+    "coverageReporters": [
+      [
+        "lcov",
+        {
+          "projectRoot": ".."
+        }
+      ],
+      ["text", {"skipFull": true}],
+      "text-summary"
+    ]
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   }
 }

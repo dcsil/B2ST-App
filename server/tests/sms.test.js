@@ -3,7 +3,7 @@ const express = require("express");
 require("dotenv").config({ path: "./.env" });
 const db = require("../config/db");
 const phone = process.env.PHONE_NUMBER;
-const {sendSMS,getSMS,router }= require("../Routes/sms");
+const {sendSMS,getSMS,router }= require("../routes/sms");
 
 const app = express();
 app.use(express.json());

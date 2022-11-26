@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+        mongodb-version: ['4.2']
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -20,7 +21,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-
+    - name: Start MongoDB ${{ matrix.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.8.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+        mongodb-username: user
+        mongodb-password: 123
+        mongodb-db: b2st
     - name: Test Coverage Frontend
       run: |
         cd client

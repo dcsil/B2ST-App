@@ -29,13 +29,42 @@
     "nyc": "^15.1.0"
   },
   "jest": {
+    "roots": [
+      "<rootDir>"
+    ],
+    "modulePaths": [
+      "<rootDir>/routes"
+    ],
+    "moduleDirectories": ["node_modules", "routes"],
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx"
+    ],
+    "collectCoverageFrom": [
+      "**/routes/**/*.js",
+      "!**/node_modules/**",
+      "**/config/*.js",
+      "**/marketing_system/**/*.js",
+      "**/models/*.js"
+    ],
     "coverageReporters": [
       [
         "lcov",
         {
           "projectRoot": ".."
         }
-      ]
+      ],
+      [
+        "text",
+        {
+          "skipFull": true
+        }
+      ],
+      "text-summary"
     ]
   },
   "nyc": {

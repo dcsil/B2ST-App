@@ -31,12 +31,14 @@ jobs:
     - name: Test Coverage Frontend
       run: |
         cd client
+        cp -r .env.example .env
         npm install
         npm test
 
     - name: Test Coverage Backend
       run: |
         cd server
+        cp -r .env.example .env
         npm install
         npm test
         

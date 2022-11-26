@@ -4,6 +4,7 @@ const mongoDbUrl = process.env.NODE_ENV === "test" ? process.env.MONGO_TEST_URL 
 let mongodb;
 
 function connect(callback) {
+
   mongoose.connect(mongoDbUrl, (err, db) => {
     if (err) {
       console.log(err);

@@ -44,15 +44,25 @@ export default function Home() {
               algorithms and seamless integratino give us a competitive
               advantage over our competitors.
             </Typography>
+
+            <Typography
+              variant="h5"
+              align="center"
+              color="primary"
+              paragraph
+            >
+              
+            </Typography>
+
             <Stack
               sx={{ pt: 4 }}
               direction="row"
               spacing={2}
               justifyContent="center"
             >
-              <Link to="/dashboard">
+              {/* <Link to="/dashboard">
                 <Button variant="contained">Dashboard</Button>
-              </Link>
+              </Link> */}
               <Link to="/pricing">
                 <Button variant="outlined">Pricing</Button>
               </Link>

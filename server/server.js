@@ -38,7 +38,7 @@ app.use(express.json());
 
 
 db.connect(() => {
-  app.use("/users", require("./routes/user"))
+  app.use("/user", require("./routes/user"))
   app.use("/marketing", require("./routes/marketing"))
   app.use("/sms", router)
   app.get("/", (req, res)=>{

@@ -10,16 +10,27 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
+import {useLogout} from "../../hooks/useLogout"
+import Button from 'react-bootstrap/Button';
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-
+  const {logout} = useLogout()
+  const handleLogout = async ()=>{
+    logout()
+  }
   return (
+    
     <ThemeProvider theme={mdTheme}>
+      
       <Box sx={{ display: 'flex' }}>
+      
         <CssBaseline />
-        <DashboardAppBar name="Dashboard"/>
+        
+        <DashboardAppBar name="Dashboard" onClick={handleLogout} />
+        
+        
         <Box
           component="main"
           sx={{
@@ -70,7 +81,9 @@ function DashboardContent() {
             </Grid>
           </Container>
         </Box>
+        
       </Box>
+      <Button variant="secondary" onClick={handleLogout}> Log out</Button>{' '}
     </ThemeProvider>
   );
 }

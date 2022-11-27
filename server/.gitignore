@@ -5,7 +5,8 @@
 .env
 yarn.lock
 package-lock.json
-
+/datasets/ecommerce-events-electronics.csv
+/datasets/ecommerce-purchases-electronics.csv
 # testing
 /coverage
 

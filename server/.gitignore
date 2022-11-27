@@ -17,6 +17,3 @@ yarn-debug.log*
 yarn-error.log*
 
 data
-
-#datasets
-/datasets

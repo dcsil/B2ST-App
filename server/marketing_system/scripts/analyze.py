@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import warnings
 
+print("Starting analysis")
+
 # Ignore warnings
 warnings.filterwarnings('ignore')
 
@@ -71,3 +73,8 @@ print("R2 Score: ", round(r2, 2))
 print("Mean Absolute Error (MAE): ", round(mae, 2))
 
 #We have regression (r2 score) of 0.76 which is good in the sense that it indicates correlation, but we can improve it by using more data and more features
+
+# accept user input
+user_input = input("Enter input for prediction: ")
+user_predictions = regr.predict(user_input)
+print(user_predictions)

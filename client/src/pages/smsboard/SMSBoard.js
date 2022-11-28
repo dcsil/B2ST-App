@@ -6,6 +6,7 @@ import EnhancedTable from './ContactTable';
 import TextDialog from './TextDialog';
 import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import SMSTable from './SMSOverview';
 
 const mdTheme = createTheme();
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
@@ -58,7 +59,13 @@ function SMSBoardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3} padding={2}>
-              <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
+              <Grid item xs={12}>
+
+                <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
+              </Grid>
+              <Grid item xs={12}>
+                <SMSTable />
+              </Grid>
             </Grid>
           </Container>
           <TextDialog

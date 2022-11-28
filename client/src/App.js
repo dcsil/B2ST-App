@@ -8,6 +8,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import SMSBoard from "./pages/smsboard/SMSBoard";
 import { useAuthContext } from "./hooks/useAuthContext"
 import Campaigns from './pages/campaigns/Campaigns';
+import PromotionForecasting from './pages/campaigns/PromotionForcasting';
 
 const ProtectedRoute = ({isAllowed, redirectPath, children}) => {
   if (!isAllowed) {
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="dashboard/sms" element={<SMSBoard/>} />
           <Route exact path="dashboard/campaigns" element={<Campaigns/>} />
           <Route exact path="profile" element={<></>} />
+          <Route exact path="dashboard/campaigns/forecasting" element={<PromotionForecasting/>} />
         </Route>
       </Routes>
     </BrowserRouter>

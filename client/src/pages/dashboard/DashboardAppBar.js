@@ -106,7 +106,15 @@ function DashboardAppBarContent(props) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                {props.name}
+                {props.name} 
+                {props.backto && (
+                  <IconButton
+                    component={Link}
+                    to={props.backto}
+                    aria-label="back"
+                  >
+                    <ChevronLeftIcon />
+                  </IconButton>)}
               </Typography>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
@@ -155,5 +163,5 @@ function DashboardAppBarContent(props) {
 }  
 
 export default function DashboardAppBar(props) {
-    return <DashboardAppBarContent name={props.name} />;
+    return <DashboardAppBarContent name={props.name} backto={props.backto}/>;
 }

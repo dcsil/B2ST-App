@@ -1,26 +1,23 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Toolbar,Typography } from '@mui/material';
+import {Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Toolbar,Typography,Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import PromotionLimitDialog from './PromotionLimitDialog';
 
+export default function ConfigTable(props) {
+  const navigate=useNavigate();
+  const [open,setOpen] = React.useState(false);
 
-function createData(name, phone) {
-  return {
-    name,
-    phone
-  };
-}
-
-const rows = [
+  const rows = [
     {
         name:'Promotion Limit',
         button: '50%',
-        onclick: () => {}
+        onclick: () => {setOpen(true)}
     },
     {
         name:'Order Timing',
@@ -30,11 +27,9 @@ const rows = [
     {
         name:'Promotion Forecasting',
         button: 'View',
-        onclick: () => {}
+        onclick: ()=>{navigate('../dashboard/campaigns/forecasting')}
     }
 ];
-
-export default function EnhancedTable(props) {
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -73,13 +68,17 @@ export default function EnhancedTable(props) {
                         {row.name}
                     </TableCell>
                     <TableCell align="left">
-                        {row.button}
+                        <Button onClick={()=>row.onclick()}>{row.button}</Button>
                     </TableCell>
                 </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
+        <PromotionLimitDialog
+            open={open}
+            closeDialog={() => setOpen(false)}
+          />
     </Box>
   );
 }

@@ -10,6 +10,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
+import Traffic from './Traffic';
 
 const mdTheme = createTheme();
 
@@ -71,6 +72,9 @@ function DashboardContent() {
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Orders />
                 </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Traffic/>
               </Grid>
             </Grid>
           </Container>

@@ -94,9 +94,10 @@ function CampaignsContent() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    height:'100%',
                   }}
                 >
+                    <Configuration/>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}

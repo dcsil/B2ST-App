@@ -35,7 +35,7 @@ const PromotionLimitDialog = (props) => {
                 label='Upper Bound'
                 color='secondary'
                 error={upperLimit<lowerLimit || upperLimit>100 || upperLimit<0}
-                helperText={upperLimit<lowerLimit ? 'Upper bound must be greater than lower bound' :
+                helperText={upperLimit<lowerLimit ? 'Upper bound must be no less than lower bound' :
                     (upperLimit>100 ? 'Upper bound must be less than 100' :
                     (upperLimit<0 ? 'Upper bound must be greater than 0' : ''))}
                 onChange={(e)=>{setUpperLimit(e.target.value)}}
@@ -53,7 +53,7 @@ const PromotionLimitDialog = (props) => {
                 required
                 fullWidth
                 error={upperLimit<lowerLimit || lowerLimit>100 || lowerLimit<0}
-                helperText={upperLimit<lowerLimit ? 'Upper bound must be greater than lower bound' :
+                helperText={upperLimit<lowerLimit ? 'Lower bound must be no greater than upper bound' :
                     (lowerLimit>100 ? 'Lower bound must be less than 100' :
                     (lowerLimit<0 ? 'Lower bound must be greater than 0' : ''))}
                 label='Lower Bound'

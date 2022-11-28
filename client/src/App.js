@@ -8,8 +8,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import SMSBoard from "./pages/smsboard/SMSBoard";
 import { useAuthContext } from "./hooks/useAuthContext"
 
-const ProtectedRoute = ({isAllowed, redirectPath = "/", children}) => {
-  console.log(isAllowed);
+const ProtectedRoute = ({isAllowed, redirectPath, children}) => {
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace/>
   }
@@ -17,19 +16,18 @@ const ProtectedRoute = ({isAllowed, redirectPath = "/", children}) => {
 };
 
 function App() {
-  const {user} = useAuthContext()
-
+  const {user} = useAuthContext();
 
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<Home/>} />
-        <Route element={<ProtectedRoute isAllowed={!user}/>}>
+        <Route element={<ProtectedRoute isAllowed={!user} redirectPath='/dashboard'/>}>
           <Route path="login" element={<Login/>} />
           <Route path="register" element={<Register/>} />
           <Route path="pricing" element={<Pricing/>}/>
         </Route>
-        <Route element={<ProtectedRoute isAllowed={user}/>}>
+        <Route element={<ProtectedRoute isAllowed={!!user} redirectPath='/'/>}>
           <Route exact path="dashboard" element={<Dashboard/>}/>
           <Route exact path="dashboard/sms" element={<SMSBoard/>} />
         </Route>

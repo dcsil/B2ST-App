@@ -2,16 +2,25 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import {Link } from 'react-router-dom';
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  Badge,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {useLogout} from "../../hooks/useLogout"
 
 const drawerWidth = 240;
 
@@ -64,6 +73,10 @@ function DashboardAppBarContent(props) {
     const toggleDrawer = () => {
       setOpen(!open);
     };
+    const {logout} = useLogout();
+    const handleLogout = async ()=>{
+      logout()
+    };
   
     return (
         <>
@@ -101,7 +114,7 @@ function DashboardAppBarContent(props) {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer variant="permanent" open={open}>
+          <Drawer variant="permanent" open={open} sx={{display:'flex'}}>
             <Toolbar
               sx={{
                 display: 'flex',
@@ -120,6 +133,19 @@ function DashboardAppBarContent(props) {
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
             </List>
+            <List style={{ marginTop: `auto` }}>
+              <ListItem
+                disablePadding
+              >
+              <ListItemButton component={Link} to='/profile'>
+                <Avatar/>
+                <ListItemText sx={{ pl: 2 }} primary='Profile' />
+              </ListItemButton>
+              <IconButton sx={{ mx: 2 }} onClick={handleLogout}>
+                <LogoutIcon />
+              </IconButton>
+            </ListItem>
+          </List>
           </Drawer>
       </>
     );

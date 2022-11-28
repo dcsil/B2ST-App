@@ -134,7 +134,7 @@ function DashboardAppBarContent(props) {
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
             </List>
-            <List component='nav' style={{ marginTop: `auto` }}>
+            <List component='nav' style={{ marginTop: `auto`}}>
               <ListItem
                 disablePadding
               >
@@ -143,7 +143,7 @@ function DashboardAppBarContent(props) {
                   <Avatar/>
                 </ListItemAvatar>
                 <ListItemText sx={{ pl: 2 }} primary='Profile' />
-                <IconButton sx={{ mx: 2 }} onClick={handleLogout}>
+                <IconButton  onClick={handleLogout}>
                 <LogoutIcon />
                 </IconButton>
               </ListItemButton>

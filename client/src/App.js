@@ -7,6 +7,7 @@ import Pricing from './pages/Pricing';
 import Dashboard from "./pages/dashboard/Dashboard";
 import SMSBoard from "./pages/smsboard/SMSBoard";
 import { useAuthContext } from "./hooks/useAuthContext"
+import Campaigns from './pages/campaigns/Campaigns';
 
 const ProtectedRoute = ({isAllowed, redirectPath, children}) => {
   if (!isAllowed) {
@@ -30,6 +31,8 @@ function App() {
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath='/'/>}>
           <Route exact path="dashboard" element={<Dashboard/>}/>
           <Route exact path="dashboard/sms" element={<SMSBoard/>} />
+          <Route exact path="dashboard/campaigns" element={<Campaigns/>} />
+          <Route exact path="profile" element={<></>} />
         </Route>
       </Routes>
     </BrowserRouter>

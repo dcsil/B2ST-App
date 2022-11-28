@@ -14,6 +14,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemAvatar,
   Badge,
   ListItemText,
   Toolbar,
@@ -133,17 +134,19 @@ function DashboardAppBarContent(props) {
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
             </List>
-            <List style={{ marginTop: `auto` }}>
+            <List component='nav' style={{ marginTop: `auto` }}>
               <ListItem
                 disablePadding
               >
               <ListItemButton component={Link} to='/profile'>
-                <Avatar/>
+                <ListItemAvatar>
+                  <Avatar/>
+                </ListItemAvatar>
                 <ListItemText sx={{ pl: 2 }} primary='Profile' />
-              </ListItemButton>
-              <IconButton sx={{ mx: 2 }} onClick={handleLogout}>
+                <IconButton sx={{ mx: 2 }} onClick={handleLogout}>
                 <LogoutIcon />
-              </IconButton>
+                </IconButton>
+              </ListItemButton>
             </ListItem>
           </List>
           </Drawer>

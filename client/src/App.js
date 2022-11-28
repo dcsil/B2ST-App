@@ -7,6 +7,7 @@ import Pricing from './pages/Pricing';
 import Dashboard from "./pages/dashboard/Dashboard";
 import SMSBoard from "./pages/smsboard/SMSBoard";
 import { useAuthContext } from "./hooks/useAuthContext"
+import Plan from "./pages/Plan"
 function App() {
   const {user} = useAuthContext()
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/pricing" element={<Pricing/>}/>
         <Route path="/dashboard" element={user? <Dashboard></Dashboard>: <Navigate to="/"></Navigate>}/>
         <Route path="/dashboard/sms" element={<SMSBoard/>} />
+        <Route path="/dashboard/plans" element = {user? <Plan></Plan>: <Home></Home>}></Route>
       </Routes>
     </BrowserRouter>
   );

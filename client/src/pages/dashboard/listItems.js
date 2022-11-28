@@ -50,11 +50,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="SMS" />
     </ListItemButton>
-    <ListItemButton href='/dashboard/integrations'>
+    <ListItemButton href='/dashboard/plans'>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Plans" />
     </ListItemButton>
   </React.Fragment>
 );

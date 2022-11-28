@@ -20,11 +20,14 @@ export default function LandingAppBar() {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            <Link to={!user? "/dashboard":"/"}>B2ST</Link>
+            <Link to={"/"}>B2ST</Link>
            
           </Typography>
-          <Link to="/">
-          </Link>
+          {user ? 
+            <Link to="/dashboard">
+              <Button variant="contained" color="primary">Dashboard</Button>
+            </Link> :
+          (<>
           <Link to="/login">
             <Button variant="contained" color="primary">
               Login
@@ -35,6 +38,7 @@ export default function LandingAppBar() {
               Register
             </Button>
           </Link>
+          </>)}
         </Toolbar>
     </AppBar>
   );

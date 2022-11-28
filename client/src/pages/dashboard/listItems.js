@@ -11,51 +11,56 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import HomeIcon from '@mui/icons-material/Home';
 import MessageIcon from '@mui/icons-material/Message';
+import { Link } from "react-router-dom";
+
+const mainLists = [
+  {
+    link: "/",
+    icon: <HomeIcon />,
+    text: "Home"
+  },
+  {
+    link: "/dashboard",
+    icon: <DashboardIcon />,
+    text: "Dashboard"
+  },
+  {
+    link: "/dashboard/orders",
+    icon: <ShoppingCartIcon />,
+    text: "Orders"
+  },
+  {
+    link: "/dashboard/customers",
+    icon: <PeopleIcon />,
+    text: "Customers"
+  },
+  {
+    link: "/dashboard/campaigns",
+    icon: <BarChartIcon />,
+    text: "Campaigns"
+  },
+  {
+    link: "/dashboard/sms",
+    icon: <MessageIcon />,
+    text: "SMS"
+  },
+  {
+    link: "/dashboard/integrations",
+    icon: <LayersIcon />,
+    text: "Integrations"
+  }
+]
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton href='/'>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Home" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard'>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard/orders'>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard/customers'>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard/campaigns'>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Campaigns" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard/sms'>
-      <ListItemIcon>
-        <MessageIcon />
-      </ListItemIcon>
-      <ListItemText primary="SMS" />
-    </ListItemButton>
-    <ListItemButton href='/dashboard/integrations'>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
+    {mainLists.map((item, index) => (
+      <ListItemButton component={Link} to={item.link}>
+        <ListItemIcon>
+          {item.icon}
+        </ListItemIcon>
+        <ListItemText primary={item.text} />
+      </ListItemButton>
+    ))}
   </React.Fragment>
 );
 

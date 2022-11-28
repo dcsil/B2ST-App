@@ -8,7 +8,7 @@ import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/mate
 import CloseIcon from '@mui/icons-material/Close';
 
 const mdTheme = createTheme();
-const api_url = process.env.REACT_APP_API_URL;
+const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 function SMSBoardContent() {
   const [open, setOpen] = React.useState(false);

@@ -72,7 +72,12 @@
           "projectRoot": ".."
         }
       ],
-      ["text", {"skipFull": true}],
+      [
+        "text",
+        {
+          "skipFull": true
+        }
+      ],
       "text-summary"
     ]
   },

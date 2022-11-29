@@ -40,6 +40,7 @@ app.use(express.json());
 db.connect(() => {
   app.use("/user", require("./routes/user"))
   app.use("/plans", require("./routes/plans"))
+  app.use("/subs", require("./routes/subs"))
   app.use("/marketing", require("./routes/marketing"))
   app.use("/sms", router)
   app.get("/", (req, res)=>{

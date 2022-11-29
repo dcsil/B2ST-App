@@ -10,11 +10,36 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
-import Traffic from './Traffic';
 
+import {useLogout} from "../../hooks/useLogout"
+import Button from 'react-bootstrap/Button';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import axios from "axios";
+import {useEffect} from "react"
+import Traffic from './Traffic';
+const print = console.log
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  
+
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
+  // useEffect(()=>{
+  //   getPlan()
+  // }, [])
+
+  const getPlan = async ()=>{
+
+    print(user.email)
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {"email": user.email})
+    print(plan)
+  }
+
+  const handleLogout = async ()=>{
+    logout()
+  }
+
   return (
     
     <ThemeProvider theme={mdTheme}>
@@ -81,6 +106,10 @@ function DashboardContent() {
         </Box>
         
       </Box>
+
+      <Button variant="secondary" onClick={handleLogout}> Log out</Button>{' '}
+      <button onClick={getPlan}>get plan</button>
+
     </ThemeProvider>
   );
 }

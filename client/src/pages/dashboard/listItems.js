@@ -44,6 +44,12 @@ const mainLists = [
     icon: <MessageIcon />,
     text: "SMS"
   },
+    {
+    link: "/dashboard/plans",
+    icon: <ShoppingCartIcon />,
+    text: "Plans"
+  },
+
   {
     link: "/dashboard/integrations",
     icon: <LayersIcon />,
@@ -53,6 +59,7 @@ const mainLists = [
 
 export const mainListItems = (
   <React.Fragment>
+
     {mainLists.map((item, index) => (
       <ListItemButton component={Link} to={item.link}>
         <ListItemIcon>

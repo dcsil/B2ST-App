@@ -8,7 +8,7 @@ const stripe = Stripe(process.env.STRIPE_SEC);
 
 
 
-router.get("/", async (req, res)=>{
+router.post("/", async (req, res)=>{
     const{email} = req.body
     const user = await User.findOne({email: email})
     const customerId = user.customer.id

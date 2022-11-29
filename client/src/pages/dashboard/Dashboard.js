@@ -19,21 +19,19 @@ const print = console.log
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  
+
   const {logout} = useLogout()
   const {user} = useAuthContext()
-  useEffect(()=>{
-    getPlan()
-  }, [])
+  // useEffect(()=>{
+  //   getPlan()
+  // }, [])
 
   const getPlan = async ()=>{
-    // const plan = await fetch("http://localhost:5000/subs", {
-    //   method: "GET",
-    //   headers:{"Content-Type": "application/json"},
-    //   body:JSON.stringify({email: user.email})
-    // })
+
     print(user.email)
-    // const {data: plan} = await axios.get("http://localhost:5000/subs", {"email": user.email})
-    // print(plan)
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {"email": user.email})
+    print(plan)
   }
 
   const handleLogout = async ()=>{

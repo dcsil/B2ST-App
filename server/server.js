@@ -6,7 +6,7 @@ require("dotenv").config({path: "./.env"});
 const app = express();
 const port = process.env.PORT || 5000;
 const db = require("./config/db");
-//import sms.js
+
 const {sendSMS,getSMS,router }= require("./routes/sms");
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -39,6 +39,7 @@ app.use(express.json());
 
 db.connect(() => {
   app.use("/user", require("./routes/user"))
+  app.use("/plans", require("./routes/plans"))
   app.use("/marketing", require("./routes/marketing"))
   app.use("/sms", router)
   app.get("/", (req, res)=>{

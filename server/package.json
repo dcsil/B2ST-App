@@ -26,6 +26,7 @@
     "mongoose": "^6.7.1",
     "package.json": "^2.0.1",
     "request": "^2.88.2",
+    "stripe": "^11.1.0",
     "supertest": "^6.3.1",
     "twilio": "^3.83.2",
     "validator": "^13.7.0"

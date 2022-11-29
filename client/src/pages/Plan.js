@@ -57,6 +57,7 @@ const tiers = [
 const Plan = () =>{
     const [state, setState] = useState(0)
     const helper = ()=>{
+
         print(3)
     }
 
@@ -94,7 +95,7 @@ const Plan = () =>{
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={4}
             >
-              <Card onClick={()=>{helper()}}>
+              <Card onClick={(e)=>{helper()}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}

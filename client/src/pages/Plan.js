@@ -70,7 +70,7 @@ const Plan = () =>{
         // })
         // print(response)
         print(user)
-        const email = user.email
+        const email = (user.email? user.email: user.user.email)
         print(email)
         const {data: response} = await axios.post("http://localhost:5000/plans/session", { email})
         print(response)

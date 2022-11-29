@@ -6,14 +6,15 @@ import EnhancedTable from './ContactTable';
 import TextDialog from './TextDialog';
 import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import SMSTable from './SMSOverview';
 
 const mdTheme = createTheme();
-const api_url = process.env.REACT_APP_API_URL;
+const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 function SMSBoardContent() {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
-  const [success, setSuccess] = React.useState(false);
+  const [alert, setAlert] = React.useState({severity:'',message:''});
   const sendText = async (text,time) => {
     const request = new Request(`${api_url}/sms/sendAll`, {
       method: 'post',
@@ -26,13 +27,14 @@ function SMSBoardContent() {
     fetch(request)
       .then(res => {
         if (res.status === 200) {
-          console.log(res);
-          setSuccess(true);
+          setAlert({severity:'success',message:'Texts sent successfully!'});
         } else {
-          console.log('Text failed to send!');
+          setAlert({severity:'error',message:'Error sending texts!'});
+          console.log(res);
         }
       })
       .catch(error => {
+        setAlert({severity:'error',message:'Server Error!'});
         console.log(error);
       });
   }
@@ -57,7 +59,13 @@ function SMSBoardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3} padding={2}>
-              <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
+              <Grid item xs={12}>
+
+                <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
+              </Grid>
+              <Grid item xs={12}>
+                <SMSTable />
+              </Grid>
             </Grid>
           </Container>
           <TextDialog
@@ -65,15 +73,16 @@ function SMSBoardContent() {
             closeDialog={() => setOpen(false)}
             sendText={(text,time) => sendText(text,time)}
           />
-          <Collapse in={success} sx={{position:"fixed",bottom:0}}>
+          <Collapse in={alert.severity} sx={{position:"fixed",bottom:0}}>
             <Alert
+              severity={alert.severity}
               action={
                 <IconButton
               aria-label="close"
               color="inherit"
               size="small"
               onClick={() => {
-                setSuccess(false)
+                setAlert({severity: '', message: ''});
               }}
             >
               <CloseIcon fontSize="inherit" />
@@ -81,7 +90,7 @@ function SMSBoardContent() {
               }
               sx={{ mb: 2 }}
             >
-              Successfully sent text!
+              {alert.message}
             </Alert>
           </Collapse>
         </Box>

@@ -1,3 +1,6 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/40ef6e0914ef31702018/maintainability)](https://codeclimate.com/repos/6362eba2a7651b2e18001635/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/40ef6e0914ef31702018/test_coverage)](https://codeclimate.com/repos/6362eba2a7651b2e18001635/test_coverage)
+
 # This is the Main Application for team B2ST in DCSIL
 
 ## Running App

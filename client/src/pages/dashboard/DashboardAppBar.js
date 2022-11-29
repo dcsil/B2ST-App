@@ -2,16 +2,26 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import {Link } from 'react-router-dom';
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemAvatar,
+  Badge,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {useLogout} from "../../hooks/useLogout"
 
 const drawerWidth = 240;
 
@@ -64,6 +74,10 @@ function DashboardAppBarContent(props) {
     const toggleDrawer = () => {
       setOpen(!open);
     };
+    const {logout} = useLogout();
+    const handleLogout = async ()=>{
+      logout()
+    };
   
     return (
         <>
@@ -92,7 +106,15 @@ function DashboardAppBarContent(props) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                {props.name}
+                {props.name} 
+                {props.backto && (
+                  <IconButton
+                    component={Link}
+                    to={props.backto}
+                    aria-label="back"
+                  >
+                    <ChevronLeftIcon />
+                  </IconButton>)}
               </Typography>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
@@ -101,7 +123,7 @@ function DashboardAppBarContent(props) {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer variant="permanent" open={open}>
+          <Drawer variant="permanent" open={open} sx={{display:'flex'}}>
             <Toolbar
               sx={{
                 display: 'flex',
@@ -120,11 +142,26 @@ function DashboardAppBarContent(props) {
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
             </List>
+            <List component='nav' style={{ marginTop: `auto`}}>
+              <ListItem
+                disablePadding
+              >
+              <ListItemButton component={Link} to='/profile'>
+                <ListItemAvatar>
+                  <Avatar/>
+                </ListItemAvatar>
+                <ListItemText sx={{ pl: 2 }} primary='Profile' />
+                <IconButton  onClick={handleLogout}>
+                <LogoutIcon />
+                </IconButton>
+              </ListItemButton>
+            </ListItem>
+          </List>
           </Drawer>
       </>
     );
 }  
 
 export default function DashboardAppBar(props) {
-    return <DashboardAppBarContent name={props.name} />;
+    return <DashboardAppBarContent name={props.name} backto={props.backto}/>;
 }

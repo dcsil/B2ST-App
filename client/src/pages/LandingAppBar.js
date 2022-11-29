@@ -25,16 +25,16 @@ export default function LandingAppBar() {
           </Typography>
           <Link to="/">
           </Link>
-          <Link to="/login">
+          {!user? <Link to="/login">
             <Button variant="contained" color="primary">
               Login
             </Button>
-          </Link>
-          <Link to="/register">
+          </Link>: <div></div>}
+          {!user? <Link to="/register">
             <Button variant="contained" color="primary">
               Register
             </Button>
-          </Link>
+          </Link>: <div></div>}
         </Toolbar>
     </AppBar>
   );

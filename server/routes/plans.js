@@ -30,12 +30,12 @@ router.post("/session", async (req, res) =>{
         payment_method_types:["card"],
         line_items: [
             {
-                price: "price_1M98fxIlyH1Yo9HOTNgKUL8c", // this can be changed to another hashed price
+                price: "price_1M9WPdIlyH1Yo9HOLvXZkEYZ", // this can be changed to another hashed price
                 quantity: 1
             }
         ],
         success_url: "http://localhost:3000/",
-        cancel_url: "http://baidu.com",  //need change later!
+        cancel_url: "http://google.com",  //need change later!
         customer: user.customer.id
     }, {
         apiKey: process.env.STRIPE_SEC

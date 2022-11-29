@@ -23,14 +23,14 @@ router.get("/", async (req, res)=>{
             apiKey: process.env.STRIPE_SEC
         }
     )
-    var result
+    var plan
     if (!subscription.data.length){
-        result = []
+        plan = []
     }
     else{
-        result = subscription.data[0].plan.nickname
+        plan = subscription.data[0].plan.nickname
     }
-    res.json(result)
+    res.json(plan)
     
 
 })

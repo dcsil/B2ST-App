@@ -62,7 +62,7 @@
     "react-test-renderer": "^18.2.0"
   },
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest",
+ 
     "transformIgnorePatterns": ["node_modules\/(?!axios)"],
     "collectCoverageFrom": [
       "src/**/*.js",

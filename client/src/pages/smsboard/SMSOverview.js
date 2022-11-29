@@ -23,10 +23,13 @@ function createData(type, sentDate, name, amount, recipient, expirationDate, sta
 }
 
 const rows = [
-  createData('One-Time', '2021-08-01', 'KHJAHSDAJ', 5.00, 'Tevan', '2021-08-31', 'Active'),
-  createData('One-Time', '2021-08-01', 'AAJAKSDAJ', 3.00, 'Soso', '2021-12-31', 'Active'),
-  createData('One-Time', '2021-08-01', 'KBJACODAJ', 15.00, 'Bing', '2021-09-31', 'Active'),
-  createData('One-Time', '2021-08-01', 'CBJACWDAJ', 11.00, 'Bing', '2021-09-31', 'Inactive'),
+  createData('One-Time', '2021-08-01', 'KHJAHSDAJ', 5.00, 'Tevan', '2021-08-21', 'Active'),
+  createData('One-Time', '2021-08-09', 'AAJAKSDAJ', 3.00, 'Soso', '2021-12-31', 'Active'),
+  createData('One-Time', '2021-05-11', 'KBJACODAJ', 15.00, 'Bing', '2021-09-30', 'Active'),
+  createData('One-Time', '2021-08-01', 'CBJACWDAJ', 11.00, 'Bing', '2021-09-17', 'Inactive'),
+  createData('One-Time', '2021-06-01', 'CABCDEDAJ', 20.00, 'Sandy', '2021-09-17', 'Inactive'),
+  createData('One-Time', '2022-08-01', 'PBJAAWDAJ', 10.00, 'Frank', '2022-10-21', 'Inactive'),
+  createData('One-Time', '2022-03-01', 'WIDJAICHC', 11.00, 'Bing', '2022-09-30', 'Inactive'),
 ].sort((a, b) => (a.sentDate < b.sentDate ? -1 : 1));
 
 function SMSTableToolbar(props) {
@@ -77,11 +80,11 @@ export default function SMSTable() {
           <TableRow>
             <TableCell>Type</TableCell>
             <TableCell align="right">Sent Date</TableCell>
-            <TableCell align="right">name</TableCell>
-            <TableCell align="right">amount&nbsp;($)</TableCell>
-            <TableCell align="right">recipient</TableCell>
+            <TableCell align="right">Name</TableCell>
+            <TableCell align="right">Amount&nbsp;($)</TableCell>
+            <TableCell align="right">Recipient</TableCell>
             <TableCell align="right">Expiration Date</TableCell>
-            <TableCell align="right">status</TableCell>
+            <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

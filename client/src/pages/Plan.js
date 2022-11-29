@@ -17,6 +17,7 @@ import LandingAppBar from './LandingAppBar';
 import {useState} from "react"
 import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
+import "../App.css"
 const theme = createTheme();
 const print = console.log
 const tiers = [
@@ -72,7 +73,7 @@ const Plan = () =>{
         print(user)
         const email = (user.email? user.email: user.user.email)
         print(email)
-        const {data: response} = await axios.post("http://localhost:5000/plans/session", { email})
+        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email})
         print(response)
         window.location.href = response.price.url
     }
@@ -105,13 +106,14 @@ const Plan = () =>{
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
+            
               item
               key={tier.title}
               xs={12}
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={4}
             >
-              <Card onClick={(e)=>{checkout(e)}}>
+              <Card  onClick={(e)=>{checkout(e)}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}

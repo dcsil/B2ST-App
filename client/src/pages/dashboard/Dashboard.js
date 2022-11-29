@@ -29,14 +29,14 @@ function DashboardContent() {
   const getPlan = async ()=>{
 
     print(user.email)
-    const {data: plan} = await axios.post("http://localhost:5000/subs", {"email": user.email})
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {email: user.email})
     print(plan)
   }
 
   return (
     
     <ThemeProvider theme={mdTheme}>
-      
+     
       <Box sx={{ display: 'flex' }}>
       
         <CssBaseline />

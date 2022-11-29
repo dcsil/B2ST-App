@@ -64,7 +64,7 @@ export default function Home() {
                 <Button variant="contained">Dashboard</Button>
               </Link> */}
               <Link to="/">
-                <Button variant="outlined">Developer Teams</Button>
+                <Button variant="outlined">Developer Team</Button>
               </Link>
             </Stack>
           </Container>

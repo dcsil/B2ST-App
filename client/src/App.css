@@ -42,3 +42,7 @@
   margin-right: 3rem;
   
 }
+
+.payment_card:hover{
+  box-shadow: 1px solid black;
+}

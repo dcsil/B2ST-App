@@ -93,13 +93,13 @@ function DashboardAppBarContent(props) {
 
   const getPlan = async ()=>{
     
-
-    print(user.email)
-    setEmail(user.email)
-    const {data: plan} = await axios.post("http://localhost:5000/subs", {"email": user.email})
+    const email = (user.email? user.email: user.user.email)
+    // print(user.email)
+    setEmail(email)
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {email: email})
     
     setPlan(plan)
-    print(plan)
+    // print(plan)
   }
   
     return (

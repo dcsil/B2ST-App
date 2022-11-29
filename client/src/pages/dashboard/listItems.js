@@ -24,10 +24,15 @@ const mainLists = [
     icon: <DashboardIcon />,
     text: "Dashboard"
   },
+  // {
+  //   link: "/dashboard/orders",
+  //   icon: <ShoppingCartIcon />,
+  //   text: "Orders"
+  // },
   {
-    link: "/dashboard/orders",
+    link: "/dashboard/plans",
     icon: <ShoppingCartIcon />,
-    text: "Orders"
+    text: "Plans"
   },
   {
     link: "/dashboard/customers",
@@ -44,17 +49,13 @@ const mainLists = [
     icon: <MessageIcon />,
     text: "SMS"
   },
-    {
-    link: "/dashboard/plans",
-    icon: <ShoppingCartIcon />,
-    text: "Plans"
-  },
 
-  {
-    link: "/dashboard/integrations",
-    icon: <LayersIcon />,
-    text: "Integrations"
-  }
+
+  // {
+  //   link: "/dashboard/integrations",
+  //   icon: <LayersIcon />,
+  //   text: "Integrations"
+  // }
 ]
 
 export const mainListItems = (

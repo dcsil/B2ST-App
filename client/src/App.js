@@ -28,12 +28,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
+      
         <Route index element={<Home/>} />
         <Route element={<ProtectedRoute isAllowed={!user} redirectPath='/dashboard'/>}>
           <Route path="login" element={<Login/>} />
           <Route path="register" element={<Register/>} />
-          <Route path="pricing" element={<Pricing/>}/>
+          
         </Route>
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath='/'/>}>
           <Route exact path="dashboard" element={<Dashboard/>}/>

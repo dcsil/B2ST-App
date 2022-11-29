@@ -30,28 +30,29 @@ const tiers = [
       'Email support',
       'Free installation',
     ],
-  },
-  {
-    title: 'Standard',
-    subheader: 'Most popular',
-    price: '179.99',
-    description: [
-        '7000 texts per month',
-        '5 GB of storage',
-        'Email support',
-        'Free installation',
-    ],
-  },
-  {
-    title: 'Premium',
-    price: '299.99',
-    description: [
-        '15000 texts per month',
-        '10 GB of storage',
-        'Email support',
-        'Free installation',
-    ],
-  },
+  }
+  // Currently, these two plans are not available. Clicking them would be directed to basic plans
+  // {
+  //   title: 'Standard',
+  //   subheader: 'Most popular',
+  //   price: '179.99',
+  //   description: [
+  //       '7000 texts per month',
+  //       '5 GB of storage',
+  //       'Email support',
+  //       'Free installation',
+  //   ],
+  // },
+  // {
+  //   title: 'Premium',
+  //   price: '299.99',
+  //   description: [
+  //       '15000 texts per month',
+  //       '10 GB of storage',
+  //       'Email support',
+  //       'Free installation',
+  //   ],
+  // },
 
   
 ];
@@ -105,13 +106,13 @@ const Plan = () =>{
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid
+            <Grid className='payment_card'
             
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
-              md={4}
+              // item
+              // key={tier.title}
+              // xs={12}
+              // sm={tier.title === 'Enterprise' ? 12 : 6}
+              // md={4}
             >
               <Card  onClick={(e)=>{checkout(e)}}>
                 <CardHeader

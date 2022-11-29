@@ -41,8 +41,14 @@
   float: right;
   margin-right: 3rem;
   
+  
 }
 
+.payment_card{
+  margin: 1rem;
+  padding: 3px;
+  border-radius:5px;
+}
 .payment_card:hover{
-  box-shadow: 1px solid black;
+  background-color: gold;
 }

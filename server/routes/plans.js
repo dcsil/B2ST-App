@@ -34,8 +34,8 @@ router.post("/session", async (req, res) =>{
                 quantity: 1
             }
         ],
-        success_url: "http://localhost:3000/",
-        cancel_url: "http://google.com",  //need change later!
+        success_url: "http://localhost:3000/dashboard",
+        cancel_url: "http://localhost:3000/dashboard",  //need change later!
         customer: user.customer.id
     }, {
         apiKey: process.env.STRIPE_SEC

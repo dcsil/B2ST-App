@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.current_plan{
+  float: right;
+  margin-right: 3rem;
+  
+}

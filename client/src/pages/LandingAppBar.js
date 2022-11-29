@@ -23,18 +23,22 @@ export default function LandingAppBar() {
             <Link to={"/"}>B2ST</Link>
            
           </Typography>
-          <Link to="/">
-          </Link>
-          {!user? <Link to="/login">
+          {user ? 
+            <Link to="/dashboard">
+              <Button variant="contained" color="primary">Dashboard</Button>
+            </Link> :
+          (<>
+          <Link to="/login">
             <Button variant="contained" color="primary">
               Login
             </Button>
-          </Link>: <div></div>}
-          {!user? <Link to="/register">
+          </Link>
+          <Link to="/register">
             <Button variant="contained" color="primary">
               Register
             </Button>
-          </Link>: <div></div>}
+          </Link>
+          </>)}
         </Toolbar>
     </AppBar>
   );

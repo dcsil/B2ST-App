@@ -23,21 +23,14 @@ const mdTheme = createTheme();
 function DashboardContent() {
   
 
-  const {logout} = useLogout()
   const {user} = useAuthContext()
-  // useEffect(()=>{
-  //   getPlan()
-  // }, [])
+
 
   const getPlan = async ()=>{
 
     print(user.email)
     const {data: plan} = await axios.post("http://localhost:5000/subs", {"email": user.email})
     print(plan)
-  }
-
-  const handleLogout = async ()=>{
-    logout()
   }
 
   return (
@@ -107,8 +100,8 @@ function DashboardContent() {
         
       </Box>
 
-      <Button variant="secondary" onClick={handleLogout}> Log out</Button>{' '}
-      <button onClick={getPlan}>get plan</button>
+  
+      
 
     </ThemeProvider>
   );

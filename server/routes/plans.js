@@ -19,8 +19,10 @@ router.get("/price", async (req, res) =>{
 
 router.post("/session", async (req, res) =>{
     const {email} = req.body
+
     const user = await User.findOne({email: email})
-    // res.send(user)
+    
+    
     // return
 
     const session = await stripe.checkout.sessions.create({

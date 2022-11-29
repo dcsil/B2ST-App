@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import LandingAppBar from './LandingAppBar';
 import {useState} from "react"
-
+import { useAuthContext } from '../hooks/useAuthContext';
+import axios from 'axios';
 const theme = createTheme();
 const print = console.log
 const tiers = [
@@ -56,13 +57,28 @@ const tiers = [
 
 const Plan = () =>{
     const [state, setState] = useState(0)
-    const helper = ()=>{
+    const {user} = useAuthContext()
+    const checkout = async (e)=>{
+      e.preventDefault()
 
-        print(3)
+        // print(email, password)
+        // const {data: response} = await fetch("/api/subs/session", {
+        //     method: "POST",
+        //     headers:{"Content-Type": "application/json"},
+        //     body: JSON.stringify({email})
+
+        // })
+        // print(response)
+        print(user)
+        const email = user.email
+        print(email)
+        const {data: response} = await axios.post("http://localhost:5000/plans/session", { email})
+        print(response)
+        window.location.href = response.price.url
     }
 
 
-  return (
+  return ( 
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LandingAppBar />
@@ -95,7 +111,7 @@ const Plan = () =>{
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={4}
             >
-              <Card onClick={(e)=>{helper()}}>
+              <Card onClick={(e)=>{checkout(e)}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}

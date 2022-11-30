@@ -5,10 +5,9 @@
 .env
 yarn.lock
 package-lock.json
-
 # testing
 /coverage
-
+/datasets
 # production
 /build
 package-lock.json

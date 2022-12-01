@@ -30,51 +30,50 @@ const tiers = [
       'Email support',
       'Free installation',
     ],
-  }
+  },
   // Currently, these two plans are not available. Clicking them would be directed to basic plans
-  // {
-  //   title: 'Standard',
-  //   subheader: 'Most popular',
-  //   price: '179.99',
-  //   description: [
-  //       '7000 texts per month',
-  //       '5 GB of storage',
-  //       'Email support',
-  //       'Free installation',
-  //   ],
-  // },
-  // {
-  //   title: 'Premium',
-  //   price: '299.99',
-  //   description: [
-  //       '15000 texts per month',
-  //       '10 GB of storage',
-  //       'Email support',
-  //       'Free installation',
-  //   ],
-  // },
+  {
+    title: 'Standard',
+    subheader: 'Most popular',
+    price: '179.99',
+    description: [
+        '7000 texts per month',
+        '5 GB of storage',
+        'Email support',
+        'Free installation',
+    ],
+  },
+  {
+    title: 'Premium',
+    price: '299.99',
+    description: [
+        '15000 texts per month',
+        '10 GB of storage',
+        'Email support',
+        'Free installation',
+    ],
+  },
 
   
 ];
 
 const Plan = () =>{
-    const [state, setState] = useState(0)
     const {user} = useAuthContext()
-    const checkout = async (e)=>{
+    const checkout = async (e,index)=>{
       e.preventDefault()
-
-        // print(email, password)
-        // const {data: response} = await fetch("/api/subs/session", {
-        //     method: "POST",
-        //     headers:{"Content-Type": "application/json"},
-        //     body: JSON.stringify({email})
-
-        // })
-        // print(response)
-        print(user)
+      
+        print(index)
         const email = (user.email? user.email: user.user.email)
-        print(email)
-        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email})
+        // if(parseInt(index.index) === 0){
+        //   print (0)
+        // }
+        // else if(parseInt(index.index) === 1){
+        //   print(1)
+        // }
+        // else{
+        //   print(2)
+        // }
+        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
         print(response)
         window.location.href = response.price.url
     }
@@ -104,9 +103,10 @@ const Plan = () =>{
       {/* End hero unit */}
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
+          {tiers.map((tier, index) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid className='payment_card'
+            
+            <Grid key = {index} className='payment_card'
             
               // item
               // key={tier.title}
@@ -114,7 +114,8 @@ const Plan = () =>{
               // sm={tier.title === 'Enterprise' ? 12 : 6}
               // md={4}
             >
-              <Card  onClick={(e)=>{checkout(e)}}>
+              <Card  onClick={(e)=>{checkout(e, {index})}}>
+              
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}

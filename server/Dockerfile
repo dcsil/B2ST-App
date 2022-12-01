@@ -10,9 +10,7 @@ RUN npm i
 # Install python and its packages
 RUN apt-get update || : && apt-get install python -y
 RUN apt-get install python3-pip -y
-RUN pip install pandas
-RUN pip install matplotlib
-RUN pip install scikit-learn
+RUN pip install pandas matplotlib scikit-learn
 # Copies the entire source code into "/server"
 COPY . /server
 

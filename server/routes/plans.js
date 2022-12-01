@@ -18,19 +18,32 @@ router.get("/price", async (req, res) =>{
 
 
 router.post("/session", async (req, res) =>{
+    
     const {email} = req.body
+    const number = req.body.plan
+    print(email, number)
 
     const user = await User.findOne({email: email})
     
     
     // return
-
+    var price_url
+    if (number === 0){
+        price_url = "price_1M9WPdIlyH1Yo9HOLvXZkEYZ"
+    }
+    else if (number === 1){
+        price_url = "price_1M9dP5IlyH1Yo9HOQNfrPceV"
+    }
+    else{
+        price_url = "price_1M9ddbIlyH1Yo9HOCsh0a7hi"
+    }
     const session = await stripe.checkout.sessions.create({
+        
         mode: "subscription",
         payment_method_types:["card"],
         line_items: [
             {
-                price: "price_1M9WPdIlyH1Yo9HOLvXZkEYZ", // this can be changed to another hashed price
+                price: price_url, // this can be changed to another hashed price
                 quantity: 1
             }
         ],

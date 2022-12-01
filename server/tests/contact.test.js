@@ -28,8 +28,6 @@ describe("POST /contact/getAll", () => {
 });
 
 describe("POST /contact/add", () => {
-
-    
     it ("should not add a contact with invalid phone number", async () => {
         const res = await request(app).post("/contact/add").send(
             {

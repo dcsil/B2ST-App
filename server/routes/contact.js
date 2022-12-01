@@ -8,9 +8,9 @@ const router = express.Router();
 
 router.post("/getAll", async (req, res) => {
     try {
-        const { user } = req.query;
+        const { user } = req.body;
         const contacts = await Contact.getContacts(user);
-        res.status(200).send(contacts);
+        res.status(200).json(contacts);
     } catch (error) {
         res.status(400).json(error);
     }
@@ -20,7 +20,7 @@ router.post("/add", async (req, res) => {
     try {
         const { name, phone, user } = req.body;
         const contact = await Contact.addContact(name, phone, user);
-        res.status(200).send(contact);
+        res.status(200).json(contact);
     } catch (error) {
         res.status(400).json(error);
     }

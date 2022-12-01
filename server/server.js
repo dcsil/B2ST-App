@@ -43,6 +43,7 @@ db.connect(() => {
   app.use("/subs", require("./routes/subs"))
   app.use("/marketing", require("./routes/marketing"))
   app.use("/sms", router)
+  app.use("/contact", require("./routes/contact"))
   app.get("/", (req, res)=>{
     res.send("Api Running")
   })

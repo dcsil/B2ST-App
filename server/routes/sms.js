@@ -53,7 +53,7 @@ router.post("/sendAll", async (req, res) => {
       res.status(err.status).send(err);
     });
   } catch (error) {
-    res.sendStatus(500);
+    res.status(500).json(error);
   }
 });
 

@@ -47,6 +47,8 @@ mesSchema.statics.recordMes = async function(from, to, user, type, code, amount,
         throw Error("Missing required fields")
     }
     const time=sendAt? sendAt: new Date();
+    const expire=new Date(time);
+    expire.setMonth(expire.getMonth()+2);
     // create new mes record
     const record = await this.create({
         from:from,
@@ -57,7 +59,7 @@ mesSchema.statics.recordMes = async function(from, to, user, type, code, amount,
         amount:code?amount:null,
         mes:mes,
         sentDate: time,
-        expireDate: code? new Date(time.setMonth(time.getMonth() + 2)) : null,
+        expireDate: code? expire : null,
         active: code? false:null
     })
     return record

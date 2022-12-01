@@ -54,11 +54,12 @@ router.post("/sendAll", async (req, res) => {
     }))
     .then(() => {
       Promise.all(to.map(async (number,index) => {
-        let cur_code = codes[index];
+        let cur_code = hasCode?codes[index]:null;
         await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
       })).then(() => {
         res.status(200).send("Messages sent");
       }).catch(err => {
+        console.log(err);
         res.status(400).send(err);
       });
     })

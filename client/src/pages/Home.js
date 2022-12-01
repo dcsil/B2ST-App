@@ -63,8 +63,8 @@ export default function Home() {
               {/* <Link to="/dashboard">
                 <Button variant="contained">Dashboard</Button>
               </Link> */}
-              <Link to="/pricing">
-                <Button variant="outlined">Pricing</Button>
+              <Link to="/">
+                <Button variant="outlined">Developer Team</Button>
               </Link>
             </Stack>
           </Container>

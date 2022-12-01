@@ -2,7 +2,8 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const bcrypt = require("bcrypt")
 const validator = require('validator');
-
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.STRIPE_SET);
 const userSchema = new Schema({
     firstname:{
         type: String,
@@ -21,6 +22,14 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: true
+    },
+    customer:{
+        type: Object
+    },
+    plan:{
+        type: String,
+        required: true,
+        default: "Free"
     },
     date:{
         type: Date,
@@ -51,7 +60,8 @@ userSchema.statics.signup = async function(firstname, lastname, email, password)
   
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt) //hash is the hassed passowrd
-    const user = await this.create({ firstname, lastname, email, password: hash })
+    const customer = await stripe.customers.create({email}, {apiKey: process.env.STRIPE_SEC}) // make a stripe customer based on this email
+    const user = await this.create({ firstname, lastname, email, password: hash, customer: customer })
     return user
 }
 

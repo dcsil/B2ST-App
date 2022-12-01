@@ -11,6 +11,7 @@ const TextDialog = (props) => {
     const [text,setText] = React.useState(defaultText);
     const [loading,setLoading] = React.useState(false);
     const [time, setTime] = React.useState(dayjs());
+    const [code, setCode] = React.useState(false);
     const [now, setNow] = React.useState(true);
     const sendText = () => {
         if (time.isBefore(dayjs().add(20,'minute')) && !now) {
@@ -23,7 +24,7 @@ const TextDialog = (props) => {
         }
         setLoading(true);
         const scheduletime= now ? "" : time.toDate();
-        props.sendText(text, scheduletime)
+        props.sendText(text, scheduletime,code)
         .then(() => {
             setLoading(false);
             props.closeDialog();
@@ -70,6 +71,14 @@ const TextDialog = (props) => {
                 />
             </LocalizationProvider>
             }
+            <FormGroup sx={{mb:2}}>
+                <FormControlLabel
+                   control={
+                    <Switch checked={code} onChange={()=>setCode(!code)} name="code" />
+                  }
+                  label="promotion code?"
+                />
+            </FormGroup>
         </DialogContent>
         <DialogActions>
           <LoadingButton

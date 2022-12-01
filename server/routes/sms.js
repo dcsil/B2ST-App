@@ -6,6 +6,7 @@ const phone = process.env.PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const { MessagingResponse } = require('twilio').twiml;
 const router = express.Router();
+const Mes = require("../models/MesModel")
 
 const sendSMS = async (mes, to,sendAt) => {
   try{
@@ -42,18 +43,41 @@ router.post("/", (req, res) => {
 
 router.post("/sendAll", async (req, res) => {
   try {
-    const { mes, to,sendAt } = req.body;
-    Promise.all(to.map(async (number) => {
-      await sendSMS(mes, number,sendAt);
+    const { mes, to,sendAt,user,hasCode } = req.body;
+    const codes=[];
+    to.map( num => {
+      const code = Math.floor(Math.random() * 1000000);
+      codes.push(code);
+    })
+    Promise.all(to.map(async (number,index) => {
+      await sendSMS((hasCode?mes + " " + codes[index]:mes), number,sendAt);
     }))
     .then(() => {
-      res.status(200).send("Messages sent");
+      Promise.all(to.map(async (number,index) => {
+        let cur_code = codes[index];
+        await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
+      })).then(() => {
+        res.status(200).send("Messages sent");
+      }).catch(err => {
+        res.status(400).send(err);
+      });
     })
     .catch((err) => {
       res.status(err.status).send(err);
     });
   } catch (error) {
     res.status(500).json(error);
+  }
+});
+
+router.post("/getRecords",async (req,res) => {
+  try {
+    const { user } = req.body;
+    const records = await Mes.getMessages(user);
+    console.log(records);
+    res.status(200).json(records);
+  } catch (error) {
+    res.status(400).json(error);
   }
 });
 

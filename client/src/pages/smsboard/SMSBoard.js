@@ -7,18 +7,24 @@ import TextDialog from './TextDialog';
 import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SMSTable from './SMSOverview';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const mdTheme = createTheme();
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 function SMSBoardContent() {
   const [open, setOpen] = React.useState(false);
+  const [contactOpen, setContactOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   const [alert, setAlert] = React.useState({severity:'',message:''});
-  const sendText = async (text,time) => {
+  const {user} = useAuthContext();
+  const navigate = useNavigate();
+  const sendText = async (text,time,code) => {
+    const email=(user.email? user.email: user.user.email);
     const request = new Request(`${api_url}/sms/sendAll`, {
       method: 'post',
-      body: JSON.stringify({ mes:text, to:selected, sendAt:time}),
+      body: JSON.stringify({ mes:text, to:selected, sendAt:time,user:email, hasCode:code }),
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
@@ -61,7 +67,10 @@ function SMSBoardContent() {
             <Grid container spacing={3} padding={2}>
               <Grid item xs={12}>
 
-                <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}}/>
+                <EnhancedTable 
+                  sendText={(selected)=>{setSelected(selected);setOpen(true)}}
+                  addContact={()=>{setContactOpen(true)}}
+                />
               </Grid>
               <Grid item xs={12}>
                 <SMSTable />
@@ -71,7 +80,7 @@ function SMSBoardContent() {
           <TextDialog
             open={open}
             closeDialog={() => setOpen(false)}
-            sendText={(text,time) => sendText(text,time)}
+            sendText={(text,time,code) => sendText(text,time,code)}
           />
           <Collapse in={alert.severity} sx={{position:"fixed",bottom:0}}>
             <Alert

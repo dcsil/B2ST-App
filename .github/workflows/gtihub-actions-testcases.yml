@@ -26,8 +26,6 @@ jobs:
       uses: supercharge/mongodb-github-action@1.8.0
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
-        mongodb-username: user
-        mongodb-password: 123
         mongodb-db: b2st
       env:
         MONGO_INITDB_ROOT_USERNAME: admin

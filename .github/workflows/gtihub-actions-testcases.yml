@@ -29,6 +29,9 @@ jobs:
         mongodb-username: user
         mongodb-password: 123
         mongodb-db: b2st
+      env:
+        MONGO_INITDB_ROOT_USERNAME: admin
+        MONGO_INITDB_ROOT_PASSWORD: 123
     - name: Test Coverage Frontend
       run: |
         cd client

@@ -8,7 +8,7 @@ import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/mate
 import CloseIcon from '@mui/icons-material/Close';
 import SMSTable from './SMSOverview';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
+import ContactDialog from './ContactDialog';
 
 const mdTheme = createTheme();
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
@@ -19,7 +19,6 @@ function SMSBoardContent() {
   const [selected, setSelected] = React.useState([]);
   const [alert, setAlert] = React.useState({severity:'',message:''});
   const {user} = useAuthContext();
-  const navigate = useNavigate();
   const sendText = async (text,time,code) => {
     const email=(user.email? user.email: user.user.email);
     const request = new Request(`${api_url}/sms/sendAll`, {
@@ -43,6 +42,8 @@ function SMSBoardContent() {
         setAlert({severity:'error',message:'Server Error!'});
         console.log(error);
       });
+  }
+  const addContact = async (name,phone) => {
   }
 
   return (
@@ -81,6 +82,11 @@ function SMSBoardContent() {
             open={open}
             closeDialog={() => setOpen(false)}
             sendText={(text,time,code) => sendText(text,time,code)}
+          />
+          <ContactDialog
+            open={contactOpen}
+            closeDialog={() => setContactOpen(false)}
+            addContact={(name,phone)=>addContact(name,phone)}
           />
           <Collapse in={alert.severity} sx={{position:"fixed",bottom:0}}>
             <Alert

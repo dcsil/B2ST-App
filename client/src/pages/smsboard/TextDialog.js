@@ -84,6 +84,7 @@ const TextDialog = (props) => {
           <LoadingButton
             onClick={()=>{sendText()}}
             loading={loading}
+            disabled={text===""}
            >
             Submit
            </LoadingButton>

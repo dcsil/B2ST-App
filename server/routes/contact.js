@@ -22,7 +22,6 @@ router.post("/add", async (req, res) => {
         const contact = await Contact.addContact(name, phone, user);
         res.status(200).send(contact);
     } catch (error) {
-        console.log(error);
         res.status(400).json(error);
     }
 });

@@ -31,14 +31,9 @@ function analyze() {
   return analyzeScript;
 }
 function query(req, res, script) {
-  // var query = req.body.query;
-  var query = "hello there";
+  var query = JSON.stringify(req.body.query);
   script.stdin.write(query);
-  //Stdout logging from python script
-//   script.stdout.on("data", (data) => {
-//     console.log("Pipe data from python script ...");
-//     console.log(data.toString());
-//   });
+  script.stdin.end();
 }
 
 module.exports = { analyze, query };

@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import warnings
+import json
 
 print("Starting analysis")
 
@@ -39,7 +40,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 25, random
 # Train the Model
 regr = RandomForestRegressor(n_estimators = 10, max_depth = 10, random_state = 101)
 regr.fit(X_train, y_train.values.ravel())
-
+print(X_test)
 # Make prediction
 predictions = regr.predict(X_test)
 result = X_test
@@ -76,5 +77,6 @@ print("Mean Absolute Error (MAE): ", round(mae, 2))
 
 # accept user input
 user_input = input("Enter input for prediction: ")
-user_predictions = regr.predict(user_input)
+user_input_df = pd.DataFrame(json.loads(user_input), columns = ['order_id', 'product_id', 'category_code', 'brand'])
+user_predictions = regr.predict(user_input_df)
 print(user_predictions)

@@ -61,10 +61,19 @@ const Plan = () =>{
     const {user} = useAuthContext()
     const checkout = async (e,index)=>{
       e.preventDefault()
+      
         print(index)
         const email = (user.email? user.email: user.user.email)
-        print(email)
-        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: 1})
+        // if(parseInt(index.index) === 0){
+        //   print (0)
+        // }
+        // else if(parseInt(index.index) === 1){
+        //   print(1)
+        // }
+        // else{
+        //   print(2)
+        // }
+        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
         print(response)
         window.location.href = response.price.url
     }
@@ -105,7 +114,8 @@ const Plan = () =>{
               // sm={tier.title === 'Enterprise' ? 12 : 6}
               // md={4}
             >
-              <Card  onClick={(e,index)=>{checkout(e)}}>
+              <Card  onClick={(e)=>{checkout(e, {index})}}>
+              
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}

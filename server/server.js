@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 const db = require("./config/db");
 //import sms.js
 const { sendSMS, getSMS, router } = require("./routes/sms");
-const { analyze } = require("./marketing_system/tasks/analytics");
+const { analyzePurchases, analyzeEvents } = require("./marketing_system/tasks/analytics");
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   integrations: [
@@ -38,7 +38,8 @@ app.use(cors());
 app.use(express.json());
 
 db.connect(() => {
-  app.set("script", analyze());
+  app.set("script_purchases", analyzePurchases());
+  app.set("script_events", analyzeEvents());
   app.use("/user", require("./routes/user"));
   app.use("/marketing", require("./routes/marketing"));
   app.use("/plans", require("./routes/plans"))

@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
@@ -127,7 +128,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected,sendText,addContact } = props;
+  const { numSelected,sendText,addContact,refresh } = props;
 
   return (
     <Toolbar
@@ -177,6 +178,13 @@ function EnhancedTableToolbar(props) {
         </Tooltip>
         </div>
       ) : ""}
+      <div>
+        <Tooltip title="Refresh">
+          <Button variant="text" color="primary" onClick={()=>props.refresh()}>
+            Refresh  
+          </Button>
+        </Tooltip>
+      </div>
     </Toolbar>
   );
 }
@@ -194,7 +202,7 @@ export default function EnhancedTable(props) {
   const [rows, setRows] = React.useState([]);
 
   const {user} = useAuthContext();
-  const getContacts = async (user)=>{
+  const getContacts = async ()=>{
     const email=(user.email? user.email: user.user.email)
     console.log(email);
     axios.post(`${api_url}/contact/getAll`,{user:email})
@@ -268,7 +276,12 @@ export default function EnhancedTable(props) {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} addContact={()=>props.addContact()} sendText={sendText} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          addContact={()=>props.addContact()}
+          sendText={sendText}
+          refresh={getContacts}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

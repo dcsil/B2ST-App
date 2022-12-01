@@ -5,7 +5,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 const ContactDialog = (props) => {
     const [loading,setLoading] = React.useState(false);
     const [name,setName] = React.useState("");
-    const [phone,setPhone] = React.useState("+1xxxxxxxxx");
+    const [phone,setPhone] = React.useState("+11111111111");
     const addContact = () => {
         setLoading(true);
         props.addContact(name, phone)
@@ -13,9 +13,21 @@ const ContactDialog = (props) => {
             setLoading(false);
             props.closeDialog();
             setName("");
-            setPhone("+1xxxxxxxxx");
+            setPhone("+11111111111");
         });
     }
+
+    const validateInput = () => {
+        if (name==="") {
+            return false;
+        }
+        if (!phone.match(/^\+1([0-9]{10})$/)) {
+            console.log(phone);
+            return false;
+        }
+        return true;
+    }
+
     return(
       <Dialog open={props.open} onClose={()=>{props.closeDialog()}} style={{width:'100%'}}>
         <DialogTitle>Add Contact</DialogTitle>
@@ -38,6 +50,7 @@ const ContactDialog = (props) => {
                 value={phone}
                 required
                 fullWidth
+                inputProps={{pattern:"\\+1[0-9]{9}"}}
                 rows={8}
                 onChange={(e)=>{setPhone(e.target.value)}}
                 sx={{mb:2}}
@@ -47,6 +60,7 @@ const ContactDialog = (props) => {
           <LoadingButton
             onClick={()=>{addContact()}}
             loading={loading}
+            disabled={!validateInput()}
            >
             Submit
            </LoadingButton>

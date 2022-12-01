@@ -50,7 +50,7 @@ router.post("/sendAll", async (req, res) => {
       codes.push(code);
     })
     Promise.all(to.map(async (number,index) => {
-      await sendSMS((hasCode?mes + " " + codes[index]:mes), number,sendAt);
+      await sendSMS((hasCode?mes + "\n Promotion Code: " + codes[index]:mes), number,sendAt);
     }))
     .then(() => {
       Promise.all(to.map(async (number,index) => {

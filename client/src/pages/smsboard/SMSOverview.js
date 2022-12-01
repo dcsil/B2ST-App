@@ -84,6 +84,13 @@ export default function SMSTable() {
     setPage(0);
   };
 
+  const expired = (time) => {
+    //check if time past now
+    const now = new Date();
+    const sentDate = new Date(time);
+    return now > sentDate;
+  }
+
   return (
   <Box sx={{ width: '100%' }}>
     <Paper sx={{ width: '100%', mb: 2 }}>
@@ -126,7 +133,7 @@ export default function SMSTable() {
                 {row.expireDate? row.expireDate: "--"}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.code? (row.active ? "active" : (row.expirationDate<new Date()? 'inactive':'expired' ) ):"--"}
+                {row.code? (row.active ? "active" : (expired(row.expireDate)? 'expired':'inactive' ) ):"--"}
               </TableCell>
             </TableRow>
           ))}

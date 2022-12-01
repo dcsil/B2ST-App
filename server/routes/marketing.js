@@ -4,7 +4,6 @@ const { query } = require("../marketing_system/tasks/analytics");
 router.post("/query", async (req, res) => {
     try {
         query(req, res, req.app.get("script"));
-        res.status(200).json({ msg: "Query sent" });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");

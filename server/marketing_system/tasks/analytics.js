@@ -34,6 +34,11 @@ function query(req, res, script) {
   var query = JSON.stringify(req.body.query);
   script.stdin.write(query);
   script.stdin.end();
+  script.stdout.on("data", (data) => {
+    console.log("Pipe data from python script ...");
+    console.log(data.toString());
+    res.status(200).json({ data: data.toString() });
+  });
 }
 
 module.exports = { analyze, query };

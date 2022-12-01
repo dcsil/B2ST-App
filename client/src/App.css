@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.current_plan{
+  float: right;
+  margin-right: 3rem;
+  
+  
+}
+
+.payment_card{
+  margin: 1rem;
+  padding: 3px;
+  border-radius:5px;
+}
+.payment_card:hover{
+  background-color: gold;
+}

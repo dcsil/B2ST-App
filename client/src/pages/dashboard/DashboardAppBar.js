@@ -6,7 +6,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import "../../App.css"
 import {Link } from 'react-router-dom';
+import {useState, useEffect} from "react"
+import axios from "axios";
 import {
   Avatar,
   Divider,
@@ -22,7 +26,7 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {useLogout} from "../../hooks/useLogout"
-
+const print = console.log
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -71,6 +75,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function DashboardAppBarContent(props) {
     const [open, setOpen] = React.useState(true);
+    const [email, setEmail] = useState("")
+    const [plan, setPlan] = useState("")
     const toggleDrawer = () => {
       setOpen(!open);
     };
@@ -78,15 +84,34 @@ function DashboardAppBarContent(props) {
     const handleLogout = async ()=>{
       logout()
     };
+
+    const {user} = useAuthContext()
+    
+    useEffect(()=>{
+      getPlan()
+    }, [])
+
+  const getPlan = async ()=>{
+    
+    const email = (user.email? user.email: user.user.email)
+    // print(user.email)
+    setEmail(email)
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {email: email})
+    
+    setPlan(plan)
+    // print(plan)
+  }
   
     return (
         <>
+        
           <AppBar position="absolute" open={open}>
             <Toolbar
               sx={{
                 pr: '24px', // keep right padding when drawer closed
               }}
             >
+                           
               <IconButton
                 edge="start"
                 color="inherit"
@@ -99,6 +124,8 @@ function DashboardAppBarContent(props) {
               >
                 <MenuIcon />
               </IconButton>
+ 
+              
               <Typography
                 component="h1"
                 variant="h6"
@@ -107,6 +134,9 @@ function DashboardAppBarContent(props) {
                 sx={{ flexGrow: 1 }}
               >
                 {props.name} 
+                <span className='current_plan'>
+                  {plan}
+                </span>
                 {props.backto && (
                   <IconButton
                     component={Link}
@@ -115,7 +145,12 @@ function DashboardAppBarContent(props) {
                   >
                     <ChevronLeftIcon />
                   </IconButton>)}
+                  
+                  
               </Typography>
+              {email}
+              
+              {/* <button onClick={getPlan}>get plan</button> */}
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <NotificationsIcon />
@@ -146,6 +181,7 @@ function DashboardAppBarContent(props) {
               <ListItem
                 disablePadding
               >
+   
               <ListItemButton component={Link} to='/profile'>
                 <ListItemAvatar>
                   <Avatar/>

@@ -14,51 +14,73 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import LandingAppBar from './LandingAppBar';
-
+import {useState} from "react"
+import { useAuthContext } from '../hooks/useAuthContext';
+import axios from 'axios';
+import "../App.css"
 const theme = createTheme();
-
+const print = console.log
 const tiers = [
   {
     title: 'Basic',
-    price: '100',
+    price: '59.99',
     description: [
-      '10 users included',
+    '2000 texts per month',
       '2 GB of storage',
-      '100 texts per month',
-      'Help center access',
       'Email support',
       'Free installation',
     ],
-  },
-  {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '500',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      '1000 texts per month',
-      'Help center access',
-      'Priority email support',
-      'Free installation',
-    ],
-  },
-  {
-    title: 'Enterprise',
-    price: '2000',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      '10000+ texts per month',
-      'Help center access',
-      'Phone & email support',
-      'Free installation',
-    ],
-  },
+  }
+  // Currently, these two plans are not available. Clicking them would be directed to basic plans
+  // {
+  //   title: 'Standard',
+  //   subheader: 'Most popular',
+  //   price: '179.99',
+  //   description: [
+  //       '7000 texts per month',
+  //       '5 GB of storage',
+  //       'Email support',
+  //       'Free installation',
+  //   ],
+  // },
+  // {
+  //   title: 'Premium',
+  //   price: '299.99',
+  //   description: [
+  //       '15000 texts per month',
+  //       '10 GB of storage',
+  //       'Email support',
+  //       'Free installation',
+  //   ],
+  // },
+
+  
 ];
 
-const aa = () =>{
-  return (
+const Plan = () =>{
+    const [state, setState] = useState(0)
+    const {user} = useAuthContext()
+    const checkout = async (e)=>{
+      e.preventDefault()
+
+        // print(email, password)
+        // const {data: response} = await fetch("/api/subs/session", {
+        //     method: "POST",
+        //     headers:{"Content-Type": "application/json"},
+        //     body: JSON.stringify({email})
+
+        // })
+        // print(response)
+        print(user)
+        const email = (user.email? user.email: user.user.email)
+        print(email)
+        const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email})
+        print(response)
+        window.location.href = response.price.url
+    }
+
+
+  return ( 
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LandingAppBar />
@@ -70,30 +92,29 @@ const aa = () =>{
           color="text.primary"
           gutterBottom
         >
-          Pricing
+          Plans
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. It&apos;s built with default MUI components with little
-          customization.
+          Subscribe to our website to use our service!
         </Typography>
-        <Button sx={{margin:1}} variant="outlined">
+        {/* <Button sx={{margin:1}} variant="outlined">
             Start free trial for 14 days
-        </Button>
+        </Button> */}
       </Container>
       {/* End hero unit */}
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid
-              item
-              key={tier.title}
-              xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
-              md={4}
+            <Grid className='payment_card'
+            
+              // item
+              // key={tier.title}
+              // xs={12}
+              // sm={tier.title === 'Enterprise' ? 12 : 6}
+              // md={4}
             >
-              <Card>
+              <Card  onClick={(e)=>{checkout(e)}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -146,7 +167,7 @@ const aa = () =>{
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          B2ST
         </Typography>
         <Typography
           variant="subtitle1"
@@ -154,7 +175,7 @@ const aa = () =>{
           color="text.secondary"
           component="p"
         >
-          Pls donate to our Stripe Account
+          Please donate to our Stripe Account
         </Typography>
       </Box>
       {/* End footer */}
@@ -162,4 +183,4 @@ const aa = () =>{
   );
 }
 
-export default aa
+export default Plan

@@ -10,15 +10,33 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
-import Traffic from './Traffic';
 
+import {useLogout} from "../../hooks/useLogout"
+import Button from 'react-bootstrap/Button';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import axios from "axios";
+import {useEffect} from "react"
+import Traffic from './Traffic';
+const print = console.log
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  
+
+  const {user} = useAuthContext()
+
+
+  const getPlan = async ()=>{
+
+    print(user.email)
+    const {data: plan} = await axios.post("http://localhost:5000/subs", {email: user.email})
+    print(plan)
+  }
+
   return (
     
     <ThemeProvider theme={mdTheme}>
-      
+     
       <Box sx={{ display: 'flex' }}>
       
         <CssBaseline />
@@ -81,6 +99,10 @@ function DashboardContent() {
         </Box>
         
       </Box>
+
+  
+      
+
     </ThemeProvider>
   );
 }

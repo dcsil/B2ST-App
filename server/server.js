@@ -41,6 +41,7 @@ db.connect(() => {
   app.set("script", analyze());
   app.use("/user", require("./routes/user"));
   app.use("/marketing", require("./routes/marketing"));
+  app.use("/plans", require("./routes/plans"))
   app.use("/sms", router);
   app.get("/", (req, res) => {
     res.send("Api Running");

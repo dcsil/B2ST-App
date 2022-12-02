@@ -18,6 +18,17 @@ const RegisterFormFooter = (
   </Grid>
 )
 
+const RegisterCheckbox = (
+  <Grid item xs={12}>
+    <FormControlLabel
+      control={
+        <Checkbox value="allowExtraEmails" color="primary" />
+      }
+      label="I want to receive inspiration, marketing promotions and updates via email."
+    />
+  </Grid>
+)
+
 export default function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -76,7 +87,6 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log( firstname, lastname, email, password)
     await signup(firstname, lastname, email, password)
     setEmail("")
     setPassword("")
@@ -94,14 +104,7 @@ export default function Register() {
             </Grid>
           )
         })}
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox value="allowExtraEmails" color="primary" />
-            }
-            label="I want to receive inspiration, marketing promotions and updates via email."
-          />
-        </Grid>
+        {RegisterCheckbox}
       </Grid>
     </AuthForm>
   );

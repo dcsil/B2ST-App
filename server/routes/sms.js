@@ -20,11 +20,9 @@ const sendSMS = async (mes, to,sendAt) => {
       statusCallback: `${heroku_host}/sms`
     };
     if (sendAt) {
-      // post to twilio
       req.sendAt = new Date(sendAt);
       req.scheduleType = "fixed";
     }
-    console.log(req);
     await client.messages
     .create(req)
     .then(message => {return message})

@@ -9,36 +9,18 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 const print = console.log
 
+const itemProps = (grid,children) => ({
+  gridProps: {xs:12, ...grid},
+  children: children
+})
+
 const list = [
-  {
-    gridProps: { xs: 12, md: 8, lg: 9 },
-    paperProps: {
-      sx:{ p: 2, display: 'flex', flexDirection: 'column', height: 240 },
-    },
-    children: <Chart />,
-  },
-  {
-    gridProps: { xs: 12, md: 4, lg: 3 },
-    paperProps: {
-      sx: { p: 2, display: 'flex', flexDirection: 'column', height: 240 },
-    },
-    children: <Deposits />,
-  },
-  {
-    gridProps: { xs: 12 },
-    paperProps: {
-      sx:{ p: 2, display: 'flex', flexDirection: 'column' },
-    },
-    children: <Orders />,
-  },
-  {
-    gridProps: { xs: 12 },
-    paperProps: {
-      sx:{ p: 2, display: 'flex', flexDirection: 'column' },
-    },
-    children: <Traffic />,
-  },
+  itemProps({md:8,lg:9}, <Chart />),
+  itemProps({md:4,lg:3}, <Deposits />),
+  itemProps({xs:12}, <Orders />),
+  itemProps({xs:12}, <Traffic />),
 ];
+console.log(list);
 
 function DashboardContent() {
   const {user} = useAuthContext()
@@ -55,7 +37,7 @@ function DashboardContent() {
         <Grid container spacing={3}>
           {list.map((listItem, index) => (
             <Grid item {...listItem.gridProps} key={index}>
-              <Paper {...listItem.paperProps}>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height:'100%'}}>
                 {listItem.children}
               </Paper>
             </Grid>

@@ -26,12 +26,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import {useLogout} from "../../hooks/useLogout"
 const drawerWidth = 240;
 
-const TRANSITION = (theme, props) => {
+const TRANSITION = (theme, props) => 
   theme.transitions.create(props, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   })
-}
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',

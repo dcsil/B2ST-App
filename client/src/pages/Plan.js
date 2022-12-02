@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from './LandingAppBar';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Footer from '../components/Footer';
 import axios from 'axios';
 import "../App.css"
 const theme = createTheme();
@@ -140,21 +141,7 @@ const Plan = () =>{
           ))}
         </Grid>
       </Container>
-      {/* Footer */}
-      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          B2ST
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Please donate to our Stripe Account
-        </Typography>
-      </Box>
-      {/* End footer */}
+      <Footer />
     </ThemeProvider>
   );
 }

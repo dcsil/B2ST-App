@@ -1,4 +1,5 @@
 const express = require("express");
+const { AssignedAddOnExtensionInstance } = require("twilio/lib/rest/api/v2010/account/incomingPhoneNumber/assignedAddOn/assignedAddOnExtension");
 require("dotenv").config({path: "./.env"});
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -7,18 +8,23 @@ const client = require('twilio')(accountSid, authToken);
 const { MessagingResponse } = require('twilio').twiml;
 const router = express.Router();
 const Mes = require("../models/MesModel")
+const messaging_sid = process.env.TWILIO_MESSAGING_SERVICE;
+const heroku_host = process.env.HEROKU_HOST;
 
 const sendSMS = async (mes, to,sendAt) => {
   try{
     const req = {
       body: mes,
-      from: phone,
+      from: messaging_sid,
       to: to,
-      statusCallback: 'https://dashboard.heroku.com/apps/b2st-server/sms'
+      statusCallback: `${heroku_host}/sms`
     };
     if (sendAt) {
-      req.sendAt = sendAt;
+      // post to twilio
+      req.sendAt = new Date(sendAt);
+      req.scheduleType = "fixed";
     }
+    console.log(req);
     await client.messages
     .create(req)
     .then(message => {return message})
@@ -64,9 +70,11 @@ router.post("/sendAll", async (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.status(err.status).send(err);
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 });

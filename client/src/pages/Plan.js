@@ -3,19 +3,13 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/StarBorder';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LandingAppBar from './LandingAppBar';
 import { useAuthContext } from '../hooks/useAuthContext';
-import Footer from '../components/Footer';
+import LandingPageProvider from '../components/PageProvider/LandingPageProvider';
 import axios from 'axios';
-import "../App.css"
-const theme = createTheme();
-const print = console.log
 const tiers = [
   {
     title: 'Basic',
@@ -109,18 +103,17 @@ const Plan = () =>{
     const {user} = useAuthContext()
     const checkout = async (e,index)=>{
       e.preventDefault()
-      print(index)
       const email = (user.email? user.email: user.user.email)
       const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
-      print(response)
       window.location.href = response.price.url
     }
 
   return ( 
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <LandingAppBar />
-      <Container disableGutters maxWidth="sm" component="main" align="center" sx={{ pt: 8, pb: 6 }}>
+    <LandingPageProvider
+      containerProps={{disableGutters:true, align:'center', margin:0}}
+      boxProps={{alignItems:'center', mt:8, width:'100%'}}
+    >
+      <Box mb={6}>
         <Typography
           component="h1"
           variant="h2"
@@ -133,7 +126,7 @@ const Plan = () =>{
         <Typography variant="h5" align="center" color="text.secondary" component="p">
           Subscribe to our website to use our service!
         </Typography>
-      </Container>
+      </Box>
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier, index) => (
@@ -141,8 +134,7 @@ const Plan = () =>{
           ))}
         </Grid>
       </Container>
-      <Footer />
-    </ThemeProvider>
+    </LandingPageProvider>
   );
 }
 

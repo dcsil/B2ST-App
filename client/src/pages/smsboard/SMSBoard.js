@@ -5,7 +5,7 @@ import { Container,Grid } from '@mui/material';
 import SMSTable from './SMSOverview';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ContactDialog from './ContactDialog';
-import DashboardPageProvider from '../../components/DashboardPageProvider';
+import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import { useSendText } from '../../hooks/useSendText';
 import { useAddContact } from '../../hooks/useAddContact';
 

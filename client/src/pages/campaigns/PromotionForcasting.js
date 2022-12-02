@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Container,Grid,Toolbar,Box,Paper} from '@mui/material';
-import DashboardPageProvider from '../../components/DashboardPageProvider';
+import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 
 
 function PromotionForecastContent() {

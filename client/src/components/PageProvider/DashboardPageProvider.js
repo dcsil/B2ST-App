@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Collapse, Alert,IconButton,Toolbar,Box } from '@mui/material';
-import DashboardAppBar from '../pages/dashboard/DashboardAppBar';
+import DashboardAppBar from '../../pages/dashboard/DashboardAppBar';
 import CloseIcon from '@mui/icons-material/Close';
 
 const DashboardAlert = (props) => {

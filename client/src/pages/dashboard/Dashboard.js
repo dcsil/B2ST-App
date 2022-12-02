@@ -3,7 +3,7 @@ import { Container,Grid,Paper } from '@mui/material';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from "axios";
 import Traffic from './Traffic';
-import DashboardPageProvider from '../../components/DashboardPageProvider';
+import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';

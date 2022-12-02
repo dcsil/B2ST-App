@@ -6,7 +6,7 @@ import { Container,Grid,Toolbar,Box,Paper} from '@mui/material';
 import AppChart from '../../sections/AppChart';
 import Configuration from './Configuration';
 import AppStatistics from "../../sections/AppStatistics";
-import DashboardPageProvider from '../../components/DashboardPageProvider';
+import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 
 const cur_date=new Date();
 const date=new Date();

@@ -2,8 +2,7 @@
 
 # Exit immediately if any subcommand fails
 set -ea
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+pwd
 
 docker -v
 
@@ -15,8 +14,6 @@ command -v "docker" > /dev/null 2>&1 || {
     brew update
 
     # Install dependencies from Brewfile
-    cd "$DIR/.."
-    pwd
 
     brew bundle check >/dev/null 2>&1  || {
         echo "==> Installing Homebrew dependencies…"
@@ -30,7 +27,8 @@ command -v "docker" > /dev/null 2>&1 || {
 }
 
 # React js dependencies
-cd "$DIR/../client"
+cd client
+pwd
 echo "==> Installing client dependencies"
 npm install
 echo "==> Client dependencies installed"
@@ -44,7 +42,8 @@ fi
 echo "==> Client .env variables updated"
 
 # Node js dependencies
-cd "$DIR/../server"
+cd ../server
+pwd
 echo "==> Installing server dependencies"
 npm install
 echo "==> Server dependencies installed"
@@ -63,8 +62,7 @@ source .env
 echo "==> ENV variables sourced"
 
 
-
-cd "$DIR/.."
+cd ..
 pwd 
 
 

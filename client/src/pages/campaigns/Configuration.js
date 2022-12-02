@@ -5,7 +5,7 @@ import {Box,
     TableCell,
     TableContainer,
     TableRow,
-    Toolbar,Typography,Button } from '@mui/material';
+    Card, CardHeader,Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PromotionLimitDialog from './PromotionLimitDialog';
 
@@ -32,23 +32,10 @@ export default function ConfigTable(props) {
 ];
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Card >
+      <CardHeader title='Configuration'/>
+      <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <TableContainer>
-        <Toolbar
-            sx={{
-            pl: { sm: 2 },
-            pr: { xs: 1, sm: 1 }
-            }}
-        >
-            <Typography
-                sx={{ flex: '1 1 100%' }}
-                variant="h6"
-                id="tableTitle"
-                component="div"
-            >
-            Configurations
-            </Typography>
-        </Toolbar>
           <Table
             aria-labelledby="tableTitle"
             size='medium'
@@ -79,6 +66,7 @@ export default function ConfigTable(props) {
             open={open}
             closeDialog={() => setOpen(false)}
           />
-    </Box>
+      </Box>
+    </Card>
   );
 }

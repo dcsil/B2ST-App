@@ -12,7 +12,6 @@ const contactSchema = new Schema({
     phone:{
         type: String,
         required: true,
-        unique: true
     },
     belongsTo:{
         type: String,
@@ -44,28 +43,16 @@ contactSchema.statics.addContact = async function(name, phone, user){
 
 contactSchema.statics.deleteContact = async function(phone, user){
     // delete contact
-    const contact = await this.findOneAndDelete({phone: phone
-        , belongsTo: user})
+    const contact = await this.findOneAndDelete({phone: phone, belongsTo: user})
     if (!contact) {
         throw Error('Contact not found')
     }
     return contact
 }
 
-contactSchema.statics.updatePhone = async function(oldPhone, newPhone, user){
+contactSchema.statics.updateContact = async function(oldContatc, newContact, user){
     // update contact
-    const contact = await this.findOneAndUpdate({phone: oldPhone
-        , belongsTo: user}, {phone: newPhone})
-    if (!contact) {
-        throw Error('Contact not found')
-    }
-    return contact
-}
-
-contactSchema.statics.updateName = async function(phone, newName, user){
-    // update contact
-    const contact = await this.findOneAndUpdate({phone: phone
-        , belongsTo: user}, {name: newName})
+    const contact = await this.findOneAndUpdate({...oldContact, belongsTo: user}, {...newContact});
     if (!contact) {
         throw Error('Contact not found')
     }

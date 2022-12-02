@@ -13,9 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import axios from "axios";
 import {useAuthContext} from "../../hooks/useAuthContext"
 import {useEffect} from "react";
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import refreshIcon from "@mui/icons-material/Refresh";
 import Button from '@mui/material/Button'
 
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
@@ -49,6 +47,53 @@ function SMSTableToolbar(props) {
   );
 }
 
+const ContactTableHead = (
+  <TableHead>
+    <TableRow>
+      <TableCell>Type</TableCell>
+      <TableCell align="right">Sent Date</TableCell>
+      <TableCell align="right">Code</TableCell>
+      <TableCell align="right">Amount&nbsp;($)</TableCell>
+      <TableCell align="right">Recipient</TableCell>
+      <TableCell align="right">Expiration Date</TableCell>
+      <TableCell align="right">Status</TableCell>
+    </TableRow>
+  </TableHead>
+)
+
+const expired = (time) => {
+  //check if time past now
+  const now = new Date();
+  const sentDate = new Date(time);
+  return now > sentDate;
+}
+
+const ContactTableRow = (row) => (
+  <TableRow key={row.name} hover tabIndex={-1} >
+    <TableCell component="th" scope="row">
+      {row.type}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.sentDate}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.code? row.code: "--"}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.amount ? row.amount : "--"}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.to}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.expireDate? row.expireDate: "--"}
+    </TableCell>
+    <TableCell style={{ width: 160 }} align="right">
+      {row.code? (row.active ? "active" : (expired(row.expireDate)? 'expired':'inactive' ) ):"--"}
+    </TableCell>
+  </TableRow>
+)
+
 export default function SMSTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -57,7 +102,6 @@ export default function SMSTable() {
   const {user} = useAuthContext();
   const getSMSs = async ()=>{
     const email=(user.email? user.email: user.user.email)
-    console.log(email);
     axios.post(`${api_url}/sms/getRecords`,{user:email})
     .then((res)=>{
       if(res){
@@ -84,77 +128,37 @@ export default function SMSTable() {
     setPage(0);
   };
 
-  const expired = (time) => {
-    //check if time past now
-    const now = new Date();
-    const sentDate = new Date(time);
-    return now > sentDate;
-  }
-
   return (
   <Box sx={{ width: '100%' }}>
     <Paper sx={{ width: '100%', mb: 2 }}>
-    <SMSTableToolbar refresh={()=>getSMSs()} />
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table" size='medium'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Type</TableCell>
-            <TableCell align="right">Sent Date</TableCell>
-            <TableCell align="right">Code</TableCell>
-            <TableCell align="right">Amount&nbsp;($)</TableCell>
-            <TableCell align="right">Recipient</TableCell>
-            <TableCell align="right">Expiration Date</TableCell>
-            <TableCell align="right">Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.name} hover tabIndex={-1} >
-              <TableCell component="th" scope="row">
-                {row.type}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.sentDate}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.code? row.code: "--"}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.amount ? row.amount : "--"}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.to}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.expireDate? row.expireDate: "--"}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.code? (row.active ? "active" : (expired(row.expireDate)? 'expired':'inactive' ) ):"--"}
-              </TableCell>
-            </TableRow>
-          ))}
-
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+      <SMSTableToolbar refresh={()=>getSMSs()} />
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table" size='medium'>
+          {ContactTableHead}
+          <TableBody>
+            {(rowsPerPage > 0
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
+            ).map((row) => (
+              ContactTableRow(row)
+            ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
   </Box>
   );

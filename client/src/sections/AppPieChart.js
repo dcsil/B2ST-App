@@ -1,8 +1,10 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
 import { useTheme, styled } from '@mui/material/styles';
-import { Card, CardHeader } from '@mui/material';
+import { ResponsiveContainer } from 'recharts';
 import { useChart } from '../components/chart';
+import Title from '../components/Title';
 import numeral from 'numeral';
 const fNumber = (number) => {
     return numeral(number).format();
@@ -64,12 +66,13 @@ export default function AppPieChart({ title, subheader, chartColors, chartData, 
   });
 
   return (
-    <Card {...other}>
-      <CardHeader title={title} subheader={subheader} />
-
+    <React.Fragment>
+      <Title>{title}</Title>
+      <ResponsiveContainer>
       <StyledChartWrapper dir="ltr">
         <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
       </StyledChartWrapper>
-    </Card>
+      </ResponsiveContainer>
+    </React.Fragment>
   );
 }

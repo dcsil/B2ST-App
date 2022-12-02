@@ -22,7 +22,6 @@ const ContactDialog = (props) => {
             return false;
         }
         if (!phone.match(/^\+1([0-9]{10})$/)) {
-            console.log(phone);
             return false;
         }
         return true;

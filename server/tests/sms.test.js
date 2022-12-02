@@ -27,7 +27,7 @@ describe("POST /sms/sendAll", () => {
     });
 
     it("should not send with unverified phone", async () => {
-        const req = {mes: "test",to: [phone],user:"sample@test.com",hasCode: false};
+        const req = {mes: "test",to: ["+1111111111"],user:"sample@test.com",hasCode: false};
         const res = await request(app).post("/sms/sendAll").type('json').send(req);
         expect(res.statusCode).toBe(400);
     });

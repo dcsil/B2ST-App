@@ -67,7 +67,7 @@ export function AppBarListItems(props) {
       {subheader}
     </ListSubheader>
     {list.map((item, index) => (
-      <ListItemButton component={Link} to={item.link}>
+      <ListItemButton component={Link} to={item.link} key={index}>
         <ListItemIcon>
           {item.icon}
         </ListItemIcon>

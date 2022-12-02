@@ -2,24 +2,22 @@ import React from 'react';
 import { TextField,} from '@mui/material';
 import DashboardDialog from '../../components/DashboardDialog';
 
+const validateUpperLimit = (upper,lower) => {
+  return (upper<lower || upper>100 || upper<0) ?
+          'Upper bound must be no less than lower bound, and between 0 and 100' : '';
+}
+
+const validateLowerLimit = (upper,lower) => {
+  return (lower>upper || lower>100 || lower<0) ?
+          'Lower bound must be no greater than upper bound, and between 0 and 100' : '';
+}
+
 const PromotionLimitDialog = (props) => {
     const [upperLimit,setUpperLimit] = React.useState(50);
     const [lowerLimit,setLowerLimit] = React.useState(10);
-
-    const handleLimitChange = () => {
-        //TODO: send request to server
-    }
-
-    const validateUpperLimit = () => {
-        return upperLimit<lowerLimit ? 'Upper bound must be no less than lower bound' :
-            (upperLimit>100 ? 'Upper bound must be less than 100' :
-            (upperLimit<0 ? 'Upper bound must be greater than 0' : ''))
-    }
-
-    const validateLowerLimit = () => {
-        return lowerLimit>upperLimit ? 'Lower bound must be no greater than upper bound' :
-            (lowerLimit>100 ? 'Lower bound must be less than 100' :
-            (lowerLimit<0 ? 'Lower bound must be greater than 0' : ''))
+    const handleLimitChange = async () => {
+      // todo: add to database
+      return;
     }
 
     return(
@@ -28,8 +26,8 @@ const PromotionLimitDialog = (props) => {
         closeDialog={props.closeDialog}
         title="Set Promotion Limit"
         component="form"
-        validate={!validateUpperLimit() && !validateLowerLimit()}
-        onSubmit={handleLimitChange}
+        validate={!validateUpperLimit(upperLimit,lowerLimit) && !validateLowerLimit(upperLimit,lowerLimit)}
+        onSubmit={()=>handleLimitChange()}
         callback={()=>{}}
       >
         <TextField
@@ -43,8 +41,8 @@ const PromotionLimitDialog = (props) => {
             fullWidth
             label='Upper Bound'
             color='secondary'
-            error={validateUpperLimit()}
-            helperText={validateUpperLimit()}
+            error={validateUpperLimit(upperLimit,lowerLimit)}
+            helperText={validateUpperLimit(upperLimit,lowerLimit)}
             sx={{marginBottom:2}}
             onChange={(e)=>{setUpperLimit(e.target.value)}}
         />
@@ -57,8 +55,8 @@ const PromotionLimitDialog = (props) => {
             value={lowerLimit}
             required
             fullWidth
-            error={validateLowerLimit()}
-            helperText={validateLowerLimit()}
+            error={validateLowerLimit(upperLimit,lowerLimit)}
+            helperText={validateLowerLimit(upperLimit,lowerLimit)}
             label='Lower Bound'
             color='secondary'
             onChange={(e)=>{setLowerLimit(e.target.value)}}

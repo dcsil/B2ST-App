@@ -1,21 +1,22 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import {Link} from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LandingAppBar from "./LandingAppBar";
 import {useState} from "react"
 import {useSignup} from "../hooks/useSignup"
-const theme = createTheme();
+import AuthForm from "../components/AuthForm";
+
+const RegisterFormFooter = (
+  <Grid container justifyContent="flex-end">
+    <Grid item>
+      <Link to="/login" variant="body2">
+        Already have an account? Sign in
+      </Link>
+    </Grid>
+  </Grid>
+)
 
 export default function Register() {
   const [email, setEmail] = useState("")
@@ -23,6 +24,55 @@ export default function Register() {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const {signup, error, isLoading} = useSignup()
+  const list = [
+    {
+      inputProps:{
+        autoComplete:"given-name",
+        name:"firstName",
+        id:"firstName",
+        label:"First Name",
+        onChange:(e)=>{setFirstname(e.target.value)},
+        value:firstname,
+      },
+      gridProps:{xs:12, sm:6}
+    },
+    {
+      inputProps:{
+        autoComplete:"family-name",
+        id:"lastName",
+        label:"Last Name",
+        name:"lastName",
+        onChange:(e)=>{setLastname(e.target.value)},
+        value:lastname,
+      },
+      gridProps:{xs:12, sm:6}
+    },
+    {
+      inputProps:{
+        autoComplete:"email",
+        id:"email",
+        label:"Email Address",
+        name:"email",
+        fullWidth:true,
+        onChange:(e)=>{setEmail(e.target.value)},
+        value:email,
+      },
+      gridProps:{xs:12}
+    },
+    {
+      inputProps: {
+        autoComplete:"new-password",
+        id:"password",
+        label:"Password",
+        name:"password",
+        type:"password",
+        onChange:(e)=>{setPassword(e.target.value)},
+        value:password
+      },
+      gridProps:{xs:12}
+    },
+
+  ]
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,111 +85,24 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <LandingAppBar />
-
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  onChange={(e)=>{setFirstname(e.target.value)}}
-                  value={firstname}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  onChange={(e)=>{setLastname(e.target.value)}}
-                  value = {lastname}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={(e)=>{setEmail(e.target.value)}}
-                  value = {email}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={(e)=>{setPassword(e.target.value)}}
-                  value={password}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+    <AuthForm title="Sign up" handleSubmit={handleSubmit} isLoading={isLoading} error={error} footer={RegisterFormFooter}>
+      <Grid container spacing={2}>
+        {list.map((listItem, index)=>{
+          return (
+            <Grid item key={index} {...listItem.gridProps}>
+              <TextField fullWidth required {...listItem.inputProps} autoFocus />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              disabled={isLoading}
-            >
-              Sign Up
-            </Button>
-            {error && <div className="error">{error}</div>}
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+          )
+        })}
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={
+              <Checkbox value="allowExtraEmails" color="primary" />
+            }
+            label="I want to receive inspiration, marketing promotions and updates via email."
+          />
+        </Grid>
+      </Grid>
+    </AuthForm>
   );
 }

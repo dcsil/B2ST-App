@@ -3,6 +3,7 @@ const express = require("express");
 require("dotenv").config({ path: "./.env" });
 const db = require("../config/db");
 const phone = process.env.PHONE_NUMBER;
+const testPhone = process.env.TEST_PHONE;
 const {sendSMS,getSMS,router }= require("../routes/sms");
 
 const app = express();
@@ -26,8 +27,19 @@ describe("POST /sms/sendAll", () => {
     });
 
     it("should not send with unverified phone", async () => {
-        const req = {mes: "test",to: [phone]};
+        const req = {mes: "test",to: [phone],user:"sample@test.com",hasCode: false};
         const res = await request(app).post("/sms/sendAll").type('json').send(req);
         expect(res.statusCode).toBe(400);
+    });
+
+    it("should send with verified phone", async () => {
+        const req = {
+            mes: "test",
+            to: [testPhone],
+            user:"sample@test.com",
+            hasCode: false
+        };
+        const res = await request(app).post("/sms/sendAll").type('json').send(req);
+        expect(res.statusCode).toBe(200);
     });
 });

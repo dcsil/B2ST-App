@@ -18,22 +18,13 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import SendIcon from '@mui/icons-material/Send';
 import { visuallyHidden } from '@mui/utils';
+import { useEffect } from 'react';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 
-function createData(name, phone) {
-  return {
-    name,
-    phone
-  };
-}
-
-const rows = [
-  createData('Virginia Barnard', "+15594901025"),
-  createData('Alicia Holloway', "+12679785992"),
-  createData('Emily Oliver', "+12624970119"),
-  createData('Doris Johnson', "+17783883262"),
-  createData('Kenneth M. Parham', "+17056440182"),
-  createData('Kyle Smith', "+16479948024"),
-];
+const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -137,7 +128,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected,sendText } = props;
+  const { numSelected,sendText,addContact,refresh } = props;
 
   return (
     <Toolbar
@@ -170,6 +161,14 @@ function EnhancedTableToolbar(props) {
         </Typography>
       )}
 
+        <div>
+        <Tooltip title="AddContact">
+          <IconButton onClick={addContact}>
+            <AddIcon />
+          </IconButton>
+        </Tooltip>
+        </div>
+
       {numSelected > 0 ? (
         <div>
         <Tooltip title="SendText">
@@ -179,6 +178,13 @@ function EnhancedTableToolbar(props) {
         </Tooltip>
         </div>
       ) : ""}
+      <div>
+        <Tooltip title="Refresh">
+          <Button variant="text" color="primary" onClick={()=>props.refresh()}>
+            Refresh  
+          </Button>
+        </Tooltip>
+      </div>
     </Toolbar>
   );
 }
@@ -193,6 +199,24 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState([]);
+
+  const {user} = useAuthContext();
+  const getContacts = async ()=>{
+    const email=(user.email? user.email: user.user.email)
+    console.log(email);
+    axios.post(`${api_url}/contact/getAll`,{user:email})
+    .then((res)=>{
+      if(res){
+        console.log(res.data);
+        setRows(res.data);
+      }
+    })
+  };
+
+  useEffect(()=>{
+    getContacts(user);
+  },[]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -248,10 +272,16 @@ export default function EnhancedTable(props) {
     props.sendText(selected);
   }
 
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} sendText={sendText} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          addContact={()=>props.addContact()}
+          sendText={sendText}
+          refresh={getContacts}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

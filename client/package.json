@@ -62,8 +62,9 @@
     "react-test-renderer": "^18.2.0"
   },
   "jest": {
- 
-    "transformIgnorePatterns": ["node_modules\/(?!axios)"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!**/node_modules/**",
@@ -96,4 +97,3 @@
     ]
   }
 }
-

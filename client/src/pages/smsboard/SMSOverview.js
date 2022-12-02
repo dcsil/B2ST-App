@@ -10,20 +10,16 @@ import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import TableHead from '@mui/material/TableHead';
+import axios from "axios";
+import {useAuthContext} from "../../hooks/useAuthContext"
+import {useEffect} from "react";
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import refreshIcon from "@mui/icons-material/Refresh";
+import Button from '@mui/material/Button'
 
-function createData(type, sentDate, name, amount, recipient, expirationDate, status) {
-  return { type, sentDate, name, amount, recipient, expirationDate, status };
-}
+const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
-const rows = [
-  createData('One-Time', '2021-08-01', 'KHJAHSDAJ', 5.00, 'Tevan', '2021-08-21', 'Active'),
-  createData('One-Time', '2021-08-09', 'AAJAKSDAJ', 3.00, 'Soso', '2021-12-31', 'Active'),
-  createData('One-Time', '2021-05-11', 'KBJACODAJ', 15.00, 'Bing', '2021-09-30', 'Active'),
-  createData('One-Time', '2021-08-01', 'CBJACWDAJ', 11.00, 'Bing', '2021-09-17', 'Inactive'),
-  createData('One-Time', '2021-06-01', 'CABCDEDAJ', 20.00, 'Sandy', '2021-09-17', 'Inactive'),
-  createData('One-Time', '2022-08-01', 'PBJAAWDAJ', 10.00, 'Frank', '2022-10-21', 'Inactive'),
-  createData('One-Time', '2022-03-01', 'WIDJAICHC', 11.00, 'Bing', '2022-09-30', 'Inactive'),
-].sort((a, b) => (a.sentDate < b.sentDate ? -1 : 1));
 
 function SMSTableToolbar(props) {
 
@@ -42,6 +38,13 @@ function SMSTableToolbar(props) {
       >
         Promotion
       </Typography>
+      <div>
+        <Tooltip title="Refresh">
+          <Button variant="text" color="primary" onClick={()=>props.refresh()}>
+            Refresh  
+          </Button>
+        </Tooltip>
+        </div>
     </Toolbar>
   );
 }
@@ -49,6 +52,24 @@ function SMSTableToolbar(props) {
 export default function SMSTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState([]);
+
+  const {user} = useAuthContext();
+  const getSMSs = async ()=>{
+    const email=(user.email? user.email: user.user.email)
+    console.log(email);
+    axios.post(`${api_url}/sms/getRecords`,{user:email})
+    .then((res)=>{
+      if(res){
+        setRows(res.data);
+        rows.sort((a, b) => (a.sentDate < b.sentDate ? -1 : 1));
+      }
+    })
+  };
+
+  useEffect(()=>{
+    getSMSs(user);
+  },[]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -63,17 +84,24 @@ export default function SMSTable() {
     setPage(0);
   };
 
+  const expired = (time) => {
+    //check if time past now
+    const now = new Date();
+    const sentDate = new Date(time);
+    return now > sentDate;
+  }
+
   return (
   <Box sx={{ width: '100%' }}>
     <Paper sx={{ width: '100%', mb: 2 }}>
-    <SMSTableToolbar />
+    <SMSTableToolbar refresh={()=>getSMSs()} />
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table" size='medium'>
         <TableHead>
           <TableRow>
             <TableCell>Type</TableCell>
             <TableCell align="right">Sent Date</TableCell>
-            <TableCell align="right">Name</TableCell>
+            <TableCell align="right">Code</TableCell>
             <TableCell align="right">Amount&nbsp;($)</TableCell>
             <TableCell align="right">Recipient</TableCell>
             <TableCell align="right">Expiration Date</TableCell>
@@ -93,19 +121,19 @@ export default function SMSTable() {
                 {row.sentDate}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.name}
+                {row.code? row.code: "--"}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.amount}
+                {row.amount ? row.amount : "--"}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.recipient}
+                {row.to}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.expirationDate}
+                {row.expireDate? row.expireDate: "--"}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                {row.status}
+                {row.code? (row.active ? "active" : (expired(row.expireDate)? 'expired':'inactive' ) ):"--"}
               </TableCell>
             </TableRow>
           ))}

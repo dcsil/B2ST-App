@@ -42,10 +42,13 @@ db.connect(() => {
   app.use("/user", require("./routes/user"));
   app.use("/marketing", require("./routes/marketing"));
   app.use("/plans", require("./routes/plans"))
-  app.use("/sms", router);
-  app.get("/", (req, res) => {
-    res.send("Api Running");
-  });
+  app.use("/subs", require("./routes/subs"))
+  app.use("/marketing", require("./routes/marketing"))
+  app.use("/sms", router)
+  app.use("/contact", require("./routes/contact"))
+  app.get("/", (req, res)=>{
+    res.send("Api Running")
+  })
   app.listen(port, () => {
     // perform a database connection when server starts
     console.log(`Server is running on port: ${port}`);

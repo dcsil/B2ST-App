@@ -47,7 +47,8 @@ We used datasets from Kaggle to train our marketing system which originated at t
     - You can setup your own credentials in .env, or credentials will be copied from `.env.example` when setup.
     - For twilio credentials
      - Go to https://www.twilio.com/, sign up an account
-     - Fill in the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and PHONE_NUMBER in `server/env`
+     - Fill in the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and PHONE_NUMBER (provided by Twilio) in `server/env`
+     - Add the phone you verified with twilio as TEST_PHONE in `server/env`
 - Database
     - After setup with bootstrap, run `docker-compose exec -it b2st-app_mongo_1 mongosh` to access the local DB.
 

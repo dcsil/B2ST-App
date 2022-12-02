@@ -29,61 +29,27 @@ const RegisterCheckbox = (
   </Grid>
 )
 
+const inputProps = (name,label,value,onChange,otherProps,gridProps) => {
+  return {
+    inputProps:{
+      name,
+      autoComplete:name,
+      id:name,
+      label,
+      value,
+      onChange,
+      ...otherProps
+    },
+    gridProps:{...gridProps}
+  }
+}
+
 export default function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const {signup, error, isLoading} = useSignup()
-  const list = [
-    {
-      inputProps:{
-        autoComplete:"given-name",
-        name:"firstName",
-        id:"firstName",
-        label:"First Name",
-        onChange:(e)=>{setFirstname(e.target.value)},
-        value:firstname,
-      },
-      gridProps:{xs:12, sm:6}
-    },
-    {
-      inputProps:{
-        autoComplete:"family-name",
-        id:"lastName",
-        label:"Last Name",
-        name:"lastName",
-        onChange:(e)=>{setLastname(e.target.value)},
-        value:lastname,
-      },
-      gridProps:{xs:12, sm:6}
-    },
-    {
-      inputProps:{
-        autoComplete:"email",
-        id:"email",
-        label:"Email Address",
-        name:"email",
-        fullWidth:true,
-        onChange:(e)=>{setEmail(e.target.value)},
-        value:email,
-      },
-      gridProps:{xs:12}
-    },
-    {
-      inputProps: {
-        autoComplete:"new-password",
-        id:"password",
-        label:"Password",
-        name:"password",
-        type:"password",
-        onChange:(e)=>{setPassword(e.target.value)},
-        value:password
-      },
-      gridProps:{xs:12}
-    },
-
-  ]
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -93,6 +59,13 @@ export default function Register() {
     setFirstname("")
     setLastname("")
   };
+
+  const list = [
+    inputProps("firstName", "First Name", firstname, (e)=>{setFirstname(e.target.value)}, {}, {xs:12, sm:6}),
+    inputProps("lastName", "Last Name", lastname, (e)=>{setLastname(e.target.value)}, {}, {xs:12, sm:6}),
+    inputProps("email", "Email Address", email, (e)=>{setEmail(e.target.value)}, {}, {xs:12}),
+    inputProps("password", "Password", password, (e)=>{setPassword(e.target.value)}, {type:"password"}, {xs:12})
+  ]
 
   return (
     <AuthForm title="Sign up" handleSubmit={handleSubmit} isLoading={isLoading} error={error} footer={RegisterFormFooter}>

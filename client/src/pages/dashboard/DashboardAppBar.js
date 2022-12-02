@@ -26,21 +26,22 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import {useLogout} from "../../hooks/useLogout"
 const drawerWidth = 240;
 
+const TRANSITION = (theme, props) => {
+  theme.transitions.create(props, {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  })
+}
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  transition: TRANSITION(theme,['width', 'margin']),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    transition: TRANSITION(theme,['width', 'margin']),
   }),
 }));
 
@@ -50,17 +51,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       position: 'relative',
       whiteSpace: 'nowrap',
       width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+      transition: TRANSITION(theme,['width']),
       boxSizing: 'border-box',
       ...(!open && {
         overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
+        transition: TRANSITION(theme,['width']),
         width: theme.spacing(7),
         [theme.breakpoints.up('sm')]: {
           width: theme.spacing(9),
@@ -170,24 +165,17 @@ export default function DashboardAppBar(props) {
     const toggleDrawer = () => {
       setOpen(!open);
     };
-
     const {user} = useAuthContext()
-    
     useEffect(()=>{
       getPlan()
     }, [])
 
   const getPlan = async ()=>{
-    
     const email = (user.email? user.email: user.user.email)
-    // print(user.email)
     setEmail(email)
     const {data: plan} = await axios.post("http://localhost:5000/subs", {email: email})
-    
     setPlan(plan)
-    // print(plan)
   }
-  
   return (
     <>
       <DashboardTopBar open={open} toggleDrawer={toggleDrawer} plan={plan} email={email} {...props}/>

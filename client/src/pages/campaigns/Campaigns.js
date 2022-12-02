@@ -8,9 +8,6 @@ import Configuration from './Configuration';
 import AppStatistics from "../../sections/AppStatistics";
 import DashboardPageProvider from '../../components/DashboardPageProvider';
 
-const mdTheme = createTheme();
-const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
-
 const cur_date=new Date();
 const date=new Date();
 date.setFullYear(cur_date.getFullYear()-1);

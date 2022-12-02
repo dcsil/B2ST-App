@@ -157,7 +157,7 @@ const PLOT_OPTIONS= (theme) => ({
   },
 })
 
-const RESPONSIVE = (theme) => ([
+const RESPONSIVE = (theme) => [
   {
     // sm
     breakpoint: theme.breakpoints.values.sm,
@@ -172,7 +172,7 @@ const RESPONSIVE = (theme) => ([
       plotOptions: { bar: { columnWidth: '32%' } },
     },
   },
-])
+]
 
 export default function useChart(options) {
   const theme = useTheme();

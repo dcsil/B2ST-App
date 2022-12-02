@@ -38,6 +38,7 @@ const ContactDialog = (props) => {
                 label='Name'
                 value={name}
                 required
+                error={name===""}
                 fullWidth
                 onChange={(e)=>{setName(e.target.value)}}
                 sx={{mb:2}}
@@ -50,6 +51,8 @@ const ContactDialog = (props) => {
                 required
                 fullWidth
                 inputProps={{pattern:"\\+1[0-9]{9}"}}
+                error={!phone.match(/^\+1([0-9]{10})$/)}
+                helperText="Phone number must be in +1XXXXXXXXXX (CA) format"
                 rows={8}
                 onChange={(e)=>{setPhone(e.target.value)}}
                 sx={{mb:2}}

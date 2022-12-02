@@ -29,7 +29,7 @@ const COLOR = (theme) => ([
   theme.palette.success.darker,
   theme.palette.info.dark,
   theme.palette.info.darker
-]);
+])
 
 const CHART = (theme) => ({
   toolbar: { show: false },
@@ -172,7 +172,7 @@ const RESPONSIVE = (theme) => ([
       plotOptions: { bar: { columnWidth: '32%' } },
     },
   },
-]);
+])
 
 export default function useChart(options) {
   const theme = useTheme();

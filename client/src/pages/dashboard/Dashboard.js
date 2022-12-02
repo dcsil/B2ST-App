@@ -10,12 +10,8 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import DashboardAppBar from './DashboardAppBar';
-
-import {useLogout} from "../../hooks/useLogout"
-import Button from 'react-bootstrap/Button';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from "axios";
-import {useEffect} from "react"
 import Traffic from './Traffic';
 const print = console.log
 const mdTheme = createTheme();
@@ -42,8 +38,6 @@ function DashboardContent() {
         <CssBaseline />
         
         <DashboardAppBar name="Dashboard"/>
-        
-        
         <Box
           component="main"
           sx={{

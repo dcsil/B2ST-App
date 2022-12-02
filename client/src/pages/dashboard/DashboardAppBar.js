@@ -4,7 +4,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { AppBarListItems } from './listItems';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import "../../App.css"
@@ -19,7 +18,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemAvatar,
-  Badge,
   ListItemText,
   Toolbar,
   Typography,
@@ -166,7 +164,6 @@ function DashboardTopBar(props) {
 }
 
 export default function DashboardAppBar(props) {
-    const {name, backto} = props;
     const [open, setOpen] = React.useState(true);
     const [email, setEmail] = useState("")
     const [plan, setPlan] = useState("")

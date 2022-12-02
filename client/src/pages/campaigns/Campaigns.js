@@ -6,6 +6,7 @@ import { Container,Grid,Toolbar,Box,Paper} from '@mui/material';
 import AppChart from '../../sections/AppChart';
 import Configuration from './Configuration';
 import AppStatistics from "../../sections/AppStatistics";
+import DashboardPageProvider from '../../components/DashboardPageProvider';
 
 const mdTheme = createTheme();
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
@@ -60,58 +61,25 @@ const ordersData=[
 ];
 
 function CampaignsContent() {
-  const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState([]);
-  const [success, setSuccess] = React.useState(false);
-
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <DashboardAppBar name="Campaigns"/>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <AppChart title='Orders' subheader='in last 12 months' chartLabels={ordersLabels} chartData={ordersData} />
-              </Grid>
-              {/* Chart */}
-              <Grid item xs={12} md={6} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height:'100%',
-                  }}
-                >
-                    <Configuration/>
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={6} lg={6}>
-                    <AppStatistics
-                        title="Statistics"
-                        list={statsData}
-                    />
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
-      </Box>
-    </ThemeProvider>
+    <DashboardPageProvider name="Campaigns">
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <AppChart title='Orders' subheader='in last 12 months' chartLabels={ordersLabels} chartData={ordersData} />
+          </Grid>
+          <Grid item xs={12} md={6} lg={6}>
+            <Configuration/>
+          </Grid>
+          <Grid item xs={12} md={6} lg={6}>
+            <AppStatistics
+              title="Statistics"
+              list={statsData}
+            />
+          </Grid>
+        </Grid>
+      </Container>
+    </DashboardPageProvider>
   );
 }
 

@@ -12,7 +12,6 @@ const contactSchema = new Schema({
     phone:{
         type: String,
         required: true,
-        unique: true
     },
     belongsTo:{
         type: String,

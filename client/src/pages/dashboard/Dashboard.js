@@ -1,13 +1,12 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import { Container,Grid,Paper } from '@mui/material';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from "axios";
 import Traffic from './Traffic';
 import DashboardPageProvider from '../../components/DashboardPageProvider';
+import Chart from './Chart';
+import Deposits from './Deposits';
+import Orders from './Orders';
 const print = console.log
 
 const list = [
@@ -52,15 +51,17 @@ function DashboardContent() {
 
   return (
     <DashboardPageProvider name="Dashboard">
-      <Grid container spacing={3}>
-        {list.map((listItem, index) => (
-          <Grid item {...listItem.gridProps} key={index}>
-            <Paper {...listItem.paperProps}>
-              {listItem.children}
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid container spacing={3}>
+          {list.map((listItem, index) => (
+            <Grid item {...listItem.gridProps} key={index}>
+              <Paper {...listItem.paperProps}>
+                {listItem.children}
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </DashboardPageProvider>
   );
 }

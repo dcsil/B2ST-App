@@ -1,16 +1,11 @@
 import * as React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import DashboardAppBar from '../dashboard/DashboardAppBar';
 import EnhancedTable from './ContactTable';
 import TextDialog from './TextDialog';
-import { Collapse, Alert,IconButton,Container,Grid,Toolbar,Box } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Container,Grid } from '@mui/material';
 import SMSTable from './SMSOverview';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ContactDialog from './ContactDialog';
-
-const mdTheme = createTheme();
+import DashboardPageProvider from '../../components/DashboardPageProvider';
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 function SMSBoardContent() {
@@ -69,70 +64,31 @@ function SMSBoardContent() {
   }
 
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <DashboardAppBar name="SMS"/>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3} padding={2}>
-              <Grid item xs={12}>
-
-                <EnhancedTable 
-                  sendText={(selected)=>{setSelected(selected);setOpen(true)}}
-                  addContact={()=>{setContactOpen(true)}}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <SMSTable />
-              </Grid>
-            </Grid>
-          </Container>
-          <TextDialog
-            open={open}
-            closeDialog={() => setOpen(false)}
-            sendText={(text,time,code) => sendText(text,time,code)}
-          />
-          <ContactDialog
-            open={contactOpen}
-            closeDialog={() => setContactOpen(false)}
-            addContact={(name,phone)=>addContact(name,phone)}
-          />
-          <Collapse in={alert.severity} sx={{position:"fixed",bottom:0}}>
-            <Alert
-              severity={alert.severity}
-              action={
-                <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setAlert({severity: '', message: ''});
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-              sx={{ mb: 2 }}
-            >
-              {alert.message}
-            </Alert>
-          </Collapse>
-        </Box>
-      </Box>
-    </ThemeProvider>
+    <DashboardPageProvider name="SMS Board" alert={alert} setAlert={setAlert}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Grid container spacing={3} padding={2}>
+          <Grid item xs={12}>
+            <EnhancedTable 
+              sendText={(selected)=>{setSelected(selected);setOpen(true)}}
+              addContact={()=>{setContactOpen(true)}}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <SMSTable />
+          </Grid>
+        </Grid>
+      </Container>
+      <TextDialog
+        open={open}
+        closeDialog={() => setOpen(false)}
+        sendText={(text,time,code) => sendText(text,time,code)}
+      />
+      <ContactDialog
+        open={contactOpen}
+        closeDialog={() => setContactOpen(false)}
+        addContact={(name,phone)=>addContact(name,phone)}
+      />
+    </DashboardPageProvider>
   );
 }
 

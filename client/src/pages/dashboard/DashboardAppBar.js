@@ -5,7 +5,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { AppBarListItems } from './listItems';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import "../../App.css"
 import {Link } from 'react-router-dom';
@@ -26,7 +26,6 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {useLogout} from "../../hooks/useLogout"
-const print = console.log
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -73,16 +72,106 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-function DashboardAppBarContent(props) {
+function DashboardAppBarDrawer(props) {
+  const {open, toggleDrawer} = props;
+  const {logout} = useLogout();
+  const handleLogout = async ()=>{
+    logout()
+  };
+  return (
+    <Drawer variant="permanent" open={open} sx={{display:'flex'}}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          px: [1],
+        }}
+      >
+        <IconButton onClick={toggleDrawer}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </Toolbar>
+      <Divider />
+      <List component="nav">
+        <AppBarListItems component="main"/>
+        <Divider sx={{ my: 1 }} />
+        <AppBarListItems subheader="Saved reports" component="secondary"/>
+      </List>
+      <List component='nav' style={{ marginTop: `auto`}}>
+        <ListItem
+          disablePadding
+        >
+        <ListItemButton component={Link} to='/profile'>
+          <ListItemAvatar>
+            <Avatar/>
+          </ListItemAvatar>
+          <ListItemText sx={{ pl: 2 }} primary='Profile' />
+          <IconButton  onClick={handleLogout}>
+            <LogoutIcon />
+          </IconButton>
+        </ListItemButton>
+      </ListItem>
+    </List>
+  </Drawer>
+  )
+}
+
+function DashboardTopBar(props) {
+  const {open, toggleDrawer, plan, email, name, backto} = props;
+  return (
+    <AppBar position="absolute" open={open}>
+    <Toolbar
+      sx={{
+        pr: '24px', // keep right padding when drawer closed
+      }}
+    >                
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="open drawer"
+        onClick={toggleDrawer}
+        sx={{
+          marginRight: '36px',
+            ...(open && { display: 'none' }),
+          }}
+      >
+        <MenuIcon />
+      </IconButton>        
+      <Typography
+        component="h1"
+        variant="h6"
+        color="inherit"
+        noWrap
+        sx={{ flexGrow: 1 }}
+      >
+        {name} 
+      <span className='current_plan'>
+        {plan}
+      </span>
+        {backto && (
+          <IconButton
+            component={Link}
+            to={backto}
+            aria-label="back"
+          >
+            <ChevronLeftIcon />
+          </IconButton>)}    
+      </Typography>
+        {email}
+      {/* <button onClick={getPlan}>get plan</button> */}
+    </Toolbar>
+    </AppBar>
+  )
+}
+
+export default function DashboardAppBar(props) {
+    const {name, backto} = props;
     const [open, setOpen] = React.useState(true);
     const [email, setEmail] = useState("")
     const [plan, setPlan] = useState("")
     const toggleDrawer = () => {
       setOpen(!open);
-    };
-    const {logout} = useLogout();
-    const handleLogout = async ()=>{
-      logout()
     };
 
     const {user} = useAuthContext()
@@ -102,102 +191,10 @@ function DashboardAppBarContent(props) {
     // print(plan)
   }
   
-    return (
-        <>
-        
-          <AppBar position="absolute" open={open}>
-            <Toolbar
-              sx={{
-                pr: '24px', // keep right padding when drawer closed
-              }}
-            >
-                           
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={toggleDrawer}
-                sx={{
-                  marginRight: '36px',
-                  ...(open && { display: 'none' }),
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
- 
-              
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 1 }}
-              >
-                {props.name} 
-                <span className='current_plan'>
-                  {plan}
-                </span>
-                {props.backto && (
-                  <IconButton
-                    component={Link}
-                    to={props.backto}
-                    aria-label="back"
-                  >
-                    <ChevronLeftIcon />
-                  </IconButton>)}
-                  
-                  
-              </Typography>
-              {email}
-              
-              {/* <button onClick={getPlan}>get plan</button> */}
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Drawer variant="permanent" open={open} sx={{display:'flex'}}>
-            <Toolbar
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                px: [1],
-              }}
-            >
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
-            </List>
-            <List component='nav' style={{ marginTop: `auto`}}>
-              <ListItem
-                disablePadding
-              >
-   
-              <ListItemButton component={Link} to='/profile'>
-                <ListItemAvatar>
-                  <Avatar/>
-                </ListItemAvatar>
-                <ListItemText sx={{ pl: 2 }} primary='Profile' />
-                <IconButton  onClick={handleLogout}>
-                <LogoutIcon />
-                </IconButton>
-              </ListItemButton>
-            </ListItem>
-          </List>
-          </Drawer>
-      </>
-    );
+  return (
+    <>
+      <DashboardTopBar open={open} toggleDrawer={toggleDrawer} plan={plan} email={email} {...props}/>
+      <DashboardAppBarDrawer open={open} toggleDrawer={toggleDrawer}/>
+    </>
+  );
 }  
-
-export default function DashboardAppBar(props) {
-    return <DashboardAppBarContent name={props.name} backto={props.backto}/>;
-}

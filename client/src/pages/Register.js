@@ -53,7 +53,7 @@ export default function Register() {
   const checkValid = password.length > 6 && password.search(/[A-Z]/) > -1 && password.search(/[0-9]/)  > -1 && password.search(/[A-Z]/) > -1 && firstname && lastname && email && password;
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (checkValid()){
+    if (checkValid){
       await signup(firstname, lastname, email, password)
       setEmail("")
       setPassword("")

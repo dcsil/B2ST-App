@@ -11,9 +11,6 @@ import AuthForm from "../components/AuthForm";
 const LoginFormFooter = (
   <Grid container>
     <Grid item xs>
-      <Link to="/" variant="body2">
-        Forgot password?
-      </Link>
     </Grid>
     <Grid item>
       <Link to="/register" variant="body2">
@@ -23,12 +20,6 @@ const LoginFormFooter = (
   </Grid>
 )
 
-const LoginCheckBox = (
-  <FormControlLabel
-    control={<Checkbox value="remember" color="primary" />}
-    label="Remember me"
-  />
-)
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -49,7 +40,7 @@ export default function Login() {
         id="password" autoComplete="current-password"
         onChange={(e)=>{setPassword(e.target.value)}}
       />
-      {LoginCheckBox}
+
     </AuthForm>
   );
 }

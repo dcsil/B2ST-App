@@ -7,7 +7,10 @@ import Grid from "@mui/material/Grid";
 import {useState} from "react"
 import {useSignup} from "../hooks/useSignup"
 import AuthForm from "../components/AuthForm";
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import "../../src/App.css"
+const validator = require('validator');
 const RegisterFormFooter = (
   <Grid container justifyContent="flex-end">
     <Grid item>
@@ -15,17 +18,6 @@ const RegisterFormFooter = (
         Already have an account? Sign in
       </Link>
     </Grid>
-  </Grid>
-)
-
-const RegisterCheckbox = (
-  <Grid item xs={12}>
-    <FormControlLabel
-      control={
-        <Checkbox value="allowExtraEmails" color="primary" />
-      }
-      label="I want to receive inspiration, marketing promotions and updates via email."
-    />
   </Grid>
 )
 
@@ -50,13 +42,19 @@ export default function Register() {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const {signup, error, isLoading} = useSignup()
+  const checkValid = () =>{
+    return password.length > 6 && password.search(/[A-Z]/) > -1 && password.search(/[0-9]/)  > -1 && password.search(/[A-Z]/) > -1 && firstname && lastname && email && password
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await signup(firstname, lastname, email, password)
-    setEmail("")
-    setPassword("")
-    setFirstname("")
-    setLastname("")
+    if (checkValid()){
+      await signup(firstname, lastname, email, password)
+      setEmail("")
+      setPassword("")
+      setFirstname("")
+      setLastname("")
+    }
+    
   };
   const list = [
     inputProps("firstName", "First Name", firstname, (e)=>{setFirstname(e.target.value)}, {}, {xs:12, sm:6}),
@@ -70,10 +68,34 @@ export default function Register() {
         {list.map((listItem, index)=>(
             <Grid item key={index} {...listItem.gridProps}>
               <TextField fullWidth required {...listItem.inputProps} autoFocus />
+              
             </Grid>
           ))}
-        {RegisterCheckbox}
+
+    <div className="checkContainer">
+    <div>
+            Valid email{validator.isEmail(email)? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+            
+            <div>
+            All fields must be filled {firstname && lastname && email && password? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+            <div>
+            Password length greater than 6{password.length > 6? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+
+            <div>
+              Password contains at least one number {password.search(/[0-9]/)  > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+            <div>
+            Password contains at least one Lower case letter {password.search(/[A-Z]/) > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+            <div>
+              Password contains at least one Upper case letter {password.search(/[A-Z]/) > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+            </div>
+    </div>
       </Grid>
     </AuthForm>
   );
 }
+

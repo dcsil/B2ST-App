@@ -50,9 +50,7 @@ const PlanCard = (props) => {
   return (
     <Grid item key={index} xs={12} sm={6} md={4}>
       <Card onClick={(e)=>{checkout(e, {index})}} className='payment_card' >
-        <CardHeader
-          title={tier.title}
-          subheader={tier.subheader}
+        <CardHeader title={tier.title} subheader={tier.subheader}
           titleTypographyProps={{ align: 'center' }}
           action={tier.title === 'Pro' ? <StarIcon /> : null}
           subheaderTypographyProps={{align: 'center'}}
@@ -64,9 +62,7 @@ const PlanCard = (props) => {
             <Typography variant="h6" color="text.secondary">/mo</Typography>
           </Box>
           <ul>
-            {tier.description.map((line) => (
-              <Typography component="li" variant="subtitle1" align="center" key={line}>{line}</Typography>
-            ))}
+            {tier.description.map((line) => (<Typography component="li" variant="subtitle1" align="center" key={line}>{line}</Typography>))}
           </ul>
         </CardContent>
       </Card>

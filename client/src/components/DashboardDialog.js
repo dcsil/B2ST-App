@@ -14,24 +14,16 @@ export default function DashboardDialog(props) {
             callback();
         });
     }
-
     return (
       <Dialog open={open} onClose={closeDialog} style={{width:'100%'}}>
         <DialogTitle>{title}</DialogTitle>
         <Box sx={{width:500}}>
-            <DialogContent>
-                {children}
-            </DialogContent>
-            {component==="form"&&
-            <DialogActions>
-                <LoadingButton
-                    onClick={submit}
-                    loading={loading}
-                    disabled={!validate}
-                >
-                    Submit
-                </LoadingButton>
-            </DialogActions>}
+          <DialogContent>
+            {children}
+          </DialogContent>
+          {component==="form"&&<DialogActions>
+            <LoadingButton onClick={submit} loading={loading} disabled={!validate}>Submit</LoadingButton>
+          </DialogActions>}
         </Box>
       </Dialog>
     )

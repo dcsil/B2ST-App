@@ -52,35 +52,39 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
+const head = ["Date", "Name", "Ship To", "Payment Method", "Sale Amount"]
+const OrderHead = () => (
+  <TableHead>
+    <TableRow>
+      {head.map((h) => (
+        <TableCell key={h}>{h}</TableCell>
+      ))}
+    </TableRow>
+  </TableHead>
+)
+const OrderRow = (row) => (
+  <TableRow key={row.id}>
+    <TableCell>{row.date}</TableCell>
+    <TableCell>{row.name}</TableCell>
+    <TableCell>{row.shipTo}</TableCell>
+    <TableCell>{row.paymentMethod}</TableCell>
+    <TableCell align="right">{row.amount}</TableCell>
+  </TableRow>
+)
+
 export default function Orders() {
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
       <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
+        <OrderHead />
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
-            </TableRow>
+            <OrderRow {...row} />
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
+      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>See more orders</Link>
     </React.Fragment>
   );
 }

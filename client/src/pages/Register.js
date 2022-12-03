@@ -21,17 +21,6 @@ const RegisterFormFooter = (
   </Grid>
 )
 
-const RegisterCheckbox = (
-  <Grid item xs={12}>
-    <FormControlLabel
-      control={
-        <Checkbox value="allowExtraEmails" color="primary" />
-      }
-      label="I want to receive inspiration, marketing promotions and updates via email."
-    />
-  </Grid>
-)
-
 const inputProps = (name,label,value,onChange,otherProps,gridProps) => {
   return {
     inputProps:{
@@ -102,7 +91,7 @@ export default function Register() {
             </div>
 
             <div>
-              Password contain at least one number {password.search(/[0-9]/)  > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
+              Password contains at least one number {password.search(/[0-9]/)  > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
             </div>
             <div>
             Password contains at least one Lower case letter {password.search(/[A-Z]/) > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
@@ -111,7 +100,6 @@ export default function Register() {
               Password contains at least one Upper case letter {password.search(/[A-Z]/) > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
             </div>
     </div>
-        {RegisterCheckbox}
       </Grid>
     </AuthForm>
   );

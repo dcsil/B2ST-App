@@ -13,6 +13,7 @@ export const useSendText = (user,setAlert) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log({ mes:text, to:selected, sendAt:time,user:email, hasCode:code });
         handleRequest(request,setAlert,"text");
     }
     return {sendText}

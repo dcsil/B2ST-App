@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Container,Grid,Paper } from '@mui/material';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import axios from "axios";
 import Traffic from './Traffic';
 import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-const print = console.log
-
 const itemProps = (grid,children) => ({
   gridProps: {xs:12, ...grid},
   children: children
@@ -20,17 +17,9 @@ const list = [
   itemProps({xs:12}, <Orders />),
   itemProps({xs:12}, <Traffic />),
 ];
-console.log(list);
 
 function DashboardContent() {
   const {user} = useAuthContext()
-
-  const getPlan = async ()=>{
-    print(user.email)
-    const {data: plan} = await axios.post("http://localhost:5000/subs", {email: user.email})
-    print(plan)
-  }
-
   return (
     <DashboardPageProvider name="Dashboard">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

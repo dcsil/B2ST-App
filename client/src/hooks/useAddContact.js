@@ -1,3 +1,5 @@
+import { handleRequest } from "./requests/communication";
+
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 export const useAddContact = (user,setAlert) => {
@@ -11,19 +13,7 @@ export const useAddContact = (user,setAlert) => {
             'Content-Type': 'application/json',
           },
         });
-        fetch(request)
-          .then(res => {
-            if (res.status === 200) {
-              setAlert({severity:'success',message:'Contact added successfully!'});
-            } else {
-              setAlert({severity:'error',message:'Error adding contact!'});
-              console.log(res);
-            }
-          })
-          .catch(error => {
-            setAlert({severity:'error',message:'Server Error!'});
-            console.log(error);
-          });
+        handleRequest(request,setAlert,"contact");
     }
     return {addContact}
 }

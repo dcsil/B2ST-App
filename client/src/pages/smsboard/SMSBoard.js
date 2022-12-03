@@ -17,32 +17,20 @@ export default function SMSBoard() {
   const {user} = useAuthContext();
   const {sendText} = useSendText(user,setAlert);
   const {addContact} = useAddContact(user,setAlert);
-
   return (
     <DashboardPageProvider name="SMS Board" alert={alert} setAlert={setAlert}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3} padding={2}>
           <Grid item xs={12}>
-            <EnhancedTable 
-              sendText={(selected)=>{setSelected(selected);setOpen(true)}}
-              addContact={()=>{setContactOpen(true)}}
-            />
+            <EnhancedTable sendText={(selected)=>{setSelected(selected);setOpen(true)}} addContact={()=>{setContactOpen(true)}}/>
           </Grid>
           <Grid item xs={12}>
             <SMSTable />
           </Grid>
         </Grid>
       </Container>
-      <TextDialog
-        open={open}
-        closeDialog={() => setOpen(false)}
-        sendText={(text,time,code) => sendText(text,selected,time,code)}
-      />
-      <ContactDialog
-        open={contactOpen}
-        closeDialog={() => setContactOpen(false)}
-        addContact={(name,phone)=>addContact(name,phone)}
-      />
+      <TextDialog open={open} closeDialog={() => setOpen(false)} sendText={(text,time,code) => sendText(text,selected,time,code)} />
+      <ContactDialog open={contactOpen} closeDialog={() => setContactOpen(false)} addContact={(name,phone)=>addContact(name,phone)} />
     </DashboardPageProvider>
   );
 }

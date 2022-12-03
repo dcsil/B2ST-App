@@ -8,45 +8,19 @@ import LandingPageProvider from "../components/PageProvider/LandingPageProvider"
 export default function Home() {
   return (
     <LandingPageProvider containerProps={{maxWidth:"sm"}} boxProps={{mt:8}}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Welcome to B2ST
-            </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              We are a SMS Marketing B2B company. Our Machine Learning
-              algorithms and seamless integratino give us a competitive
-              advantage over our competitors.
-            </Typography>
-
-            <Typography
-              variant="h5"
-              align="center"
-              color="primary"
-              paragraph
-            >
-              
-            </Typography>
-
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Link to="/">
-                <Button variant="outlined">Developer Team</Button>
-              </Link>
-            </Stack>
+      <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+        Welcome to B2ST
+      </Typography>
+      <Typography variant="h5" align="center" color="text.secondary" paragraph>
+        We are a SMS Marketing B2B company. Our Machine Learning
+        algorithms and seamless integratino give us a competitive
+        advantage over our competitors.
+      </Typography>
+      <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
+        <Link to="/">
+          <Button variant="outlined">Developer Team</Button>
+        </Link>
+      </Stack>
     </LandingPageProvider>
   );
 }

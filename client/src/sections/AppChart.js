@@ -23,21 +23,12 @@ export default function AppChart({ title, subheader, chartLabels, chartData, ...
     tooltip: {
       shared: true,
       intersect: false,
-      y: {
-        formatter: (y) => {
-          if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} sold`;
-          }
-          return y;
-        },
-      },
+      y: { formatter: (y) => (typeof y !== 'undefined') ? `${y.toFixed(0)} sold`: y,},
     },
   });
-
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
-
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={chartData} options={chartOptions} height={364} />
       </Box>

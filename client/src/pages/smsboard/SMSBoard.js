@@ -15,7 +15,7 @@ export default function SMSBoard() {
   const [selected, setSelected] = React.useState([]);
   const [alert, setAlert] = React.useState({severity:'',message:''});
   const {user} = useAuthContext();
-  const {sendText} = useSendText(user,setAlert);
+  const {sendText} = useSendText("sms/sendAll", {},user,setAlert);
   const {addContact} = useAddContact(user,setAlert);
 
   return (
@@ -33,16 +33,8 @@ export default function SMSBoard() {
           </Grid>
         </Grid>
       </Container>
-      <TextDialog
-        open={open}
-        closeDialog={() => setOpen(false)}
-        sendText={(text,time,code) => sendText(text,selected,time,code)}
-      />
-      <ContactDialog
-        open={contactOpen}
-        closeDialog={() => setContactOpen(false)}
-        addContact={(name,phone)=>addContact(name,phone)}
-      />
+      <TextDialog open={open} closeDialog={() => setOpen(false)} sendText={(text,time,code) => sendText({mes:text,to:selected,sendAt:time,hasCode:code})} />
+      <ContactDialog open={contactOpen} closeDialog={() => setContactOpen(false)} addContact={(name,phone)=>addContact(name,phone)} />
     </DashboardPageProvider>
   );
 }

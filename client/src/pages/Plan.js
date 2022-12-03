@@ -58,21 +58,11 @@ const PlanCard = (props) => {
           subheaderTypographyProps={{
             align: 'center',
           }}
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[700],
-          }}
+          sx={{backgroundColor: (theme) => theme.palette.grey[200]}}
         />
         <CardContent>
           <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'baseline',
-              mb: 2,
-            }}
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2,}}
           >
             <Typography component="h2" variant="h3" color="text.primary">
               ${tier.price}
@@ -83,12 +73,7 @@ const PlanCard = (props) => {
           </Box>
           <ul>
             {tier.description.map((line) => (
-              <Typography
-                component="li"
-                variant="subtitle1"
-                align="center"
-                key={line}
-              >
+              <Typography component="li" variant="subtitle1" align="center" key={line}>
                 {line}
               </Typography>
             ))}
@@ -100,27 +85,20 @@ const PlanCard = (props) => {
 }
 
 const Plan = () =>{
-    const {user} = useAuthContext()
-    const checkout = async (e,index)=>{
-      e.preventDefault()
-      const email = (user.email? user.email: user.user.email)
-      const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
-      window.location.href = response.price.url
-    }
-
+  const {user} = useAuthContext()
+  const checkout = async (e,index)=>{
+    e.preventDefault()
+    const email = (user.email? user.email: user.user.email)
+    const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
+    window.location.href = response.price.url
+  }
   return ( 
     <LandingPageProvider
       containerProps={{disableGutters:true, align:'center', margin:0}}
       boxProps={{alignItems:'center', mt:8, width:'100%'}}
     >
-      <Box mb={6}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
+      <Box>
+        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
           Plans
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">

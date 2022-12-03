@@ -100,7 +100,6 @@ export default function Register() {
               Password contains at least one Upper case letter {password.search(/[A-Z]/) > -1? <CheckCircleIcon color="success"></CheckCircleIcon>:<CancelIcon color = "action"></CancelIcon>}
             </div>
     </div>
-
       </Grid>
     </AuthForm>
   );

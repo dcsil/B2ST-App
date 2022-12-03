@@ -9,6 +9,10 @@ const ContactDialog = (props) => {
         setName("");
         setPhone("+11111111111");
     }
+    React.useEffect(()=>{
+      console.log(name)
+      console.log(phone)
+    } ,[name,phone])
     return(
       <DashboardDialog
         open={props.open}

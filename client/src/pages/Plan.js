@@ -55,27 +55,17 @@ const PlanCard = (props) => {
           subheader={tier.subheader}
           titleTypographyProps={{ align: 'center' }}
           action={tier.title === 'Pro' ? <StarIcon /> : null}
-          subheaderTypographyProps={{
-            align: 'center',
-          }}
+          subheaderTypographyProps={{align: 'center'}}
           sx={{backgroundColor: (theme) => theme.palette.grey[200]}}
         />
         <CardContent>
-          <Box
-            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2,}}
-          >
-            <Typography component="h2" variant="h3" color="text.primary">
-              ${tier.price}
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              /mo
-            </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2,}}>
+            <Typography component="h2" variant="h3" color="text.primary">${tier.price}</Typography>
+            <Typography variant="h6" color="text.secondary">/mo</Typography>
           </Box>
           <ul>
             {tier.description.map((line) => (
-              <Typography component="li" variant="subtitle1" align="center" key={line}>
-                {line}
-              </Typography>
+              <Typography component="li" variant="subtitle1" align="center" key={line}>{line}</Typography>
             ))}
           </ul>
         </CardContent>
@@ -93,23 +83,16 @@ const Plan = () =>{
     window.location.href = response.price.url
   }
   return ( 
-    <LandingPageProvider
-      containerProps={{disableGutters:true, align:'center', margin:0}}
-      boxProps={{alignItems:'center', mt:8, width:'100%'}}
-    >
+    <LandingPageProvider containerProps={{disableGutters:true, align:'center', margin:0}} boxProps={{alignItems:'center', mt:8, width:'100%'}}>
       <Box>
-        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
-          Plans
-        </Typography>
+        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>Plans</Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
           Subscribe to our website to use our service!
         </Typography>
       </Box>
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier, index) => (
-            <PlanCard tier={tier} index={index} checkout={checkout}/>
-          ))}
+          {tiers.map((tier, index) => ( <PlanCard tier={tier} index={index} checkout={checkout}/>))}
         </Grid>
       </Container>
     </LandingPageProvider>

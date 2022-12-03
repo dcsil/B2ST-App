@@ -125,16 +125,12 @@ function DashboardTopBar(props) {
 }
 
 export default function DashboardAppBar(props) {
-    const [open, setOpen] = React.useState(true);
-    const [email, setEmail] = useState("")
-    const [plan, setPlan] = useState("")
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
-    const {user} = useAuthContext()
-    useEffect(()=>{
-      getPlan()
-    }, [])
+  const [open, setOpen] = React.useState(true);
+  const [email, setEmail] = useState("")
+  const [plan, setPlan] = useState("")
+  const toggleDrawer = () => { setOpen(!open);};
+  const {user} = useAuthContext()
+  useEffect(()=>{ getPlan() }, [])
   const getPlan = async ()=>{
     const email = (user.email? user.email: user.user.email)
     setEmail(email)

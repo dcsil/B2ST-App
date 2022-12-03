@@ -50,7 +50,6 @@ export default function Register() {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const {signup, error, isLoading} = useSignup()
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signup(firstname, lastname, email, password)
@@ -59,24 +58,20 @@ export default function Register() {
     setFirstname("")
     setLastname("")
   };
-
   const list = [
     inputProps("firstName", "First Name", firstname, (e)=>{setFirstname(e.target.value)}, {}, {xs:12, sm:6}),
     inputProps("lastName", "Last Name", lastname, (e)=>{setLastname(e.target.value)}, {}, {xs:12, sm:6}),
     inputProps("email", "Email Address", email, (e)=>{setEmail(e.target.value)}, {}, {xs:12}),
     inputProps("password", "Password", password, (e)=>{setPassword(e.target.value)}, {type:"password"}, {xs:12})
   ]
-
   return (
     <AuthForm title="Sign up" handleSubmit={handleSubmit} isLoading={isLoading} error={error} footer={RegisterFormFooter}>
       <Grid container spacing={2}>
-        {list.map((listItem, index)=>{
-          return (
+        {list.map((listItem, index)=>(
             <Grid item key={index} {...listItem.gridProps}>
               <TextField fullWidth required {...listItem.inputProps} autoFocus />
             </Grid>
-          )
-        })}
+          ))}
         {RegisterCheckbox}
       </Grid>
     </AuthForm>

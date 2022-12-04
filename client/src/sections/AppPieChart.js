@@ -41,11 +41,8 @@ AppPieChart.propTypes = {
 
 export default function AppPieChart({ title, subheader, chartColors, chartData, ...other }) {
   const theme = useTheme();
-
   const chartLabels = chartData.map((i) => i.label);
-
   const chartSeries = chartData.map((i) => i.value);
-
   const chartOptions = useChart({
     labels: chartLabels,
     stroke: { colors: [theme.palette.background.paper] },
@@ -53,18 +50,10 @@ export default function AppPieChart({ title, subheader, chartColors, chartData, 
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
     tooltip: {
       fillSeriesColor: false,
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: (seriesName) => `${seriesName}`,
-        },
-      },
+      y: { formatter: (seriesName) => fNumber(seriesName), title: {formatter: (seriesName) => `${seriesName}`,}}
     },
-    plotOptions: {
-      pie: { donut: { labels: { show: false } } },
-    },
+    plotOptions: { pie: { donut: { labels: { show: false } } },}
   });
-
   return (
     <React.Fragment>
       <Title>{title}</Title>

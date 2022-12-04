@@ -50,48 +50,19 @@ const PlanCard = (props) => {
   return (
     <Grid item key={index} xs={12} sm={6} md={4}>
       <Card onClick={(e)=>{checkout(e, {index})}} className='payment_card' >
-        <CardHeader
-          title={tier.title}
-          subheader={tier.subheader}
+        <CardHeader title={tier.title} subheader={tier.subheader}
           titleTypographyProps={{ align: 'center' }}
           action={tier.title === 'Pro' ? <StarIcon /> : null}
-          subheaderTypographyProps={{
-            align: 'center',
-          }}
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[200]
-                : theme.palette.grey[700],
-          }}
+          subheaderTypographyProps={{align: 'center'}}
+          sx={{backgroundColor: (theme) => theme.palette.grey[200]}}
         />
         <CardContent>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'baseline',
-              mb: 2,
-            }}
-          >
-            <Typography component="h2" variant="h3" color="text.primary">
-              ${tier.price}
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              /mo
-            </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2,}}>
+            <Typography component="h2" variant="h3" color="text.primary">${tier.price}</Typography>
+            <Typography variant="h6" color="text.secondary">/mo</Typography>
           </Box>
           <ul>
-            {tier.description.map((line) => (
-              <Typography
-                component="li"
-                variant="subtitle1"
-                align="center"
-                key={line}
-              >
-                {line}
-              </Typography>
-            ))}
+            {tier.description.map((line) => (<Typography component="li" variant="subtitle1" align="center" key={line}>{line}</Typography>))}
           </ul>
         </CardContent>
       </Card>
@@ -100,38 +71,24 @@ const PlanCard = (props) => {
 }
 
 const Plan = () =>{
-    const {user} = useAuthContext()
-    const checkout = async (e,index)=>{
-      e.preventDefault()
-      const email = (user.email? user.email: user.user.email)
-      const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
-      window.location.href = response.price.url
-    }
-
+  const {user} = useAuthContext()
+  const checkout = async (e,index)=>{
+    e.preventDefault()
+    const email = (user.email? user.email: user.user.email)
+    const {data: response} = await axios.post("http://localhost:5000/plans/session", {email: email, plan: index.index})
+    window.location.href = response.price.url
+  }
   return ( 
-    <LandingPageProvider
-      containerProps={{disableGutters:true, align:'center', margin:0}}
-      boxProps={{alignItems:'center', mt:8, width:'100%'}}
-    >
-      <Box mb={6}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-        >
-          Plans
-        </Typography>
+    <LandingPageProvider containerProps={{disableGutters:true, align:'center', margin:0}} boxProps={{alignItems:'center', mt:8, width:'100%'}}>
+      <Box>
+        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>Plans</Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
           Subscribe to our website to use our service!
         </Typography>
       </Box>
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier, index) => (
-            <PlanCard tier={tier} index={index} checkout={checkout}/>
-          ))}
+          {tiers.map((tier, index) => ( <PlanCard tier={tier} index={index} checkout={checkout}/>))}
         </Grid>
       </Container>
     </LandingPageProvider>

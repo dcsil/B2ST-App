@@ -84,11 +84,9 @@ export default function EnhancedTable(props) {
   const {user} = useAuthContext();
   const getContacts = async ()=>{
     const email=(user.email? user.email: user.user.email)
-    console.log(email);
     axios.post(`${api_url}/contact/getAll`,{user:email})
     .then((res)=>{
       if(res){
-        console.log(res.data);
         setRows(res.data);
       }
     })

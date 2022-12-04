@@ -14,41 +14,23 @@ const ContactDialog = (props) => {
       console.log(phone)
     } ,[name,phone])
     return(
-      <DashboardDialog
-        open={props.open}
-        closeDialog={props.closeDialog}
-        title="Add Contact"
-        component="form"
+      <DashboardDialog title="Add Contact" component="form" open={props.open} closeDialog={props.closeDialog}
         validate={name && phone.match(/^\+1[0-9]{10}$/)}
         onSubmit={()=>props.addContact(name,phone)}
         callback={reset}
       >
-        <TextField
-            color='secondary'
-            id='outlined-multiline-static'
-            label='Name'
-            value={name}
-            required
-            error={name===""}
-            fullWidth
-            onChange={(e)=>{setName(e.target.value)}}
-            sx={{mb:2}}
-        />
-        <TextField
-            color='secondary'
-            id='outlined-multiline-static'
-            label='Phone'
+        <TextField color='secondary' sx={{mb:2}} required label='Name' fullWidth value={name}
+          onChange={(e)=>{setName(e.target.value)}}
+          error={name===""}/>
+        <TextField sx={{mb:2}} required label='Phone Number' fullWidth color='secondary'
             value={phone}
-            required
-            fullWidth
             inputProps={{pattern:"\\+1[0-9]{9}"}}
             error={!phone.match(/^\+1([0-9]{10})$/)}
             helperText="Phone number must be in +1XXXXXXXXXX (CA) format"
             onChange={(e)=>{setPhone(e.target.value)}}
-            sx={{mb:2}}
         />
       </DashboardDialog>
-    );
+    )
   };
 
 export default ContactDialog;

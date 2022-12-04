@@ -57,7 +57,7 @@ plt.xlabel('Product ID')
 plt.ylabel('Price')
 plt.grid(color = '#D3D3D3', linestyle = 'solid')
 plt.legend(loc = 'lower right')
-plt.show()
+# plt.show()
 
 # Mean squared error (MSE)
 mse = mean_squared_error(y_test.values.ravel(), predictions)

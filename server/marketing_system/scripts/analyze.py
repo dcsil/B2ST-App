@@ -40,7 +40,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 25, random
 # Train the Model
 regr = RandomForestRegressor(n_estimators = 10, max_depth = 10, random_state = 101)
 regr.fit(X_train, y_train.values.ravel())
-print(X_test)
 # Make prediction
 predictions = regr.predict(X_test)
 result = X_test
@@ -69,9 +68,9 @@ r2 = r2_score(y_test.values.ravel(), predictions)
 mae = mean_absolute_error(y_test.values.ravel(), predictions)
 
 #Print Results
-print("Mean squared error (MSE): ", round(mse, 2))
-print("R2 Score: ", round(r2, 2))
-print("Mean Absolute Error (MAE): ", round(mae, 2))
+# print("Mean squared error (MSE): ", round(mse, 2))
+# print("R2 Score: ", round(r2, 2))
+# print("Mean Absolute Error (MAE): ", round(mae, 2))
 
 #We have regression (r2 score) of 0.76 which is good in the sense that it indicates correlation, but we can improve it by using more data and more features
 

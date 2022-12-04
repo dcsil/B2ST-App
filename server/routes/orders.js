@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const csv = require('csv-parser')
+const csv = require("csv-parser");
 
 router.get("/", async (req, res) => {
   try {
@@ -14,17 +14,27 @@ router.get("/", async (req, res) => {
 function getOrders(req, res) {
   let resData = [];
   let resLabels = [];
-  fs.createReadStream('datasets/ecommerce-purchases-electronics.csv')
-  .pipe(csv())
-  .on('data', (data) => {
-    if(data['price']){
-        resData.push(data['price'])
-        resLabels.push(data['event_time'])
-    }
-  })
-  .on('end', () => {
-    res.json({data: resData, labels: resLabels});
-  });
+  var readStream = fs.createReadStream(
+    "datasets/ecommerce-purchases-electronics.csv"
+  );
+  readStream
+    .on("close", () => {
+      return res.send({ data: resData, labels: resLabels });
+    })
+    .pipe(csv())
+    .on("data", (data) => {
+      if (resData.length == 100) {
+        readStream.destroy();
+      } else if(data['price']){
+        let dateStr = data["event_time"].split(" ")[0];
+        if (resLabels.includes(dateStr)) {
+          resData[resLabels.indexOf(dateStr)] += parseFloat(data["price"]);
+        } else {
+          resLabels.push(dateStr);
+          resData.push(parseFloat(data["price"]));
+        }
+      }
+    })
 }
 
 module.exports = router;

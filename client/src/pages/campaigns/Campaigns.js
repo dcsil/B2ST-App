@@ -35,7 +35,6 @@ function CampaignsContent() {
   React.useEffect(() => {
     axios.get("http://localhost:5000/orders").then((res) => {
       const data = res.data;
-      console.log("Initial data: ", data);
       setOrdersData([
         {
           name: "Orders",
@@ -47,10 +46,6 @@ function CampaignsContent() {
       setOrdersLabels(data.map((i) => i.date));
     });
   }, []);
-  React.useEffect(() => {
-    console.log("Effect log 1: ", ordersData);
-    console.log("Effect log 2: ", ordersLabels);
-  }, [ordersData, ordersLabels]);
   return (
     <DashboardPageProvider name="Campaigns">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

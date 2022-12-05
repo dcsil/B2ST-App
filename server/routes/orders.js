@@ -12,15 +12,12 @@ router.get("/", async (req, res) => {
   }
 });
 function getOrders(req, res) {
-  let resData = [];
-  let resLabels = [];
   let result = [];
   var readStream = fs.createReadStream(
     "datasets/ecommerce-purchases-electronics.csv"
   );
   readStream
     .on("close", () => {
-        
         result.sort((a, b) => {
             let dateA = new Date(a.date);
             let dateB = new Date(b.date);
@@ -30,7 +27,7 @@ function getOrders(req, res) {
     })
     .pipe(csv())
     .on("data", (data) => {
-      if (resData.length == 100) {
+      if (result.length == 100) {
         readStream.destroy();
       } else if (data["price"]) {
         let dateStr = data["event_time"].split(" ")[0];

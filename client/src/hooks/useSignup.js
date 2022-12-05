@@ -16,7 +16,7 @@ export const useSignup = ()=>{
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({firstname, lastname, email, password})
         })
-        handleAuthContext(setIsLoading, setError, dispatch, response, "SIGNUP")
+        handleAuthContext(setIsLoading, setError, dispatch, response, "LOGIN")
     }
     return {signup, isLoading, error}
 }

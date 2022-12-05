@@ -2,27 +2,9 @@ import * as React from "react";
 import { Container, Grid } from "@mui/material";
 import AppChart from "../../sections/AppChart";
 import Configuration from "./Configuration";
-import AppStatistics from "../../sections/AppStatistics";
+import AppAnalysis from "../../sections/AppAnalysis";
 import DashboardPageProvider from "../../components/PageProvider/DashboardPageProvider";
 import axios from "axios";
-const statsData = [
-  {
-    name: "Customer Satisfaction Rate",
-    value: "87%",
-  },
-  {
-    name: "Customer Retention Rate",
-    value: "42%",
-  },
-  {
-    name: "Average Promotion Rate",
-    value: "5%",
-  },
-  {
-    name: "Ordering Trends (past 3 days)",
-    value: "+300%",
-  },
-];
 
 function CampaignsContent() {
   const [ordersData, setOrdersData] = React.useState([{
@@ -62,7 +44,7 @@ function CampaignsContent() {
             <Configuration />
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <AppStatistics title="Statistics" list={statsData} />
+            <AppAnalysis title="Analysis" />
           </Grid>
         </Grid>
       </Container>

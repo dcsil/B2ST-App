@@ -8,7 +8,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  TextField
+  TextField,
+  Button,
+  Box,
 } from "@mui/material";
 
 const columns = [
@@ -22,18 +24,21 @@ function createData(order_id, product_id, category_code, brand) {
   return { order_id, product_id, category_code, brand };
 }
 
-const rows = [
-  createData(
-    "2388440981134609919",
-    "2273948312304353947",
-    "smartphone",
-    "huawei"
-  ),
-];
-
 export default function InputTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([
+    createData(
+      "2388440981134609919",
+      "2273948312304353947",
+      "smartphone",
+      "huawei"
+    ),
+  ]);
+
+  React.useEffect(() => {
+    console.log("rows", rows);
+  }, [rows]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -44,8 +49,34 @@ export default function InputTable() {
     setPage(0);
   };
 
+  const editField = (e, row, column) => {
+    setRows(
+      rows.map((r) => {
+        if (r.order_id === row.order_id) {
+          return {
+            ...r,
+            [column.id]: e.target.value,
+          };
+        }
+        return r;
+      })
+    );
+  };
+
+  const addRow = () => {
+    setRows([...rows, createData("", "", "", "")]);
+  };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Box
+        m={1}
+        //margin
+        display="flex"
+        justifyContent="flex-end"
+        alignItems="flex-end"
+      >
+        <Button variant="contained" onClick={() => addRow()}>Contained</Button>
+      </Box>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -76,6 +107,7 @@ export default function InputTable() {
                             key={column.id}
                             align={column.align}
                             value={value}
+                            onChange={(e) => editField(e, row, column)}
                           />
                         </TableCell>
                       );

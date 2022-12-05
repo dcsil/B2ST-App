@@ -14,27 +14,38 @@ router.get("/", async (req, res) => {
 function getOrders(req, res) {
   let resData = [];
   let resLabels = [];
+  let result = [];
   var readStream = fs.createReadStream(
     "datasets/ecommerce-purchases-electronics.csv"
   );
   readStream
     .on("close", () => {
-      return res.send({ data: resData, labels: resLabels });
+        
+        result.sort((a, b) => {
+            let dateA = new Date(a.date);
+            let dateB = new Date(b.date);
+            return dateA.getTime() - dateB.getTime();
+        });
+      return res.send(result);
     })
     .pipe(csv())
     .on("data", (data) => {
       if (resData.length == 100) {
         readStream.destroy();
-      } else if(data['price']){
+      } else if (data["price"]) {
         let dateStr = data["event_time"].split(" ")[0];
-        if (resLabels.includes(dateStr)) {
-          resData[resLabels.indexOf(dateStr)] += parseFloat(data["price"]);
+        const i = result.findIndex((e) => e.date === dateStr);
+        if (i >= 0) {
+          result[i]["price"] += Math.round(
+            parseFloat(data["price"] * 100) / 100
+          );
         } else {
-          resLabels.push(dateStr);
-          resData.push(parseFloat(data["price"]));
+          result.push({
+            date: dateStr,
+            price: Math.round(parseFloat(data["price"] * 100) / 100),
+          });
         }
       }
-    })
+    });
 }
-
 module.exports = router;

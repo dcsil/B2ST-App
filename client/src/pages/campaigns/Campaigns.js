@@ -41,10 +41,10 @@ function CampaignsContent() {
           name: "Orders",
           type: "line",
           fill: "solid",
-          data: data.data,
+          data: data.map((i) => i.price),
         }
       ]);
-      setOrdersLabels(data.labels);
+      setOrdersLabels(data.map((i) => i.date));
     });
   }, []);
   React.useEffect(() => {

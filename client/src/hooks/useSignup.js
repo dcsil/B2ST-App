@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {useAuthContext} from "./useAuthContext"
-
+import { handleAuthContext } from "./requests/communication";
 const api_url = process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL;
 
 export const useSignup = ()=>{
@@ -16,21 +16,7 @@ export const useSignup = ()=>{
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({firstname, lastname, email, password})
         })
-        const json = await response.json()
-
-        if (!response.ok){
-            setIsLoading(false)
-            setError(json.error)
-        }
-        else{
-            // save the user to local storage
-            localStorage.setItem("user", JSON.stringify(json))
-
-            //update auth context
-            dispatch({type: "LOGIN", payload: json})
-            setIsLoading(false)
-        }
-
+        handleAuthContext(setIsLoading, setError, dispatch, response, "LOGIN")
     }
     return {signup, isLoading, error}
 }

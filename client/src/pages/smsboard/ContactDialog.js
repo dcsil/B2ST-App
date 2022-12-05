@@ -9,10 +9,6 @@ const ContactDialog = (props) => {
         setName("");
         setPhone("+11111111111");
     }
-    React.useEffect(()=>{
-      console.log(name)
-      console.log(phone)
-    } ,[name,phone])
     return(
       <DashboardDialog title="Add Contact" component="form" open={props.open} closeDialog={props.closeDialog}
         validate={name && phone.match(/^\+1[0-9]{10}$/)}

@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import warnings
 import json
+from threading import Timer
 
 print("Starting analysis")
 
@@ -75,7 +76,9 @@ mae = mean_absolute_error(y_test.values.ravel(), predictions)
 #We have regression (r2 score) of 0.76 which is good in the sense that it indicates correlation, but we can improve it by using more data and more features
 
 # accept user input
-user_input = input("Enter input for prediction: ")
-user_input_df = pd.DataFrame(json.loads(user_input), columns = ['order_id', 'product_id', 'category_code', 'brand'])
-user_predictions = regr.predict(user_input_df)
-print(user_predictions)
+user_input = input("Enter Something")
+features = ['order_id', 'product_id', 'category_code', 'brand']
+user_input_df = pd.DataFrame(json.loads(user_input), columns = features)
+for i in range(len(features)):
+    user_input_df[features[i]] = le.fit_transform(user_input_df[features[i]])
+print(regr.predict(user_input_df))

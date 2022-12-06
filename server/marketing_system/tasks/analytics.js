@@ -16,6 +16,7 @@ function analyze() {
   analyzeScript.stderr.on("data", (data) => {
     console.log("Pipe error data from python script ...");
     pythonDataOutput = data.toString();
+    console.log(pythonDataOutput);
     code = 500;
   });
   analyzeScript.on("close", (code) => {

@@ -12,12 +12,14 @@ import {
   Button,
   Box,
 } from "@mui/material";
-
+import axios from "axios";
+import swal from "sweetalert";
 const columns = [
   { id: "order_id", label: "Order ID", minWidth: 100 },
   { id: "product_id", label: "Product ID", minWidth: 100 },
   { id: "category_code", label: "Category Code", minWidth: 100 },
   { id: "brand", label: "Brand Name", minWidth: 100 },
+  { id: "prediction", label: "Prediction", minWidth: 100 },
 ];
 
 function createData(order_id, product_id, category_code, brand) {
@@ -32,13 +34,10 @@ export default function InputTable() {
       "2388440981134609919",
       "2273948312304353947",
       "smartphone",
-      "huawei"
+      "huawei",
+      ""
     ),
   ]);
-
-  React.useEffect(() => {
-    console.log("rows", rows);
-  }, [rows]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -64,7 +63,32 @@ export default function InputTable() {
   };
 
   const addRow = () => {
-    setRows([...rows, createData("", "", "", "")]);
+    setRows([...rows, createData("", "", "", "", "")]);
+  };
+
+  const predict = async () => {
+    axios
+      .post("http://localhost:5000/marketing/query", {
+        query: rows.map((row) => {
+          return [
+            row["order_id"],
+            row["product_id"],
+            row["category_code"],
+            row["brand"],
+          ];
+        }),
+      })
+      .then((res) => {
+        let result = JSON.parse(res.data.data);
+        setRows(
+          rows.map((row, index) => {
+            return {
+              ...row,
+              prediction: result[index],
+            };
+          }
+        ));
+      });
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -75,7 +99,16 @@ export default function InputTable() {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <Button variant="contained" onClick={() => addRow()}>Contained</Button>
+        <Button
+          variant="contained"
+          sx={{ marginRight: 1 }}
+          onClick={() => addRow()}
+        >
+          Add Row
+        </Button>
+        <Button variant="contained" onClick={() => predict()}>
+          Predict
+        </Button>
       </Box>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">

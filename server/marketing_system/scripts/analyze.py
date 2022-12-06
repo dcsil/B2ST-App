@@ -81,4 +81,4 @@ features = ['order_id', 'product_id', 'category_code', 'brand']
 user_input_df = pd.DataFrame(json.loads(user_input), columns = features)
 for i in range(len(features)):
     user_input_df[features[i]] = le.fit_transform(user_input_df[features[i]])
-print(regr.predict(user_input_df))
+print([float(x) for x in regr.predict(user_input_df)])

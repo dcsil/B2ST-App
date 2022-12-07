@@ -1,32 +1,30 @@
 const request = require("supertest");
 const express = require("express");
 require("dotenv").config({ path: "./.env" });
-const db = require("../config/db");
 const { analyze } = require("../marketing_system/tasks/analytics");
 const app = express();
 app.use(express.json());
 app.set("script", analyze());
 app.use("/marketing", require("../routes/marketing"));
 const mongoose = require("mongoose");
-let mongodb;
+let connection;
+let db;
+const {MongoClient} = require('mongodb');
+
 /* Connecting to the database before each test. */
-beforeAll(() => {
-  mongoose.connect(process.env.MONGO_URL, (err, db) => {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
-    console.log("Connected to MongoDB");
-    mongodb = db;
-  });
+beforeAll(async () => {
+    connection = await MongoClient.connect(process.env.MONGO_URL);
 });
 
-
+afterAll(async () => {
+    await connection.close();
+    let script = app.get("script");
+    await script.kill();
+});
 
 describe("Test the ML model initiation", () => {
   test("Analyze function should run correctly", async () => {
     let script = app.get("script");
-    console.log(script);
     expect(script).not.toBe(null);
   });
 });

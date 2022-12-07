@@ -19,7 +19,7 @@ function CampaignsContent() {
       const data = res.data;
       setOrdersData([
         {
-          name: "Orders",
+          name: "Revenue",
           type: "line",
           fill: "solid",
           data: data.map((i) => i.price),
@@ -34,7 +34,7 @@ function CampaignsContent() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <AppChart
-              title="Orders"
+              title="Revenue"
               subheader="in last 12 months"
               chartLabels={ordersLabels}
               chartData={ordersData}

@@ -5,17 +5,26 @@ set -ea
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+if [[ $OSTYPE == 'darwin'* ]]; then
+  DIR="$DIR/.."
+fi
+
 docker -v
 
+# Install docker compose
+echo "==> Installing docker compose"
+sh "$DIR/script/install-docker-compose.sh"
+echo "==> Docker compose installed"
+
 command -v "docker" > /dev/null 2>&1 || {
-  if [$(uname -s) = 'Darwin']; then
+  if [[ $OSTYPE == 'darwin'* ]]; then
     # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     
     brew update
 
     # Install dependencies from Brewfile
-    cd "$DIR/.."
+    cd "$DIR"
     pwd
 
     brew bundle check >/dev/null 2>&1  || {
@@ -25,12 +34,12 @@ command -v "docker" > /dev/null 2>&1 || {
         pip install pandas matplotlib scikit-learn
     }
   else
-    sh "$DIR/install-docker.sh"
+    sh "$DIR/script/install-docker.sh"
   fi
 }
 
 # React js dependencies
-cd "$DIR/../client"
+cd "$DIR/client"
 echo "==> Installing client dependencies"
 npm install
 echo "==> Client dependencies installed"
@@ -44,7 +53,7 @@ fi
 echo "==> Client .env variables updated"
 
 # Node js dependencies
-cd "$DIR/../server"
+cd "$DIR/server"
 echo "==> Installing server dependencies"
 npm install
 echo "==> Server dependencies installed"
@@ -64,10 +73,10 @@ echo "==> ENV variables sourced"
 
 
 
-cd "$DIR/.."
+cd "$DIR"
 pwd 
 
 
 echo "==> Docker Compose"
-docker-compose up -d --build
+docker compose up -d --build
 echo "==> Docker Compose done"

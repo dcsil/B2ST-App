@@ -5,6 +5,10 @@ set -ea
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+if [$(uname -s) = 'Darwin']; then
+  DIR="$DIR/.."
+fi
+
 docker -v
 
 command -v "docker" > /dev/null 2>&1 || {
@@ -15,7 +19,7 @@ command -v "docker" > /dev/null 2>&1 || {
     brew update
 
     # Install dependencies from Brewfile
-    cd "$DIR/.."
+    cd "$DIR"
     pwd
 
     brew bundle check >/dev/null 2>&1  || {
@@ -30,7 +34,7 @@ command -v "docker" > /dev/null 2>&1 || {
 }
 
 # React js dependencies
-cd "$DIR/../client"
+cd "$DIR/client"
 echo "==> Installing client dependencies"
 npm install
 echo "==> Client dependencies installed"
@@ -44,7 +48,7 @@ fi
 echo "==> Client .env variables updated"
 
 # Node js dependencies
-cd "$DIR/../server"
+cd "$DIR/server"
 echo "==> Installing server dependencies"
 npm install
 echo "==> Server dependencies installed"
@@ -64,7 +68,7 @@ echo "==> ENV variables sourced"
 
 
 
-cd "$DIR/.."
+cd "$DIR"
 pwd 
 
 

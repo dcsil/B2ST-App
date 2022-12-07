@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KeyboardReturn, Dashboard, ShoppingCart, People, BarChart, Message } from '@mui/icons-material';
+import { KeyboardReturn, Dashboard, ShoppingCart, BarChart, Message } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, ListSubheader, ListItemButton } from '@mui/material';
 import { Link } from "react-router-dom";
 
@@ -31,11 +31,9 @@ const mainLists = [
   }
 ]
 
-const secondLists = [];
-
 export function AppBarListItems(props) {
   const {component,subheader}=props;
-  const list = component === "main" ? mainLists : secondLists;
+  const list = component === "main" ? mainLists : [];
   return (
     <React.Fragment>
     <ListSubheader component="div" inset>

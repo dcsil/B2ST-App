@@ -78,8 +78,6 @@ function DashboardAppBarDrawer(props) {
       <Divider />
       <List component="nav">
         <AppBarListItems component="main"/>
-        <Divider sx={{ my: 1 }} />
-        <AppBarListItems subheader="Saved reports" component="secondary"/>
       </List>
       <List component='nav' style={{ marginTop: `auto`}}>
         <ListItem disablePadding>

@@ -2,9 +2,27 @@ import * as React from "react";
 import { Container, Grid } from "@mui/material";
 import AppChart from "../../sections/AppChart";
 import Configuration from "./Configuration";
-import AppAnalysis from "../../sections/AppAnalysis";
+import AppStatistics from "../../sections/AppStatistics";
 import DashboardPageProvider from "../../components/PageProvider/DashboardPageProvider";
 import axios from "axios";
+const statsData = [
+  {
+    name: "Customer Satisfaction Rate",
+    value: "87%",
+  },
+  {
+    name: "Customer Retention Rate",
+    value: "42%",
+  },
+  {
+    name: "Average Promotion Rate",
+    value: "5%",
+  },
+  {
+    name: "Ordering Trends (past 3 days)",
+    value: "+300%",
+  },
+];
 
 function CampaignsContent() {
   const [ordersData, setOrdersData] = React.useState([{
@@ -19,7 +37,7 @@ function CampaignsContent() {
       const data = res.data;
       setOrdersData([
         {
-          name: "Revenue",
+          name: "Orders",
           type: "line",
           fill: "solid",
           data: data.map((i) => i.price),
@@ -34,7 +52,7 @@ function CampaignsContent() {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <AppChart
-              title="Revenue"
+              title="Orders"
               subheader="in last 12 months"
               chartLabels={ordersLabels}
               chartData={ordersData}
@@ -44,7 +62,7 @@ function CampaignsContent() {
             <Configuration />
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <AppAnalysis title="Analysis" />
+            <AppStatistics title="Statistics" list={statsData} />
           </Grid>
         </Grid>
       </Container>

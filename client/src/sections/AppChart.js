@@ -23,7 +23,7 @@ export default function AppChart({ title, subheader, chartLabels, chartData, ...
     tooltip: {
       shared: true,
       intersect: false,
-      y: { formatter: (y) => (typeof y !== 'undefined') ? `$${y.toFixed(0)}.00`: y,},
+      y: { formatter: (y) => (typeof y !== 'undefined') ? `${y.toFixed(0)} sold`: y,},
     },
   });
   return (

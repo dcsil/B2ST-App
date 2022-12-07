@@ -52,6 +52,14 @@ then
 fi
 echo "==> Client .env variables updated"
 
+echo "==> Source ENV variables"
+if [[ $OSTYPE == 'darwin'* ]]; then
+ source .env
+else
+ . .env
+fi
+echo "==> ENV variables sourced"
+
 # Node js dependencies
 cd "$DIR/server"
 echo "==> Installing server dependencies"
@@ -68,7 +76,11 @@ fi
 echo "==> Server .env variables updated"
 
 echo "==> Source ENV variables"
-source .env
+if [[ $OSTYPE == 'darwin'* ]]; then
+ source .env
+else
+ . .env
+fi
 echo "==> ENV variables sourced"
 
 

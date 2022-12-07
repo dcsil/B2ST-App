@@ -30,7 +30,14 @@ const DashboardAlert = (props) => {
   </Collapse>
 )}
 
-const mdTheme = createTheme();
+const mdTheme  = createTheme({
+  palette: {
+    background: {
+      default: "#ACB9CC",
+    },
+  },
+});
+
 export default function DashboardPageProvider(props) {
   const { name, backto, children, alert, setAlert } = props;
   return (

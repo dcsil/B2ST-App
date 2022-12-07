@@ -5,18 +5,22 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "../../pages/LandingAppBar";
 import Footer from "../Footer";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "#ACB9CC",
+    },
+  },
+});
 
 export default function LandingPageProvider(props) {
-  const { children,containerProps,boxProps } = props;
+  const { children, containerProps, boxProps } = props;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LandingAppBar />
       <Container component="main" {...containerProps}>
-        <Box {...boxProps}>
-          {children}
-        </Box>
+        <Box {...boxProps}>{children}</Box>
       </Container>
       <Footer />
     </ThemeProvider>

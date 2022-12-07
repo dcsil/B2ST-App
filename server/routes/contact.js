@@ -12,7 +12,7 @@ router.post("/getAll", async (req, res) => {
         const contacts = await Contact.getContacts(user);
         res.status(200).json(contacts);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({error: error.message});
     }
 });
 
@@ -22,7 +22,7 @@ router.post("/add", async (req, res) => {
         const contact = await Contact.addContact(name, phone, user);
         res.status(200).json(contact);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({error: error.message});
     }
 });
 
@@ -32,7 +32,7 @@ router.delete("/", async (req, res) => {
         const contact = await Contact.deleteContact(id);
         res.status(200).send(contact);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({error: error.message});
     }
 });
 

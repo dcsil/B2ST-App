@@ -19,11 +19,17 @@ function get() {
   return mongodb;
 }
 
-function drop(){
-  mongodb.dropDatabase();
+async function clear(){
+  const collections =  mongodb.collections;
+  for (const key in collections) {
+    const collection = collections[key];
+    await collection.deleteMany();
+  }
 }
 
-
+function drop() {
+  mongodb.dropDatabase();
+}
 
 function close() {
   mongodb.close();
@@ -33,5 +39,6 @@ module.exports = {
   connect,
   get,
   close,
-  drop
+  drop,
+  clear
 };

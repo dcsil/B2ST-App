@@ -49,6 +49,9 @@ router.post("/sendAll", async (req, res) => {
   try {
     const { mes, to,sendAt,user,hasCode } = req.body;
     const codes=[];
+    if (!mes || !to || !user) {
+      throw Error("Missing required fields");
+    }
     to.map( num => {
       const code = Math.floor(Math.random() * 1000000);
       codes.push(code);
@@ -63,17 +66,14 @@ router.post("/sendAll", async (req, res) => {
       })).then(() => {
         res.status(200).send("Messages sent");
       }).catch(err => {
-        console.log(err);
-        res.status(400).send(err);
+        res.status(400).json({error:err.message});
       });
     })
     .catch((err) => {
-      console.log(err);
-      res.status(err.status).send(err);
+      res.status(err.status).json({error:err.message});
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({error:error.message});
   }
 });
 

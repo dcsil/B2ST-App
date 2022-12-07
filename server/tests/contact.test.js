@@ -17,6 +17,7 @@ beforeAll(async () => {
 
 /* Closing database connection after each test. */
 afterAll(async () => {
+    await db.clear();
     await db.drop();
     await db.close();
 });
@@ -54,6 +55,7 @@ describe("POST /contact/add", () => {
         })
         expect(res.statusCode).toBe(200);
         expect(res.body.name).toBe('People 3');
+        console.log(res.body);
     }, 100000);
 
     it ("should not add a contact with exist phone number", async () => {

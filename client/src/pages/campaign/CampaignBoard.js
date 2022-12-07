@@ -17,6 +17,9 @@ export default function CampaignBoard() {
   const {user} = useAuthContext();
   const {sendText} = useSendText(user,setAlert);
   const {addContact} = useAddContact(user,setAlert);
+  React.useEffect(() => {
+    document.title = "B2ST | Dashboard | Campaign";
+  }, []);
   return (
     <DashboardPageProvider name="Campaign" alert={alert} setAlert={setAlert}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

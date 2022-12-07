@@ -47,6 +47,9 @@ const tiers = [
 
 const PlanCard = (props) => {
   const { tier, index, checkout } = props;
+  React.useEffect(() => {
+    document.title = "B2ST | Dashboard | Plans";
+  }, []);
   return (
     <Grid item key={index} xs={12} sm={6} md={4}>
       <Card

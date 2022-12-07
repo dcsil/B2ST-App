@@ -1,7 +1,11 @@
 import LandingPageProvider from "../components/PageProvider/LandingPageProvider";
 import { Typography, Stack, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import React from "react";
 export default function Error404() {
+    React.useEffect(() => {
+      document.title = "B2ST | Error 404";
+    }, []);
   return (
     <LandingPageProvider
       containerProps={{ maxWidth: "sm" }}

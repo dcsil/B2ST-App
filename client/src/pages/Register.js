@@ -67,6 +67,9 @@ export default function Register() {
     inputProps("email", "Email Address", email, (e)=>{setEmail(e.target.value)}, {}, {xs:12}),
     inputProps("password", "Password", password, (e)=>{setPassword(e.target.value)}, {type:"password"}, {xs:12})
   ]
+  React.useEffect(() => {
+    document.title = "B2ST | Register";
+  }, []);
   return (
     <AuthForm title="Sign up" handleSubmit={handleSubmit} isLoading={isLoading} error={error} footer={RegisterFormFooter}>
       <Grid container spacing={2}>

@@ -20,6 +20,9 @@ const list = [
 
 function DashboardContent() {
   const {user} = useAuthContext()
+  React.useEffect(() => {
+    document.title = "B2ST | Dashboard";
+  }, []);
   return (
     <DashboardPageProvider name="Dashboard">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

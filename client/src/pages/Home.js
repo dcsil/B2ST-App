@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import LandingPageProvider from "../components/PageProvider/LandingPageProvider";
 
 export default function Home() {
+  React.useEffect(() => {
+    document.title = "B2ST | Homepage";
+  }, []);
   return (
     <LandingPageProvider containerProps={{maxWidth:"sm"}} boxProps={{mt:8}}>
       <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>

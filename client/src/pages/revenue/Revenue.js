@@ -27,6 +27,7 @@ function RevenueContent() {
       ]);
       setOrdersLabels(data.map((i) => i.date));
     });
+    document.title = "B2ST | Dashboard | Revenue"
   }, []);
   return (
     <DashboardPageProvider name="Revenue">

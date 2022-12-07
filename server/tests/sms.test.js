@@ -97,3 +97,10 @@ describe("POST /sms/getRecords", () => {
         expect(res.body.length).toBeGreaterThan(0);
     });
 });
+
+describe("POST /sms", () => {
+    it("should get response", async () => {
+        const res = await request(app).post("/sms");
+        expect(res.statusCode).toBe(200);
+    });
+});

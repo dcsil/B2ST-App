@@ -28,9 +28,13 @@ router.post("/add", async (req, res) => {
 
 router.delete("/", async (req, res) => {
     try {
-        const { id } = req.body;
-        const contact = await Contact.deleteContact(id);
-        res.status(200).send(contact);
+        const { phone,user } = req.body;
+        const contact = await Contact.deleteContact(phone, user);
+        if(!contact){
+            res.status(404).json({error: "Contact not found"});
+        }else{
+            res.status(200).send(contact);
+        }
     } catch (error) {
         res.status(400).json({error: error.message});
     }

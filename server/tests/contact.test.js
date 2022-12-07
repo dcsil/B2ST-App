@@ -69,11 +69,12 @@ describe("POST /contact/add", () => {
         const res = await request(app).post("/contact/add").send(
             {
                 name: 'People 4',
-                phone: '123456789',
+                phone: phone,
                 user: 'sample@test.com'
             }
         )
         expect(res.statusCode).toBe(400);
+        expect(res.body.error).toBe('Phone number already exists');
     }, 10000);
 });
 
@@ -99,14 +100,19 @@ describe('POST /contact/update', () => {
     });
 });
 
-describe("POST /contact/delete", () => {
+describe("DELETE /contact/delete", () => {
     it("should not delete a contact not exist", async () => {
-        const res = await request(app).post("/contact/delete").send({id: '123456789'});
+        const res = await request(app).delete("/contact").send({phone: '123', user:'123'});
         expect(res.statusCode).toBe(404);
     });
 
-    if("should delete a contact", async () => {
-        const res = await request(app).post("/contact/delete").send({id: id});
+    it("should delete a contact", async () => {
+        const res = await request(app).delete("/contact").send({phone:phone, user:'sample@test.com'});
         expect(res.statusCode).toBe(200);
+    });
+
+    it("should not delete with empty req", async () => {
+        const res = await request(app).delete("/contact").send({});
+        expect(res.statusCode).toBe(400);
     });
 });

@@ -43,10 +43,10 @@ contactSchema.statics.addContact = async function(name, phone, user){
 
 contactSchema.statics.deleteContact = async function(phone, user){
     // delete contact
-    const contact = await this.findOneAndDelete({phone: phone, belongsTo: user})
-    if (!contact) {
-        throw Error('Contact not found')
+    if (!phone || !user){
+        throw Error("Missing required fields")
     }
+    const contact = await this.findOneAndDelete({phone: phone, belongsTo: user})
     return contact
 }
 

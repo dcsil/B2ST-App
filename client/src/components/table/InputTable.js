@@ -113,9 +113,9 @@ export default function InputTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, idx) => (
                 <TableCell
-                  key={column.id}
+                  key={idx}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
@@ -130,13 +130,13 @@ export default function InputTable() {
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
+                    {columns.map((column, idx) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           <TextField
                             id="outlined-basic"
-                            key={column.id}
+                            key={idx}
                             align={column.align}
                             value={value}
                             onChange={(e) => editField(e, row, column)}

@@ -41,6 +41,9 @@ jobs:
       run: |
         cd server
         cp -r .env.example .env
+        apt-get update || : && apt-get install python -y
+        apt-get install python3-pip -y
+        pip install pandas matplotlib scikit-learn
         npm install
         npm test
         

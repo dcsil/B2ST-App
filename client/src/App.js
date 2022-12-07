@@ -6,11 +6,8 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
 import CampaignBoard from "./pages/campaign/CampaignBoard";
 import { useAuthContext } from "./hooks/useAuthContext"
-
 import Plan from "./pages/Plan"
-
-
-import Campaigns from './pages/revenue/Revenue';
+import Revenue from './pages/revenue/Revenue';
 import PromotionForecasting from './pages/revenue/PromotionForcasting';
 
 const ProtectedRoute = ({isAllowed, redirectPath, children}) => {
@@ -37,10 +34,9 @@ function App() {
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath='/'/>}>
           <Route exact path="dashboard" element={<Dashboard/>}/>
           <Route exact path="dashboard/campaign" element={<CampaignBoard/>} />
-          <Route exact path="dashboard/revenue" element={<Campaigns/>} />
+          <Route exact path="dashboard/revenue" element={<Revenue/>} />
+          <Route exact path="dashboard/plans" element = {user? <Plan></Plan>: <Home></Home>}></Route>
           <Route exact path="profile" element={<></>} />
-          <Route exact path="dashboard/campaigns/forecasting" element={<PromotionForecasting/>} />
-          <Route path="/dashboard/plans" element = {user? <Plan></Plan>: <Home></Home>}></Route>
         </Route>
 
       </Routes>

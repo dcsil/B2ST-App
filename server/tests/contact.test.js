@@ -17,6 +17,7 @@ beforeAll(async () => {
 
 /* Closing database connection after each test. */
 afterAll(async () => {
+    await db.drop();
     await db.close();
 });
 

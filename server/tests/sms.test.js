@@ -11,12 +11,13 @@ app.use(express.json());
 app.use("/sms", router);
 
 /* Connecting to the database before each test. */
-beforeEach(async () => {
+beforeAll(async () => {
     await db.connect(()=>{});
 });
 
 /* Closing database connection after each test. */
-afterEach(async () => {
+afterAll(async () => {
+    await db.drop();
     await db.close();
 });
 

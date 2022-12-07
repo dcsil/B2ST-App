@@ -19,6 +19,12 @@ function get() {
   return mongodb;
 }
 
+function drop(){
+  mongodb.dropDatabase();
+}
+
+
+
 function close() {
   mongodb.close();
 }
@@ -27,4 +33,5 @@ module.exports = {
   connect,
   get,
   close,
+  drop
 };

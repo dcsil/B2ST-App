@@ -22,6 +22,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Set up Python3
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
     - name: Start MongoDB ${{ matrix.mongodb-version }}
       uses: supercharge/mongodb-github-action@1.8.0
       with:
@@ -41,6 +45,7 @@ jobs:
       run: |
         cd server
         cp -r .env.example .env
+        pip install pandas matplotlib scikit-learn
         npm install
         npm test
         

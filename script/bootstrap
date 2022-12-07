@@ -11,6 +11,11 @@ fi
 
 docker -v
 
+# Install docker compose
+echo "==> Installing docker compose"
+sh "$DIR/script/install-docker-compose.sh"
+echo "==> Docker compose installed"
+
 command -v "docker" > /dev/null 2>&1 || {
   if [[ $OSTYPE == 'darwin'* ]]; then
     # Install Homebrew
@@ -29,7 +34,7 @@ command -v "docker" > /dev/null 2>&1 || {
         pip install pandas matplotlib scikit-learn
     }
   else
-    sh "$DIR/install-docker.sh"
+    sh "$DIR/script/install-docker.sh"
   fi
 }
 
@@ -73,5 +78,5 @@ pwd
 
 
 echo "==> Docker Compose"
-docker-compose up -d --build
+docker compose up -d --build
 echo "==> Docker Compose done"

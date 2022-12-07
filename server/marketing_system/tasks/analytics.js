@@ -12,21 +12,15 @@ function analyze() {
   analyzeScript.on("spawn", (data) => {
     console.log("Spawned");
   });
-  analyzeScript.stdout.on("data", (data) => {
-    console.log("Pipe data from python script ...");
-    console.log(data.toString());
-  });
   //Error logging from python script
   analyzeScript.stderr.on("data", (data) => {
     console.log("Pipe error data from python script ...");
     pythonDataOutput = data.toString();
+    console.log(pythonDataOutput);
     code = 500;
   });
   analyzeScript.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);
-    console.log(pythonDataOutput);
-    // send data to browser
-    console.log(code);
   });
   return analyzeScript;
 }
@@ -35,9 +29,12 @@ function query(req, res, script) {
   script.stdin.write(query);
   script.stdin.end();
   script.stdout.on("data", (data) => {
-    console.log("Pipe data from python script ...");
-    console.log(data.toString());
-    res.status(200).json({ data: data.toString() });
+    if(data.toString().includes('[')){
+      console.log("Pipe data from python script ...");
+      console.log(data.toString());
+      res.status(200).json({ data: data.toString().replace('\n', '') });
+      req.app.set("script", analyze());
+    }
   });
 }
 

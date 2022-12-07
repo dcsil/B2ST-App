@@ -6,7 +6,7 @@ import AppAnalysis from "../../sections/AppAnalysis";
 import DashboardPageProvider from "../../components/PageProvider/DashboardPageProvider";
 import axios from "axios";
 
-function CampaignsContent() {
+function RevenueContent() {
   const [ordersData, setOrdersData] = React.useState([{
     name: "Item A",
     type: "line",
@@ -52,6 +52,6 @@ function CampaignsContent() {
   );
 }
 
-export default function Campaigns() {
-  return <CampaignsContent />;
+export default function Revenue() {
+  return <RevenueContent />;
 }

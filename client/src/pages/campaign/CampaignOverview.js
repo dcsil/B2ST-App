@@ -94,7 +94,7 @@ const ContactTableRow = (row) => (
   </TableRow>
 )
 
-export default function SMSTable() {
+export default function CampaignTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState([]);

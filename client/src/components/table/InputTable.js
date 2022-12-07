@@ -47,17 +47,11 @@ export default function InputTable() {
     setPage(0);
   };
 
-  const editField = (e, row, column) => {
+  const editField = (e, column, id) => {
+    let curRows = [...rows];
+    curRows[id][column.id] = e.target.value;
     setRows(
-      rows.map((r) => {
-        if (r.order_id === row.order_id) {
-          return {
-            ...r,
-            [column.id]: e.target.value,
-          };
-        }
-        return r;
-      })
+      curRows
     );
   };
 
@@ -127,10 +121,10 @@ export default function InputTable() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, idx) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column, idx) => {
+                    {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
@@ -139,7 +133,7 @@ export default function InputTable() {
                             key={idx}
                             align={column.align}
                             value={value}
-                            onChange={(e) => editField(e, row, column)}
+                            onChange={(e) => editField(e, column, idx)}
                           />
                         </TableCell>
                       );

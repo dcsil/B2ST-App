@@ -12,13 +12,6 @@ function analyze() {
   analyzeScript.on("spawn", (data) => {
     console.log("Spawned");
   });
-  //Error logging from python script
-  analyzeScript.stderr.on("data", (data) => {
-    console.log("Pipe error data from python script ...");
-    pythonDataOutput = data.toString();
-    console.log(pythonDataOutput);
-    code = 500;
-  });
   analyzeScript.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);
   });

@@ -4,15 +4,13 @@ require("dotenv").config({ path: "./.env" });
 const { analyze } = require("../marketing_system/tasks/analytics");
 const app = express();
 app.use(express.json());
-app.set("script", analyze());
 app.use("/marketing", require("../routes/marketing"));
-const mongoose = require("mongoose");
 let connection;
-let db;
 const {MongoClient} = require('mongodb');
 
 /* Connecting to the database before each test. */
 beforeAll(async () => {
+    app.set("script", analyze());
     connection = await MongoClient.connect(process.env.MONGO_URL);
 });
 

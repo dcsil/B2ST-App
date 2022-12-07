@@ -29,7 +29,7 @@ function CampaignsContent() {
     });
   }, []);
   return (
-    <DashboardPageProvider name="Campaigns">
+    <DashboardPageProvider name="Revenue">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>

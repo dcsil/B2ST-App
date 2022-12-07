@@ -36,8 +36,8 @@ function App() {
         </Route>
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath='/'/>}>
           <Route exact path="dashboard" element={<Dashboard/>}/>
-          <Route exact path="dashboard/sms" element={<SMSBoard/>} />
-          <Route exact path="dashboard/campaigns" element={<Campaigns/>} />
+          <Route exact path="dashboard/campaign" element={<SMSBoard/>} />
+          <Route exact path="dashboard/revenue" element={<Campaigns/>} />
           <Route exact path="profile" element={<></>} />
           <Route exact path="dashboard/campaigns/forecasting" element={<PromotionForecasting/>} />
           <Route path="/dashboard/plans" element = {user? <Plan></Plan>: <Home></Home>}></Route>

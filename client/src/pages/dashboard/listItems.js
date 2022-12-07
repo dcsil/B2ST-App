@@ -1,59 +1,39 @@
 import * as React from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import HomeIcon from '@mui/icons-material/Home';
-import MessageIcon from '@mui/icons-material/Message';
+import { Home, Dashboard, ShoppingCart, People, BarChart, Message } from '@mui/icons-material';
+import { ListItemIcon, ListItemText, ListSubheader, ListItemButton } from '@mui/material';
 import { Link } from "react-router-dom";
 
 const mainLists = [
   {
     link: "/",
-    icon: <HomeIcon />,
+    icon: <Home />,
     text: "Home"
   },
   {
     link: "/dashboard",
-    icon: <DashboardIcon />,
+    icon: <Dashboard />,
     text: "Dashboard"
   },
-  // {
-  //   link: "/dashboard/orders",
-  //   icon: <ShoppingCartIcon />,
-  //   text: "Orders"
-  // },
   {
     link: "/dashboard/plans",
-    icon: <ShoppingCartIcon />,
+    icon: <ShoppingCart />,
     text: "Plans"
   },
   {
     link: "/dashboard/customers",
-    icon: <PeopleIcon />,
+    icon: <People />,
     text: "Customers"
   },
   {
-    link: "/dashboard/campaigns",
-    icon: <BarChartIcon />,
-    text: "Campaigns"
+    link: "/dashboard/revenue",
+    icon: <BarChart />,
+    text: "Revenue"
   },
   {
-    link: "/dashboard/sms",
-    icon: <MessageIcon />,
-    text: "SMS"
-  },
-
-
-  // {
-  //   link: "/dashboard/integrations",
-  //   icon: <LayersIcon />,
-  //   text: "Integrations"
-  // }
+    link: "/dashboard/campaign",
+    icon: <Message />,
+    text: "Campaign"
+  }
 ]
 
 const secondLists = [];

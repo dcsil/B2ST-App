@@ -18,7 +18,7 @@ export default function SMSBoard() {
   const {sendText} = useSendText(user,setAlert);
   const {addContact} = useAddContact(user,setAlert);
   return (
-    <DashboardPageProvider name="SMS Board" alert={alert} setAlert={setAlert}>
+    <DashboardPageProvider name="Campaign" alert={alert} setAlert={setAlert}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3} padding={2}>
           <Grid item xs={12}>

@@ -6,21 +6,21 @@ const app = express();
 app.use(express.json());
 app.use("/marketing", require("../routes/marketing"));
 let connection;
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require("mongodb");
 
 /* Connecting to the database before each test. */
 beforeAll(async () => {
-    app.set("script", analyze());
-    connection = await MongoClient.connect(process.env.MONGO_URL);
-    if(connection.isConnected()){
-        console.log("Connected to MongoDB");
-    }
+  app.set("script", analyze());
+  connection = await MongoClient.connect(process.env.MONGO_URL);
+  if (connection) {
+    console.log("Connected to MongoDB");
+  }
 });
 
 afterAll(async () => {
-    await connection.close();
-    let script = app.get("script");
-    await script.kill();
+  await connection.close();
+  let script = app.get("script");
+  await script.kill();
 });
 
 describe("Test the ML model initiation", () => {

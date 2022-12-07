@@ -12,6 +12,9 @@ const {MongoClient} = require('mongodb');
 beforeAll(async () => {
     app.set("script", analyze());
     connection = await MongoClient.connect(process.env.MONGO_URL);
+    if(connection.isConnected()){
+        console.log("Connected to MongoDB");
+    }
 });
 
 afterAll(async () => {

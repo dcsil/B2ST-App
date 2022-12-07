@@ -12,6 +12,9 @@ function analyze() {
   analyzeScript.on("spawn", (data) => {
     console.log("Spawned");
   });
+  analyzeScript.stderr.on("data", (data) => {
+    console.log(`stderr: ${data}`);
+  });
   analyzeScript.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);
   });

@@ -13,7 +13,6 @@ import {
   Box,
 } from "@mui/material";
 import axios from "axios";
-import swal from "sweetalert";
 const columns = [
   { id: "order_id", label: "Order ID", minWidth: 100 },
   { id: "product_id", label: "Product ID", minWidth: 100 },

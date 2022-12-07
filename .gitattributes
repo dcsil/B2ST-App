@@ -1,2 +1,0 @@
-ecommerce-events-electronics.csv filter=lfs diff=lfs merge=lfs -text
-ecommerce-purchases-electronics.csv filter=lfs diff=lfs merge=lfs -text

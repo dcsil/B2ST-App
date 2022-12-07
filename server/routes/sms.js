@@ -49,31 +49,37 @@ router.post("/sendAll", async (req, res) => {
   try {
     const { mes, to,sendAt,user,hasCode } = req.body;
     const codes=[];
-    if (!mes || !to || !user) {
-      throw Error("Missing required fields");
+    if (!mes || !to || !user || to.length === 0) {
+      throw new Error("Missing required fields");
     }
     to.map( num => {
       const code = Math.floor(Math.random() * 1000000);
       codes.push(code);
     })
-    Promise.all(to.map(async (number,index) => {
+    Promise.allSettled(to.map(async (number,index) => {
       await sendSMS((hasCode?mes + "\n Promotion Code: " + codes[index]:mes), number,sendAt);
     }))
-    .then(() => {
+    .then((result) => {
       Promise.all(to.map(async (number,index) => {
-        let cur_code = hasCode?codes[index]:null;
-        await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
+        if (result[index].status !== "rejected") {
+          let cur_code = hasCode?codes[index]:null;
+          await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
+        }
       })).then(() => {
-        res.status(200).send("Messages sent");
+        if (result.some((r) => r.status === "rejected")) {
+          res.status(207).json({error:"Some messages failed to send", result});
+        }else{
+          res.status(200).send({message:"Messages sent successfully", result});
+        }
       }).catch(err => {
-        res.status(400).json({error:err.message});
+        res.status(500).json({error:err.message, status: result});
       });
     })
     .catch((err) => {
       res.status(err.status).json({error:err.message});
     });
   } catch (error) {
-    res.status(500).json({error:error.message});
+    res.status(400).json({error:error.message});
   }
 });
 
@@ -81,10 +87,9 @@ router.post("/getRecords",async (req,res) => {
   try {
     const { user } = req.body;
     const records = await Mes.getMessages(user);
-    console.log(records);
     res.status(200).json(records);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(error.status?error.status:400).json({error:error.message});
   }
 });
 

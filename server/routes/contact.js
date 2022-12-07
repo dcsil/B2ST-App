@@ -12,7 +12,7 @@ router.post("/getAll", async (req, res) => {
         const contacts = await Contact.getContacts(user);
         res.status(200).json(contacts);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(error.status?error.status:400).json({error: error.message});
     }
 });
 
@@ -33,6 +33,20 @@ router.delete("/", async (req, res) => {
         res.status(200).send(contact);
     } catch (error) {
         res.status(400).json({error: error.message});
+    }
+});
+
+router.post("/update", async (req, res) => {
+    try {
+        const { oldContact, newContact, user } = req.body;
+        const contact = await Contact.updateContact(oldContact, newContact, user);
+        if(!contact){
+            res.status(404).json({error: "Contact not found"});
+        }else{
+            res.status(200).json(contact);
+        }
+    } catch (error) {
+        res.status(error.status?error.status:400).json({error: error.message});
     }
 });
 

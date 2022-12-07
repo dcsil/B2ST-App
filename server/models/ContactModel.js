@@ -50,17 +50,20 @@ contactSchema.statics.deleteContact = async function(phone, user){
     return contact
 }
 
-contactSchema.statics.updateContact = async function(oldContatc, newContact, user){
+contactSchema.statics.updateContact = async function(oldContact, newContact, user){
     // update contact
-    const contact = await this.findOneAndUpdate({...oldContact, belongsTo: user}, {...newContact});
-    if (!contact) {
-        throw Error('Contact not found')
+    if (!oldContact || !newContact || !user){
+        throw Error("Missing required fields")
     }
+    const contact = await this.findOneAndUpdate({...oldContact, belongsTo: user}, {...newContact});
     return contact
 }
 
 contactSchema.statics.getContacts = async function(user){
     // get all contacts
+    if (!user){
+        throw Error("Missing user")
+    }
     const contacts = await this.find({belongsTo: user})
     return contacts
 }

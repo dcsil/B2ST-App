@@ -56,7 +56,7 @@ echo "==> Source ENV variables"
 if [[ $OSTYPE == 'darwin'* ]]; then
  source .env
 else
- . .env
+ . "$DIR/client/.env"
 fi
 echo "==> ENV variables sourced"
 
@@ -79,7 +79,7 @@ echo "==> Source ENV variables"
 if [[ $OSTYPE == 'darwin'* ]]; then
  source .env
 else
- . .env
+ . "$DIR/server/.env"
 fi
 echo "==> ENV variables sourced"
 

@@ -79,6 +79,9 @@ mesSchema.statics.updateMes = async function(id, active){
 
 mesSchema.statics.getMessages = async function(user){
     // get all contacts
+    if (!user){
+        throw Error("Missing user")
+    }
     const record = await this.find({belongsTo: user})
     return record
 }

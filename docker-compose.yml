@@ -55,7 +55,7 @@ services:
     env_file:
       - ./server/.env
     ports:
-      - 27017:27017
+      - 27000:27000
     volumes:
       - mongo:/data/db
       - ./server/config/mongo_setup.js:/docker-entrypoint-initdb.d/mongo-init.js:ro

@@ -91,7 +91,7 @@ const Plan = () => {
       </Box>
       <Container maxWidth="md" component="main" sx={{ marginTop: 4 }}>
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier, index) => (<PlanCard tier={tier} index={index} checkout={checkout} />))}
+          {tiers.map((tier, index) => (<PlanCard key={index} tier={tier} index={index} checkout={checkout} />))}
         </Grid>
       </Container>
     </DashboardPageProvider>

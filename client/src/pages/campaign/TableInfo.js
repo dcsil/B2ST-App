@@ -36,6 +36,7 @@ export function TableInfo(props) {
           aria-checked={isItemSelected}
           tabIndex={-1}
           key={row.name}
+          className="ContactRow"
           selected={isItemSelected}
         >
           <TableCell padding="checkbox">

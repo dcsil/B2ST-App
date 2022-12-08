@@ -7,16 +7,9 @@ export default function Error404() {
       document.title = "B2ST | Error 404";
     }, []);
   return (
-    <LandingPageProvider
-      containerProps={{ maxWidth: "sm" }}
-      boxProps={{ mt: 8 }}
-    >
-      <Typography
-        component="h1"
-        variant="h2"
-        align="center"
-        color="text.primary"
-        gutterBottom
+    <LandingPageProvider containerProps={{ maxWidth: "sm" }} boxProps={{ mt: 8 }}>
+      <Typography component="h1" variant="h2" align="center"
+        color="text.primary" gutterBottom
       >
         404 Error
       </Typography>
@@ -24,9 +17,7 @@ export default function Error404() {
         The page you are looking for does not exist.
       </Typography>
       <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-        <Link to="/">
-          <Button variant="outlined">Home</Button>
-        </Link>
+        <Button variant="outlined" component={Link} to="/">Home</Button>
       </Stack>
     </LandingPageProvider>
   );

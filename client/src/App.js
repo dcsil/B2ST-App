@@ -24,25 +24,16 @@ const ProtectedRoute = ({ isAllowed, redirectPath, children }) => {
 
 function App() {
   const { user } = useAuthContext();
-
   return (
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          element={
-            <ProtectedRoute isAllowed={!user} redirectPath="/dashboard" />
-          }
-        >
+        <Route element={<ProtectedRoute isAllowed={!user} redirectPath="/dashboard" />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath="/" />}>
           <Route exact path="/dashboard/campaign" element={<CampaignBoard />} />
-          <Route
-            exact
-            path="/dashboard/plans"
-            element={user ? <Plan></Plan> : <Home></Home>}
-          ></Route>
+          <Route exact path="/dashboard/plans" element={user ? <Plan></Plan> : <Home></Home>}/>
           <Route exact path="/dashboard" element={<Revenue />} />
           <Route exact path="/profile" element={<></>} />
         </Route>

@@ -26,31 +26,15 @@ export default function LandingAppBar() {
           <Link to='/' style={{color:'white', textDecoration:'none'}}>B2ST</Link>
         </Typography>
         {user ? (
-          <Button
-            variant="contained"
-            sx={buttonStyle}
-            component={Link}
-            to="/dashboard"
-          >
+          <Button variant="contained" sx={buttonStyle} component={Link} to="/dashboard">
               Dashboard
           </Button>
         ) : (
           <>
-            <Button
-              variant="contained"
-              sx={buttonStyle}
-              component={Link}
-              to="/login"
-            >
+            <Button variant="contained" sx={buttonStyle} component={Link} to="/login">
               Login
             </Button>
-            
-            <Button
-              variant="contained"
-              component={Link}
-              to="/register"
-              sx={buttonStyle}
-            >
+            <Button variant="contained" component={Link} to="/register" sx={buttonStyle}>
               Register
             </Button>
           </>

@@ -15,7 +15,7 @@ function CampaignsContent() {
   }]);
   const [ordersLabels, setOrdersLabels] = React.useState([]);
   React.useEffect(() => {
-    axios.get("http://localhost:5000/orders").then((res) => {
+    axios.get(process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL+"/orders").then((res) => {
       const data = res.data;
       setOrdersData([
         {

@@ -12,7 +12,7 @@ router.post("/getAll", async (req, res) => {
         const contacts = await Contact.getContacts(user);
         res.status(200).json(contacts);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(error.status?error.status:400).json({error: error.message});
     }
 });
 
@@ -22,17 +22,35 @@ router.post("/add", async (req, res) => {
         const contact = await Contact.addContact(name, phone, user);
         res.status(200).json(contact);
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({error: error.message});
     }
 });
 
 router.delete("/", async (req, res) => {
     try {
-        const { id } = req.body;
-        const contact = await Contact.deleteContact(id);
-        res.status(200).send(contact);
+        const { phone,user } = req.body;
+        const contact = await Contact.deleteContact(phone, user);
+        if(!contact){
+            res.status(404).json({error: "Contact not found"});
+        }else{
+            res.status(200).send(contact);
+        }
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({error: error.message});
+    }
+});
+
+router.post("/update", async (req, res) => {
+    try {
+        const { oldContact, newContact, user } = req.body;
+        const contact = await Contact.updateContact(oldContact, newContact, user);
+        if(!contact){
+            res.status(404).json({error: "Contact not found"});
+        }else{
+            res.status(200).json(contact);
+        }
+    } catch (error) {
+        res.status(error.status?error.status:400).json({error: error.message});
     }
 });
 

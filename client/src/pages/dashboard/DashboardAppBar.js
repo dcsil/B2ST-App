@@ -80,7 +80,7 @@ function DashboardAppBarDrawer(props) {
       <List component="nav" sx={{backgroundColor: "#8092AD", color: "white"}}>
         <AppBarListItems component="main"/>
       </List>
-      <List component='nav' style={{ paddingBottom: "60vh", backgroundColor: "#8092AD"}}>
+      <List component='nav' style={{ paddingBottom: "60vh", color: "black", backgroundColor: "#8092AD"}}>
         <ListItem disablePadding>
           <ListItemButton component={Link} onClick={handleLogout}>
             <IconButton>

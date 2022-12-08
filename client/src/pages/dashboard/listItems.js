@@ -40,11 +40,11 @@ export function AppBarListItems(props) {
       {subheader}
     </ListSubheader>
     {list.map((item, index) => (
-      <ListItemButton component={Link} to={item.link} key={index}>
+      <ListItemButton component={Link} to={item.link} key={index} sx={{color: "black"}}>
         <ListItemIcon>
           {item.icon}
         </ListItemIcon>
-        <ListItemText primary={item.text} />
+        <ListItemText primary={item.text}/>
       </ListItemButton>
     ))}
     </React.Fragment>

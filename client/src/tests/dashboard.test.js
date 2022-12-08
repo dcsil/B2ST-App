@@ -1,11 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from 'react-router';
 import App from '../App'
 import { AuthContextProvider } from "../context/AuthContext"
 import { BrowserRouter } from "react-router-dom";
 import userEvent from '@testing-library/user-event'
-import Plan from '../pages/Plan';
 
 jest.mock('axios', ()=>({
     get: () => {

@@ -6,12 +6,7 @@ import DashboardPageProvider from "../../components/PageProvider/DashboardPagePr
 import axios from "axios";
 
 function RevenueContent() {
-  const [ordersData, setOrdersData] = React.useState([{
-    name: "Item A",
-    type: "line",
-    fill: "solid",
-    data: [],
-  }]);
+  const [ordersData, setOrdersData] = React.useState([]);
   const [ordersLabels, setOrdersLabels] = React.useState([]);
   React.useEffect(() => {
     axios.get(process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU_HOST : process.env.REACT_APP_API_URL+"/orders").then((res) => {
@@ -33,9 +28,7 @@ function RevenueContent() {
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <AppChart
-              title="Revenue"
-              subheader="Based on recent orders"
+            <AppChart title="Revenue" subheader="Based on recent orders"
               chartLabels={ordersLabels}
               chartData={ordersData}
             />

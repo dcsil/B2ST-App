@@ -2,14 +2,14 @@ import * as React from 'react';
 import EnhancedTable from './ContactTable';
 import TextDialog from './TextDialog';
 import { Container,Grid } from '@mui/material';
-import SMSTable from './SMSOverview';
+import SMSTable from './CampaignOverview';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ContactDialog from './ContactDialog';
 import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import { useSendText } from '../../hooks/useSendText';
 import { useAddContact } from '../../hooks/useAddContact';
 
-export default function SMSBoard() {
+export default function CampaignBoard() {
   const [open, setOpen] = React.useState(false);
   const [contactOpen, setContactOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
@@ -17,8 +17,11 @@ export default function SMSBoard() {
   const {user} = useAuthContext();
   const {sendText} = useSendText(user,setAlert);
   const {addContact} = useAddContact(user,setAlert);
+  React.useEffect(() => {
+    document.title = "B2ST | Dashboard | Campaign";
+  }, []);
   return (
-    <DashboardPageProvider name="SMS Board" alert={alert} setAlert={setAlert}>
+    <DashboardPageProvider name="Campaign" alert={alert} setAlert={setAlert}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3} padding={2}>
           <Grid item xs={12}>

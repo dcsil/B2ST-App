@@ -94,12 +94,12 @@ export default function InputTable() {
       >
         <Button
           variant="contained"
-          sx={{ marginRight: 1 }}
+          sx={{ marginRight: 1, backgroundColor: "#012956" }}
           onClick={() => addRow()}
         >
           Add Row
         </Button>
-        <Button variant="contained" onClick={() => predict()}>
+        <Button variant="contained" onClick={() => predict()} sx={{ backgroundColor: "#012956" }}>
           Predict
         </Button>
       </Box>
@@ -111,7 +111,7 @@ export default function InputTable() {
                 <TableCell
                   key={idx}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, backgroundColor: "#084C7D", color: "white" }}
                 >
                   {column.label}
                 </TableCell>

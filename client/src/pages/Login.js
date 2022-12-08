@@ -25,6 +25,9 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const {login, error, isLoading} = useLogin()
+  React.useEffect(() => {
+    document.title = "B2ST | Login";
+  }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
     await login(email, password)

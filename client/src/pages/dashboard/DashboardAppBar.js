@@ -70,6 +70,9 @@ function DashboardAppBarDrawer(props) {
   const handleLogout = async () => {
     logout();
   };
+  const gotoDashboard = ()=>{
+    
+  }
   return (
     <Drawer
       variant="permanent"
@@ -111,7 +114,7 @@ function DashboardAppBarDrawer(props) {
           backgroundColor: "white",
         }}
       >
-        <ListItemButton component={Link} onClick={handleLogout}>
+        <ListItemButton component={Link} to="/">
           <IconButton>
             <KeyboardReturn />
           </IconButton>

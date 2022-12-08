@@ -70,9 +70,6 @@ function DashboardAppBarDrawer(props) {
   const handleLogout = async () => {
     logout();
   };
-  const gotoDashboard = ()=>{
-    
-  }
   return (
     <Drawer
       variant="permanent"

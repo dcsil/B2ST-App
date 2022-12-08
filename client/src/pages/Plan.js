@@ -47,51 +47,22 @@ const tiers = [
 
 const PlanCard = (props) => {
   const { tier, index, checkout } = props;
-  React.useEffect(() => {
-    document.title = "B2ST | Dashboard | Plans";
-  }, []);
+  React.useEffect(() => { document.title = "B2ST | Dashboard | Plans";}, []);
   return (
     <Grid item key={index} xs={12} sm={6} md={4}>
-      <Card
-        onClick={(e) => {
-          checkout(e, { index });
-        }}
-        className="payment_card"
-      >
-        <CardHeader
-          title={tier.title}
-          subheader={tier.subheader}
-          titleTypographyProps={{ align: "center" }}
-          action={tier.title === "Pro" ? <StarIcon /> : null}
-          subheaderTypographyProps={{ align: "center" }}
+      <Card onClick={(e) => {checkout(e, { index });}} className="payment_card">
+        <CardHeader title={tier.title} subheader={tier.subheader} titleTypographyProps={{ align: "center" }}
+          action={tier.title === "Pro" ? <StarIcon /> : null} subheaderTypographyProps={{ align: "center" }}
           sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}
         />
         <CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "baseline",
-              mb: 2,
-            }}
-          >
-            <Typography component="h2" variant="h3" color="text.primary">
-              ${tier.price}
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              /mo
-            </Typography>
+          <Box sx={{display: "flex",justifyContent: "center",alignItems: "baseline",mb: 2}}>
+            <Typography component="h2" variant="h3" color="text.primary">${tier.price}</Typography>
+            <Typography variant="h6" color="text.secondary">/mo</Typography>
           </Box>
           <ul>
             {tier.description.map((line) => (
-              <Typography
-                component="li"
-                variant="subtitle1"
-                align="center"
-                key={line}
-              >
-                {line}
-              </Typography>
+              <Typography component="li" variant="subtitle1" align="center" key={line}>{line}</Typography>
             ))}
           </ul>
         </CardContent>
@@ -114,21 +85,13 @@ const Plan = () => {
   return (
     <DashboardPageProvider name="Plans">
       <Box>
-        <Typography
-          variant="h5"
-          align="center"
-          color="text.secondary"
-          component="h4"
-          sx={{ marginTop: 4 }}
-        >
+        <Typography variant="h5" align="center" color="text.secondary" component="h4" sx={{ marginTop: 4 }}>
           Please select a payment plan:
         </Typography>
       </Box>
       <Container maxWidth="md" component="main" sx={{ marginTop: 4 }}>
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier, index) => (
-            <PlanCard tier={tier} index={index} checkout={checkout} />
-          ))}
+          {tiers.map((tier, index) => (<PlanCard key={index} tier={tier} index={index} checkout={checkout} />))}
         </Grid>
       </Container>
     </DashboardPageProvider>

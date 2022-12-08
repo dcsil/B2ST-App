@@ -7,10 +7,10 @@ import InputTable from '../components/table/InputTable';
 AppAnalysis.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
+  list: PropTypes.array,
 };
 
-export default function AppAnalysis({ title, subheader, list, ...other }) {
+export default function AppAnalysis({ title, list,subheader, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />

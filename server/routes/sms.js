@@ -3,7 +3,7 @@ const { AssignedAddOnExtensionInstance } = require("twilio/lib/rest/api/v2010/ac
 require("dotenv").config({path: "./.env"});
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const phone = process.env.PHONE_NUMBER;
+const phone = process.env.TWILIO_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const { MessagingResponse } = require('twilio').twiml;
 const router = express.Router();
@@ -12,24 +12,18 @@ const messaging_sid = process.env.TWILIO_MESSAGING_SERVICE;
 const heroku_host = process.env.HEROKU_HOST;
 
 const sendSMS = async (mes, to,sendAt) => {
-  try{
     const req = {
       body: mes,
-      from: messaging_sid,
-      to: to,
-      statusCallback: `${heroku_host}/sms`
+      from: phone,
+      to: to
     };
     if (sendAt) {
       req.sendAt = new Date(sendAt);
       req.scheduleType = "fixed";
+      req.messagingServiceSid = messaging_sid;
     }
-    await client.messages
+    return await client.messages
     .create(req)
-    .then(message => {return message})
-    .catch(err => {throw err});
-  } catch (err) {
-    throw err;
-  }
 }
 
 const getSMS = async (req) => {
@@ -56,30 +50,27 @@ router.post("/sendAll", async (req, res) => {
       const code = Math.floor(Math.random() * 1000000);
       codes.push(code);
     })
-    Promise.allSettled(to.map(async (number,index) => {
+    const result = await Promise.allSettled(to.map(async (number,index) => {
       await sendSMS((hasCode?mes + "\n Promotion Code: " + codes[index]:mes), number,sendAt);
-    }))
-    .then((result) => {
-      Promise.all(to.map(async (number,index) => {
-        if (result[index].status !== "rejected") {
-          let cur_code = hasCode?codes[index]:null;
-          await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
-        }
-      })).then(() => {
-        if (result.some((r) => r.status === "rejected")) {
-          res.status(207).json({error:"Some messages failed to send", result});
-        }else{
-          res.status(200).send({message:"Messages sent successfully", result});
-        }
-      }).catch(err => {
-        res.status(500).json({error:err.message, status: result});
-      });
-    })
-    .catch((err) => {
-      res.status(err.status).json({error:err.message});
+    })).catch((err) => {
+      throw err;
+    });
+    Promise.all(to.map(async (number,index) => {
+      if (result[index].status !== "rejected") {
+        let cur_code = hasCode?codes[index]:null;
+        await Mes.recordMes(phone,number,user,(hasCode?"one time":"mes"),cur_code,10,mes,sendAt).catch(err => {throw err});
+      }
+    })).then(() => {
+      if (result.some((r) => r.status === "rejected")) {
+        res.status(207).json({error:"Some messages failed to send", result});
+      }else{
+        res.status(200).send({message:"Messages sent successfully", result});
+      }
+    }).catch(err => {
+      res.status(500).json({error:err.message, status: result});
     });
   } catch (error) {
-    res.status(400).json({error:error.message});
+    res.status(error.status? error.status:400).json({error:error.message});
   }
 });
 

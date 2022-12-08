@@ -11,8 +11,7 @@ const buttonStyle = {
   color: "black",
   mr: 2,
   "&:hover": {
-    //you want this to be the same as the backgroundColor above
-    backgroundColor: "#ACB9CC"
+    backgroundColor: "#DDE3EA",
   },
   "a:link": {
     textDecoration: "none"
@@ -23,37 +22,21 @@ export default function LandingAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#084C7D" }}>
       <Toolbar>
-        <Typography href="/" variant="h6" component="div" sx={{ flexGrow: 1, color: "white" }}>
-          B2ST
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1,color:'white' }}>
+          <Link to='/' style={{color:'white', textDecoration:'none'}}>B2ST</Link>
         </Typography>
         {user ? (
-          <Link to="/dashboard">
-            <Button
-              variant="contained"
-              sx={buttonStyle}
-            >
+          <Button variant="contained" sx={buttonStyle} component={Link} to="/dashboard">
               Dashboard
-            </Button>
-          </Link>
+          </Button>
         ) : (
           <>
-            <Link to="/login">
-              <Button
-                variant="contained"
-                sx={buttonStyle}
-              >
-                Login
-              </Button>
-            </Link>
-            
-            <Link to="/register">
-              <Button
-                variant="contained"
-                sx={buttonStyle}
-              >
-                Register
-              </Button>
-            </Link>
+            <Button variant="contained" sx={buttonStyle} component={Link} to="/login">
+              Login
+            </Button>
+            <Button variant="contained" component={Link} to="/register" sx={buttonStyle}>
+              Register
+            </Button>
           </>
         )}
       </Toolbar>

@@ -28,22 +28,8 @@ export default function Home() {
         seamless integratino give us a competitive advantage over our
         competitors.
       </Typography>
-      <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-        <Link to="/">
-          <Button
-            variant="outlined"
-            sx={{
-              backgroundColor: "#043A69",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#043A69",
-              },
-            }}
-          >
-            Developer Team
-          </Button>
-        </Link>
-      </Stack>
+      {/* <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
+      </Stack> */}
     </LandingPageProvider>
   );
 }

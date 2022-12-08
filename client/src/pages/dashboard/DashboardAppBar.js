@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardReturn from "@mui/icons-material/KeyboardReturn";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AppBarListItems } from "./listItems";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -14,8 +15,8 @@ import {
   Divider,
   IconButton,
   List,
-  ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
@@ -73,7 +74,7 @@ function DashboardAppBarDrawer(props) {
     <Drawer
       variant="permanent"
       open={open}
-      sx={{ display: "flex", backgroundColor: "#8092AD" }}
+      sx={{ display: "flex", backgroundColor: "#dde3ea" }}
     >
       <Toolbar
         sx={{
@@ -81,7 +82,8 @@ function DashboardAppBarDrawer(props) {
           alignItems: "center",
           justifyContent: "flex-end",
           px: [1],
-          backgroundColor: "#8092AD",
+          backgroundColor: "#084C7D",
+          color: "white",
         }}
       >
         <Typography
@@ -98,7 +100,7 @@ function DashboardAppBarDrawer(props) {
         </IconButton>
       </Toolbar>
       <Divider sx={{ backgroundColor: "black" }} />
-      <List component="nav" sx={{ backgroundColor: "#8092AD", color: "white" }}>
+      <List component="nav" sx={{ backgroundColor: "white", color: "white" }}>
         <AppBarListItems component="main" />
       </List>
       <List
@@ -106,17 +108,21 @@ function DashboardAppBarDrawer(props) {
         style={{
           paddingBottom: "68vh",
           color: "black",
-          backgroundColor: "#8092AD",
+          backgroundColor: "white",
         }}
       >
-        <ListItem disablePadding>
-          <ListItemButton component={Link} onClick={handleLogout}>
-            <IconButton>
-              <LogoutIcon />
-              <ListItemText sx={{ pl: 2 }} primary="Logout" />
-            </IconButton>
-          </ListItemButton>
-        </ListItem>
+        <ListItemButton component={Link} onClick={handleLogout}>
+          <IconButton>
+            <KeyboardReturn />
+          </IconButton>
+          <ListItemText sx={{ pl: 2, color: "black" }} primary="Homepage" />
+        </ListItemButton>
+        <ListItemButton component={Link} onClick={handleLogout}>
+          <IconButton>
+            <LogoutIcon />
+          </IconButton>
+          <ListItemText sx={{ pl: 2, color: "black" }} primary="Logout" />
+        </ListItemButton>
       </List>
     </Drawer>
   );
@@ -151,7 +157,7 @@ function DashboardTopBar(props) {
             </IconButton>
           )}
         </Typography>
-        {plan ? plan+" • "+email : email}        
+        {plan ? plan + " • " + email : email}
       </Toolbar>
     </AppBar>
   );

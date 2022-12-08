@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { KeyboardReturn, Dashboard, ShoppingCart, BarChart, Message } from '@mui/icons-material';
-import { ListItemIcon, ListItemText, ListSubheader, ListItemButton } from '@mui/material';
+import { Dashboard, ShoppingCart, Message } from '@mui/icons-material';
+import { ListItemIcon, ListItemText, ListSubheader, ListItemButton, Divider } from '@mui/material';
 import { Link } from "react-router-dom";
 
 const mainLists = [
@@ -18,16 +18,6 @@ const mainLists = [
     link: "/dashboard/plans",
     icon: <ShoppingCart />,
     text: "Plans"
-  },
-  {
-    link: "/dashboard/revenue",
-    icon: <BarChart />,
-    text: "Revenue"
-  },
-  {
-    link: "/",
-    icon: <KeyboardReturn />,
-    text: "Homepage"
   }
 ]
 
@@ -40,13 +30,14 @@ export function AppBarListItems(props) {
       {subheader}
     </ListSubheader>
     {list.map((item, index) => (
-      <ListItemButton component={Link} to={item.link} key={index} sx={{color: "black"}}>
+      <ListItemButton component={Link} to={item.link} key={index} sx={{color: "black", pl:3}}>
         <ListItemIcon>
           {item.icon}
         </ListItemIcon>
         <ListItemText primary={item.text}/>
       </ListItemButton>
     ))}
+    <Divider sx={{color: "black", pt: 3}}/>
     </React.Fragment>
   )
 }

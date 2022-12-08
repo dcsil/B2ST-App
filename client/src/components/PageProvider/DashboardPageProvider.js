@@ -33,7 +33,7 @@ const DashboardAlert = (props) => {
 const mdTheme  = createTheme({
   palette: {
     background: {
-      default: "#ACB9CC",
+      default: "#dde3ea",
       mt: 4, mb: 4
     },
   },
@@ -49,7 +49,7 @@ export default function DashboardPageProvider(props) {
         <Box
           component="main"
           sx={{
-            backgroundColor: "#ACB9CC",
+            backgroundColor: "#dde3ea",
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',

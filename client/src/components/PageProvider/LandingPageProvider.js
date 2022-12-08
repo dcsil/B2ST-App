@@ -3,12 +3,11 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingAppBar from "../../pages/LandingAppBar";
-import Footer from "../Footer";
 
 const theme = createTheme({
   palette: {
     background: {
-      default: "#ACB9CC",
+      default: "#dde3ea",
     },
   },
 });
@@ -22,7 +21,6 @@ export default function LandingPageProvider(props) {
       <Container component="main" {...containerProps}>
         <Box {...boxProps}>{children}</Box>
       </Container>
-      <Footer />
     </ThemeProvider>
   );
 }

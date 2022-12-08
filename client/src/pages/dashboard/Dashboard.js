@@ -23,7 +23,7 @@ function DashboardContent() {
   }, []);
   return (
     <DashboardPageProvider name="Dashboard">
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, backgroundColor: "#ACB9CC" }}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, backgroundColor: "#dde3ea" }}>
         <Grid container spacing={3}>
           {list.map((listItem, index) => (
             <Grid item {...listItem.gridProps} key={index}>

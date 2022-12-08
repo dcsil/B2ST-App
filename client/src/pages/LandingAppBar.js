@@ -9,6 +9,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const buttonStyle = {
   backgroundColor: "#ACB9CC",
   color: "black",
+  mr: 2,
   "&:hover": {
     //you want this to be the same as the backgroundColor above
     backgroundColor: "#ACB9CC"
@@ -44,6 +45,7 @@ export default function LandingAppBar() {
                 Login
               </Button>
             </Link>
+            
             <Link to="/register">
               <Button
                 variant="contained"

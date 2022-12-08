@@ -42,6 +42,7 @@ const AppBar = styled(MuiAppBar, {
     width: `calc(100% - ${drawerWidth}px)`,
     transition: TRANSITION(theme,['width', 'margin']),
   }),
+  backgroundColor: "#084C7D"
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -69,25 +70,22 @@ function DashboardAppBarDrawer(props) {
   const {logout} = useLogout();
   const handleLogout = async ()=>{logout()};
   return (
-    <Drawer variant="permanent" open={open} sx={{display:'flex'}}>
-      <Toolbar sx={{ display: 'flex', alignItems: 'center',justifyContent: 'flex-end', px: [1] }}>    
+    <Drawer variant="permanent" open={open} sx={{display:'flex', backgroundColor: "#8092AD"}}>
+      <Toolbar sx={{ display: 'flex', alignItems: 'center',justifyContent: 'flex-end', px: [1], backgroundColor: "#8092AD" }}>    
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
-      <Divider />
-      <List component="nav">
+      <Divider sx={{backgroundColor: "black"}}/>
+      <List component="nav" sx={{backgroundColor: "#8092AD", color: "white"}}>
         <AppBarListItems component="main"/>
       </List>
-      <List component='nav' style={{ marginTop: `auto`}}>
+      <List component='nav' style={{ paddingBottom: "60vh", backgroundColor: "#8092AD"}}>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to='/profile'>
-            <ListItemAvatar>
-              <Avatar/>
-            </ListItemAvatar>
-            <ListItemText sx={{ pl: 2 }} primary='Profile' />
-            <IconButton  onClick={handleLogout}>
+          <ListItemButton component={Link} onClick={handleLogout}>
+            <IconButton>
               <LogoutIcon />
+              <ListItemText sx={{ pl: 2 }} primary='Logout' />
             </IconButton>
           </ListItemButton>
         </ListItem>

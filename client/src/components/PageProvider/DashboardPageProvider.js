@@ -34,6 +34,7 @@ const mdTheme  = createTheme({
   palette: {
     background: {
       default: "#ACB9CC",
+      mt: 4, mb: 4
     },
   },
 });
@@ -48,10 +49,7 @@ export default function DashboardPageProvider(props) {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: "#ACB9CC",
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',

@@ -1,8 +1,5 @@
 const request = require("supertest");
 const express = require("express");
-
-
-const request = require("supertest");
 const express = require("express");
 require("dotenv").config({ path: "./.env" });
 const { MongoClient } = require("mongodb");
@@ -28,5 +25,6 @@ describe("GET /plans/price", () => {
     it("should get current plan list", async () => {
       const res = await request(app).get("/plans/price");
         expect(res).not.toBe(null);
+        expect(res.status).toBe(200);
     });
 });

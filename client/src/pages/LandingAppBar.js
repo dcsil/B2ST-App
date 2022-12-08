@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link } from "@mui/material";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const buttonStyle = {
@@ -11,8 +11,7 @@ const buttonStyle = {
   color: "black",
   mr: 2,
   "&:hover": {
-    //you want this to be the same as the backgroundColor above
-    backgroundColor: "#ACB9CC"
+    backgroundColor: "#DDE3EA",
   },
   "a:link": {
     textDecoration: "none"
@@ -23,37 +22,35 @@ export default function LandingAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#084C7D" }}>
       <Toolbar>
-        <Typography href="/" variant="h6" component="div" sx={{ flexGrow: 1, color: "white" }}>
-          B2ST
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link href="/" underline="none" color="white">B2ST</Link>
         </Typography>
         {user ? (
-          <Link to="/dashboard">
+          <Button
+            variant="contained"
+            sx={buttonStyle}
+            href="dashboard"
+          >
+              Dashboard
+          </Button>
+        ) : (
+          <>
             <Button
               variant="contained"
               sx={buttonStyle}
+              href="login"
+              on
             >
-              Dashboard
+              Login
             </Button>
-          </Link>
-        ) : (
-          <>
-            <Link to="/login">
-              <Button
-                variant="contained"
-                sx={buttonStyle}
-              >
-                Login
-              </Button>
-            </Link>
             
-            <Link to="/register">
-              <Button
-                variant="contained"
-                sx={buttonStyle}
-              >
-                Register
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              href="register"
+              sx={buttonStyle}
+            >
+              Register
+            </Button>
           </>
         )}
       </Toolbar>

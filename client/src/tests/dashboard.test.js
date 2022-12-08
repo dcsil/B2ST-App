@@ -10,7 +10,12 @@ jest.mock('axios', ()=>({
       return Promise.resolve({
         data:[]
       })
-    }
+    },
+    post: () => {
+        return Promise.resolve({
+          data:[]
+        })
+      },
   }))
 
 jest.mock('react-apexcharts',()=>({

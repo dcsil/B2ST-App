@@ -25,6 +25,7 @@ export default function AppChart({ title, subheader, chartLabels, chartData, ...
       intersect: false,
       y: { formatter: (y) => (typeof y !== 'undefined') ? `$${y.toFixed(0)}.00`: y,},
     },
+    colors: ["#084C7D"]
   });
   return (
     <Card {...other}>

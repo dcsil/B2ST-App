@@ -30,7 +30,15 @@ const DashboardAlert = (props) => {
   </Collapse>
 )}
 
-const mdTheme = createTheme();
+const mdTheme  = createTheme({
+  palette: {
+    background: {
+      default: "#dde3ea",
+      mt: 4, mb: 4
+    },
+  },
+});
+
 export default function DashboardPageProvider(props) {
   const { name, backto, children, alert, setAlert } = props;
   return (
@@ -41,10 +49,7 @@ export default function DashboardPageProvider(props) {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: "#dde3ea",
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',

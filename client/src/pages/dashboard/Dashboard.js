@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Container,Grid,Paper } from '@mui/material';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import Traffic from './Traffic';
 import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import Chart from './Chart';
@@ -19,10 +18,12 @@ const list = [
 ];
 
 function DashboardContent() {
-  const {user} = useAuthContext()
+  React.useEffect(() => {
+    document.title = "B2ST | Dashboard";
+  }, []);
   return (
     <DashboardPageProvider name="Dashboard">
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, backgroundColor: "#dde3ea" }}>
         <Grid container spacing={3}>
           {list.map((listItem, index) => (
             <Grid item {...listItem.gridProps} key={index}>

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Container, Grid } from "@mui/material";
 import AppChart from "../../sections/AppChart";
-import Configuration from "./Configuration";
 import AppAnalysis from "../../sections/AppAnalysis";
 import DashboardPageProvider from "../../components/PageProvider/DashboardPageProvider";
 import axios from "axios";
@@ -27,24 +26,21 @@ function RevenueContent() {
       ]);
       setOrdersLabels(data.map((i) => i.date));
     });
-    document.title = "B2ST | Dashboard | Revenue"
+    document.title = "B2ST | Dashboard"
   }, []);
   return (
-    <DashboardPageProvider name="Revenue">
+    <DashboardPageProvider name="Dashboard">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <AppChart
               title="Revenue"
-              subheader="in last 12 months"
+              subheader="Based on recent orders"
               chartLabels={ordersLabels}
               chartData={ordersData}
             />
           </Grid>
-          <Grid item xs={12} md={6} lg={6}>
-            <Configuration />
-          </Grid>
-          <Grid item xs={12} md={6} lg={6}>
+          <Grid item xs={12} md={12} lg={12}>
             <AppAnalysis title="Analysis" />
           </Grid>
         </Grid>

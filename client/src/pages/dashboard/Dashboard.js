@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Container,Grid,Paper } from '@mui/material';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import Traffic from './Traffic';
 import DashboardPageProvider from '../../components/PageProvider/DashboardPageProvider';
 import Chart from './Chart';
@@ -19,7 +18,6 @@ const list = [
 ];
 
 function DashboardContent() {
-  const {user} = useAuthContext()
   React.useEffect(() => {
     document.title = "B2ST | Dashboard";
   }, []);

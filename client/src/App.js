@@ -9,11 +9,10 @@ import {
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/dashboard/Dashboard";
 import CampaignBoard from "./pages/campaign/CampaignBoard";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Plan from "./pages/Plan";
-import Revenue from "./pages/revenue/Revenue";
+import Revenue from "./pages/dashboard/Revenue";
 import Error404 from "./pages/Error404";
 
 const ProtectedRoute = ({ isAllowed, redirectPath, children }) => {
@@ -40,13 +39,12 @@ function App() {
         </Route>
         <Route element={<ProtectedRoute isAllowed={!!user} redirectPath="/" />}>
           <Route exact path="/dashboard/campaign" element={<CampaignBoard />} />
-          <Route exact path="/dashboard/revenue" element={<Revenue />} />
           <Route
             exact
             path="/dashboard/plans"
             element={user ? <Plan></Plan> : <Home></Home>}
           ></Route>
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/dashboard" element={<Revenue />} />
           <Route exact path="/profile" element={<></>} />
         </Route>
         <Route exact path="/page-not-found" element={<Error404 />} />

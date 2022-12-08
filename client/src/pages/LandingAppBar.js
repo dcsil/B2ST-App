@@ -23,8 +23,8 @@ export default function LandingAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#084C7D" }}>
       <Toolbar>
-        <Typography href="/" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to={"/"}>B2ST</Link>
+        <Typography href="/" variant="h6" component="div" sx={{ flexGrow: 1, color: "white" }}>
+          B2ST
         </Typography>
         {user ? (
           <Link to="/dashboard">

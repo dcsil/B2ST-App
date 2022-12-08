@@ -31,11 +31,10 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route element={<ProtectedRoute isAllowed={!!user} redirectPath="/" />}>
+        <Route element={<ProtectedRoute isAllowed={user} redirectPath="/" />}>
           <Route exact path="/dashboard/campaign" element={<CampaignBoard />} />
           <Route exact path="/dashboard/plans" element={user ? <Plan></Plan> : <Home></Home>}/>
           <Route exact path="/dashboard" element={<Revenue />} />
-          <Route exact path="/profile" element={<></>} />
         </Route>
         <Route exact path="/page-not-found" element={<Error404 />} />
         <Route path="*" element={<Navigate to="/page-not-found" replace />} />

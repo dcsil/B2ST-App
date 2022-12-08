@@ -1,6 +1,7 @@
 
 import React from 'react';
 import App from '../App';
+import Revenue from "../pages/dashboard/Revenue";
 import { AuthContextProvider } from "../context/AuthContext"
 import { render,screen } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
@@ -38,5 +39,20 @@ it('landing page navigating', async () => {
   await user.click(screen.getByText(/Register/i));
   expect(screen.getAllByText(/Sign up/i)[0]).toBeInTheDocument();
   await user.click(screen.getByText(/B2ST/i));
+  expect(screen.getByText(/Welcome to B2ST/i)).toBeInTheDocument();
+});
+
+it('landing to dashboard before login should navigate to home', async () => {
+  renderwithRouter(<App />, { route: '/dashboard' });
+  expect(screen.getByText(/Welcome to B2ST/i)).toBeInTheDocument();
+});
+
+it('landing to campaign before login should navigate to home', async () => {
+  renderwithRouter(<App />, { route: '/dashboard/campaign' });
+  expect(screen.getByText(/Welcome to B2ST/i)).toBeInTheDocument();
+});
+
+it('landing to paln before login should navigate to home', async () => {
+  renderwithRouter(<App />, { route: '/dashboard/plans' });
   expect(screen.getByText(/Welcome to B2ST/i)).toBeInTheDocument();
 });

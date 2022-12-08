@@ -5,8 +5,10 @@ const { MongoClient } = require("mongodb");
 const print = console.log
 const app = express();
 app.use(express.json());
-
+const router = require("../routes/plans")
 /* Connecting to the database before each test. */
+app.use("/", router);
+
 beforeAll(async () => {
     
     connection = await MongoClient.connect(process.env.MONGO_URL);
@@ -60,6 +62,7 @@ describe("POST /subs", () => {
     // print("+++++++++++++++++++++++++++++++++++++++++")
     // print(res.body)
       expect(res.statusCode).not.toBe(400);
+      expect(res.body).not.toBe(null)
     });
     
   });

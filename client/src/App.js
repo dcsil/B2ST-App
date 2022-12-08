@@ -26,7 +26,6 @@ function App() {
   const { user } = useAuthContext();
 
   return (
-    <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
         <Route
@@ -50,7 +49,6 @@ function App() {
         <Route exact path="/page-not-found" element={<Error404 />} />
         <Route path="*" element={<Navigate to="/page-not-found" replace />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 

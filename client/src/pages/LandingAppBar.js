@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const buttonStyle = {
@@ -22,14 +22,15 @@ export default function LandingAppBar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#084C7D" }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link href="/" underline="none" color="white">B2ST</Link>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1,color:'white' }}>
+          <Link to='/' style={{color:'white', textDecoration:'none'}}>B2ST</Link>
         </Typography>
         {user ? (
           <Button
             variant="contained"
             sx={buttonStyle}
-            href="dashboard"
+            component={Link}
+            to="/dashboard"
           >
               Dashboard
           </Button>
@@ -38,15 +39,16 @@ export default function LandingAppBar() {
             <Button
               variant="contained"
               sx={buttonStyle}
-              href="login"
-              on
+              component={Link}
+              to="/login"
             >
               Login
             </Button>
             
             <Button
               variant="contained"
-              href="register"
+              component={Link}
+              to="/register"
               sx={buttonStyle}
             >
               Register

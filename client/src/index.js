@@ -4,6 +4,7 @@ import './index.css';
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import App from './App';
+import { BrowserRouter } from "react-router-dom";
 
 import { AuthContextProvider } from "./context/AuthContext"
 Sentry.init({
@@ -18,7 +19,9 @@ Sentry.init({
 
 ReactDOM.render(
   <AuthContextProvider>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </AuthContextProvider>
 
 , document.getElementById('root'));

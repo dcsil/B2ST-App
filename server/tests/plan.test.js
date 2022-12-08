@@ -5,9 +5,9 @@ const { MongoClient } = require("mongodb");
 const print = console.log
 const app = express();
 app.use(express.json());
-const router = require("../routes/plans")
-/* Connecting to the database before each test. */
-app.use("/", router);
+
+app.use("/plans", require("../routes/plans"));
+app.use("/subs", require("../routes/subs"))
 
 beforeAll(async () => {
     
@@ -17,28 +17,28 @@ beforeAll(async () => {
     }
   });
   
-  afterAll(async () => {
-    await connection.close();
-  });
+  // afterAll(async () => {
+  //   await connection.close();
+  // });
 
 
-describe("GET /plans/price", () => {
+describe("POST /plans/price", () => {
     it("should not have error status", async () => {
-      const res = await request(app).get("/plans/price");
+      const res = await request(app).post("/plans/price").send({});
         expect(res).not.toBe(null);
         expect(res).not.toBe(404)
     });
 
     it("should get current plan list", async () => {
-        const res = await request(app).get("/plans/price");
+        const res = await request(app).get("/plans/price").send({});
           expect(res.body).not.toBe(null);
-          expect(res.statusCode).not.toBe(400);
+          expect(res.statusCode).toBe(200);
       });
 });
 
-describe("GET /plans/price", () => {
+describe("POST /plans/price", () => {
     it("should not have error status", async () => {
-      const res = await request(app).get("/plans/price");
+      const res = await request(app).post("/plans/price").send({});
         expect(res).not.toBe(null);
         expect(res).not.toBe(404)
     });
@@ -62,7 +62,7 @@ describe("POST /subs", () => {
     // print("+++++++++++++++++++++++++++++++++++++++++")
     // print(res.body)
       expect(res.statusCode).not.toBe(400);
-      expect(res.body).not.toBe(null)
+      expect(res.body).toBe("some body in json format")
     });
     
   });

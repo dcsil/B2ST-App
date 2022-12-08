@@ -45,6 +45,7 @@ describe("POST /marketing/query", () => {
           ],
         ],
       });
+    console.log(res.body)
     expect(res.statusCode).toBe(200);
   });
   it("should return consecutive predictions", async () => {

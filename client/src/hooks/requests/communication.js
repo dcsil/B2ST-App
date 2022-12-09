@@ -3,15 +3,15 @@ function capitalize(str) {
 }
 function handleRequest(request, setAlert, type) {
   fetch(request)
-    .then((res) => {
+    .then( async (res) => {
       if (res.status === 200) {
         setAlert({
           severity: "success",
           message: capitalize(type)+" added successfully!",
         });
       } else {
-        setAlert({ severity: "error", message: "Error adding "+type+"!" });
-        console.log(res);
+        const result = await res.json();
+        setAlert({ severity: "error", message: result.error });
       }
     })
     .catch((error) => {

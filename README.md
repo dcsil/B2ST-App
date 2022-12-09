@@ -109,8 +109,10 @@ Note: Users do not need to create a Stripe account to make paymnet/subscribe. Th
 - Click Register button on the top right.
 - Type in your first name, last name, email address and password. make sure all fields are valid and all checkings are passed.
 - Click Sign up, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- If you already have an account, click "Already have an account? Sign in" to sign in.
 ### Log in
 - If you already have an account, Log in by type in your email, and the corresponding password. 
-- You will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- If logged in sucessfully you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- If you do not have an account, click "Don't have an account? Sign Up" to Sign up.
 ### Log out
 - If you are already signed in, Click on Log out button at the left side, you will be logged out and redirect to main page. 

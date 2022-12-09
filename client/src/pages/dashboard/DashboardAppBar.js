@@ -79,9 +79,20 @@ function DashboardAppBarDrawer(props) {
       <List component="nav" sx={{ backgroundColor: "white", color: "white" }}>
         <AppBarListItems component="main" />
       </List>
-      <List component="nav" style={{ paddingBottom: "68vh", color: "black", backgroundColor: "white"}}>
-        <ListItemButton component={Link} onClick={handleLogout}>
-          <IconButton><KeyboardReturn /></IconButton>
+
+      <List
+        component="nav"
+        style={{
+          paddingBottom: "68vh",
+          color: "black",
+          backgroundColor: "white",
+        }}
+      >
+        <ListItemButton component={Link} to="/">
+          <IconButton>
+            <KeyboardReturn />
+          </IconButton>
+
           <ListItemText sx={{ pl: 2, color: "black" }} primary="Homepage" />
         </ListItemButton>
         <ListItemButton component={Link} onClick={handleLogout}>

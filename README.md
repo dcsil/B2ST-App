@@ -96,8 +96,20 @@ Note: You do not need to create a Stripe account to subscribe. This section is o
 - Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key to your own key by replacing /server/.env STRIPE_SEC string. 
 
 ## Subscription 
-- Login as a valid user, or register as a new one.
-- Click on Plans button at the left navbar. 
-- Choose a desired plan. You will be redirect to Payment page. This page is supported by Stripe. 
+- You need to login as a valid user to subscribe our plan, If you are not, follow User Authentication section to register as our new user. 
+- Go to Dashboard, click on Plans button at the left navbar. 
+- Choose a desired plan. By clicking it, you will be redirect to a Payment page. This page is supported by Stripe. 
 - Check whether the email and the price is correct. If so, use 4242 4242 4242 4242 as test visa card to pay. 
-- By clicking Subscribe button, if this payment is sucess, you wiil be redirect to main page and there will be a updated paln shown on top right corner of you dashboard. 
+- By clicking Subscribe button, if this payment is sucess, you wiil be redirect to main page.
+- Go to Dashboard, there will be an updated paln shown on top right corner of you dashboard. 
+
+## User Authentication
+### Sign up
+- Click Register button on the top right.
+- Type in your first name, last name, email address and password. make sure all fields are valid.
+- Click Sign up button, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+### Log in
+- If you already have an account, Log in by type in your email, and the corresponding password. 
+- You will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+### Log out
+- If you are already signed in, Click on Log out button at the left side, you will be logged out and redirect to main page. 

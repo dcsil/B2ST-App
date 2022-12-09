@@ -2,6 +2,15 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/40ef6e0914ef31702018/test_coverage)](https://codeclimate.com/repos/6362eba2a7651b2e18001635/test_coverage)
 
 # Wellcome to B2ST!
+## Deployment and Production
+
+- Deployed to Heroku automatically once CI is green on master, using github workflow `heroku-deployment.ymml`.
+
+- Production is available with Heroku.
+
+    - Client: https://b2st-app.herokuapp.com/
+
+    - Server: https://b2st-server.herokuapp.com/
 
 # Demo Instruction
 
@@ -114,13 +123,4 @@ We used datasets from Kaggle to train our marketing system which originated at t
 - Database
     - After setup with bootstrap, run `docker-compose exec -it b2st-app_mongo_1 mongosh` to access the local DB.
 
-## Deployment and Production
-
-- Deployed to Heroku automatically once CI is green on master, using github workflow `heroku-deployment.ymml`.
-
-- Production is available with Heroku.
-
-    - Client: https://b2st-app.herokuapp.com/
-
-    - Server: https://b2st-server.herokuapp.com/
 

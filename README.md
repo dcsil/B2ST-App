@@ -76,7 +76,7 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
  - You can change your plan at anytime by repeating the same process.
  
 
-### Development
+# For developer
 
 1. On macOs, install Docker/Docker Compose. Make sure docker daemon is running. If is LINUX, go to next step.
 2. At root folder, run `sh script/bootstrap`. This will install the required dependencies for this app and run `docker-compose up`.

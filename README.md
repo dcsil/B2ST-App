@@ -90,7 +90,7 @@ We used datasets from Kaggle to train our marketing system which originated at t
     
 
 ## Stripe Authentication:
-Note: Users do not need to create a Stripe account to make paymnet/subscribe. This section is only for developers!
+Note: Users do not need to create a Stripe account to make payment/subscribe. This section is only for developers!
 - Create a Stripe account. The Stripe API uses API keys to authenticate requests. You can view and manage your API keys in the Stripe Dashboard.
 
 - Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key by replacing /server/.env STRIPE_SEC string. 

@@ -109,6 +109,13 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
 
 - Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key by replacing /server/.env STRIPE_SEC string. 
 
+ ## Revenue Model. 
+ - After logging in, you will be redirect to dashboard page. 
+ - By putting your mouse on the diagram, you will be able to check revenue for each day. 
+ - You will see a default analysis with brand name “huawei”
+ - You can click on “add row” button to create a new row. 
+ - The data provided to the machine learning model is currently based on the data we manually uploaded. We will make it dynamic after MVP level. 
+ 
 ## Plan Subscription
  - You need to login as a valid user to subscribe our plan, If you are not, follow User Authentication section to register as our new user.
  - Go to Dashboard, click on Plans button at the left navbar.
@@ -117,3 +124,6 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
  - By clicking Subscribe button, if this payment is success, you will be redirect to main page.
  - Go to Dashboard, there will be an updated plan shown up on top right corner of you dashboard.
  - You can change your plan at anytime by repeating the same process.
+ 
+
+

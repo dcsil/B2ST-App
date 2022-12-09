@@ -69,7 +69,7 @@ const expired = (time) => {
 }
 
 const ContactTableRow = (row) => (
-  <TableRow key={row.name} hover tabIndex={-1} >
+  <TableRow key={row.name} className="TextRow" hover tabIndex={-1} >
     <TableCell component="th" scope="row">
       {row.type}
     </TableCell>

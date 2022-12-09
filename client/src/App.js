@@ -24,33 +24,21 @@ const ProtectedRoute = ({ isAllowed, redirectPath, children }) => {
 
 function App() {
   const { user } = useAuthContext();
-
   return (
-    <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          element={
-            <ProtectedRoute isAllowed={!user} redirectPath="/dashboard" />
-          }
-        >
+        <Route element={<ProtectedRoute isAllowed={!user} redirectPath="/dashboard" />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route element={<ProtectedRoute isAllowed={!!user} redirectPath="/" />}>
+        <Route element={<ProtectedRoute isAllowed={user} redirectPath="/" />}>
           <Route exact path="/dashboard/campaign" element={<CampaignBoard />} />
-          <Route
-            exact
-            path="/dashboard/plans"
-            element={user ? <Plan></Plan> : <Home></Home>}
-          ></Route>
+          <Route exact path="/dashboard/plans" element={user ? <Plan></Plan> : <Home></Home>}/>
           <Route exact path="/dashboard" element={<Revenue />} />
-          <Route exact path="/profile" element={<></>} />
         </Route>
         <Route exact path="/page-not-found" element={<Error404 />} />
         <Route path="*" element={<Navigate to="/page-not-found" replace />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 

@@ -17,6 +17,7 @@ import {
   List,
   ListItemButton,
   ListItemIcon,
+  Box,
   ListItemText,
   Toolbar,
   Typography,
@@ -67,42 +68,18 @@ const Drawer = styled(MuiDrawer, {
 function DashboardAppBarDrawer(props) {
   const { open, toggleDrawer } = props;
   const { logout } = useLogout();
-  const handleLogout = async () => {
-    logout();
-  };
+  const handleLogout = async () => { logout();};
   return (
-    <Drawer
-      variant="permanent"
-      open={open}
-      sx={{ display: "flex", backgroundColor: "#dde3ea" }}
-    >
-      <Toolbar
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          px: [1],
-          backgroundColor: "#084C7D",
-          color: "white",
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{ flexGrow: 1, paddingLeft: "10px" }}
-        >
-          B2ST
-        </Typography>
-        <IconButton onClick={toggleDrawer}>
-          <ChevronLeftIcon />
-        </IconButton>
+    <Drawer variant="permanent" open={open} sx={{ display: "flex", backgroundColor: "#dde3ea" }}>
+      <Toolbar sx={{ display: "flex",alignItems: "center",justifyContent: "flex-end",px: [1],backgroundColor: "#084C7D",color: "white",}}>
+        <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1, paddingLeft: "10px" }}>B2ST</Typography>
+        <IconButton onClick={toggleDrawer}><ChevronLeftIcon /></IconButton>
       </Toolbar>
       <Divider sx={{ backgroundColor: "black" }} />
       <List component="nav" sx={{ backgroundColor: "white", color: "white" }}>
         <AppBarListItems component="main" />
       </List>
+
       <List
         component="nav"
         style={{
@@ -115,46 +92,32 @@ function DashboardAppBarDrawer(props) {
           <IconButton>
             <KeyboardReturn />
           </IconButton>
+
           <ListItemText sx={{ pl: 2, color: "black" }} primary="Homepage" />
         </ListItemButton>
         <ListItemButton component={Link} onClick={handleLogout}>
-          <IconButton>
-            <LogoutIcon />
-          </IconButton>
+          <IconButton><LogoutIcon /></IconButton>
           <ListItemText sx={{ pl: 2, color: "black" }} primary="Logout" />
         </ListItemButton>
       </List>
     </Drawer>
-  );
-}
+  );}
 
 function DashboardTopBar(props) {
   const { open, toggleDrawer, plan, email, name, backto } = props;
   return (
     <AppBar position="absolute" open={open}>
       <Toolbar sx={{ pr: "24px" }}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={toggleDrawer}
+        <IconButton edge="start" color="inherit"
+          aria-label="open drawer" onClick={toggleDrawer}
           sx={{ marginRight: "36px", ...(open && { display: "none" }) }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{ flexGrow: 1 }}
-        >
+        <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
           {name}
-
           {backto && (
-            <IconButton component={Link} to={backto} aria-label="back">
-              <ChevronLeftIcon />
-            </IconButton>
+            <IconButton component={Link} to={backto} aria-label="back"><ChevronLeftIcon /></IconButton>
           )}
         </Typography>
         {plan ? plan + " • " + email : email}
@@ -167,13 +130,9 @@ export default function DashboardAppBar(props) {
   const [open, setOpen] = React.useState(true);
   const [email, setEmail] = useState("");
   const [plan, setPlan] = useState("");
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  const toggleDrawer = () => {setOpen(!open);};
   const { user } = useAuthContext();
-  useEffect(() => {
-    getPlan();
-  }, []);
+  useEffect(() => {getPlan();}, []);
   const getPlan = async () => {
     const email = user.email ? user.email : user.user.email;
     setEmail(email);
@@ -184,13 +143,7 @@ export default function DashboardAppBar(props) {
   };
   return (
     <>
-      <DashboardTopBar
-        open={open}
-        toggleDrawer={toggleDrawer}
-        plan={plan}
-        email={email}
-        {...props}
-      />
+      <DashboardTopBar open={open} toggleDrawer={toggleDrawer} plan={plan} email={email} {...props}/>
       <DashboardAppBarDrawer open={open} toggleDrawer={toggleDrawer} />
     </>
   );

@@ -9,17 +9,28 @@ app.use(express.json());
 app.use("/plans", require("../routes/plans"));
 app.use("/subs", require("../routes/subs"))
 
+const mongoose = require("mongoose");
 beforeAll(async () => {
     
     connection = await MongoClient.connect(process.env.MONGO_URL);
     if (connection) {
       console.log("Connected to MongoDB");
     }
+
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+     }).then((result) => {
+      console.log(result.connection.readyState)  
+      console.log(result.connection.host)
+     }).catch((err) => {
+    
+     });;
   });
   
-  // afterAll(async () => {
-  //   await connection.close();
-  // });
+  afterAll(async () => {
+    await connection.close();
+  });
 
 
 describe("POST /plans/price", () => {
@@ -57,12 +68,12 @@ describe("POST /subs", () => {
         .post("/subs")
         .type("json")
         .send({
-            "email": "a@a.com"
+            "": ""
         });
     // print("+++++++++++++++++++++++++++++++++++++++++")
     // print(res.body)
-      expect(res.statusCode).not.toBe(400);
-      expect(res.body).toBe("some body in json format")
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toEqual({"error": "Authenticated user not found"})
     });
     
   });

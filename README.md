@@ -90,24 +90,25 @@ We used datasets from Kaggle to train our marketing system which originated at t
     
 
 ## Stripe Authentication:
-Note: You do not need to create a Stripe account to subscribe. This section is only for developers that wish to contribute!
+Note: Users do not need to create a Stripe account to make paymnet/subscribe. This section is only for developers!
 - Create a Stripe account. The Stripe API uses API keys to authenticate requests. You can view and manage your API keys in the Stripe Dashboard.
 
-- Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key to your own key by replacing /server/.env STRIPE_SEC string. 
+- Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key by replacing /server/.env STRIPE_SEC string. 
 
 ## Subscription 
 - You need to login as a valid user to subscribe our plan, If you are not, follow User Authentication section to register as our new user. 
 - Go to Dashboard, click on Plans button at the left navbar. 
 - Choose a desired plan. By clicking it, you will be redirect to a Payment page. This page is supported by Stripe. 
 - Check whether the email and the price is correct. If so, use 4242 4242 4242 4242 as test visa card to pay. 
-- By clicking Subscribe button, if this payment is sucess, you wiil be redirect to main page.
-- Go to Dashboard, there will be an updated paln shown on top right corner of you dashboard. 
+- By clicking Subscribe button, if this payment is sucess, you will be redirect to main page.
+- Go to Dashboard, there will be an updated paln shown up on top right corner of you dashboard. 
+- You can change your plan at anytime by repeating the same process.
 
 ## User Authentication
 ### Sign up
 - Click Register button on the top right.
-- Type in your first name, last name, email address and password. make sure all fields are valid.
-- Click Sign up button, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- Type in your first name, last name, email address and password. make sure all fields are valid and all checkings are passed.
+- Click Sign up, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
 ### Log in
 - If you already have an account, Log in by type in your email, and the corresponding password. 
 - You will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 

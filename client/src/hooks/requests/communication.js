@@ -4,19 +4,19 @@ function capitalize(str) {
 function handleRequest(request, setAlert, type) {
   fetch(request)
     .then( async (res) => {
+      const result = await res.json();
+      console.log(result);
       if (res.status === 200) {
         setAlert({
           severity: "success",
           message: capitalize(type)+" added successfully!",
         });
       } else {
-        const result = await res.json();
         setAlert({ severity: "error", message: result.error });
       }
     })
     .catch((error) => {
       setAlert({ severity: "error", message: "Server Error!" });
-      console.log(error);
     });
 }
 async function handleAuthContext(setIsLoading, setError, dispatch, response, authType) {

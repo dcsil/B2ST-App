@@ -109,7 +109,7 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
 
 - Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key by replacing /server/.env STRIPE_SEC string. 
 
-## Subscription
+## Plan Subscription
  - You need to login as a valid user to subscribe our plan, If you are not, follow User Authentication section to register as our new user.
  - Go to Dashboard, click on Plans button at the left navbar.
  - Choose a desired plan. By clicking it, you will be redirect to a Payment page. This page is supported by Stripe.

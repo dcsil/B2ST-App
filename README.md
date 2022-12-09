@@ -63,6 +63,20 @@ We used datasets from Kaggle to train our marketing system which originated at t
     - Server: https://b2st-server.herokuapp.com/
 
 # Demo Instruction
+
+## User Authentication
+### Sign up
+- Click Register button on the top right.
+- Type in your first name, last name, email address and password. make sure all fields are valid and all checkings are passed.
+- Click Sign up, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- If you already have an account, click "Already have an account? Sign in" to sign in.
+### Log in
+- If you already have an account, Log in by type in your email, and the corresponding password. 
+- If logged in sucessfully you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
+- If you do not have an account, click "Don't have an account? Sign Up" to Sign up.
+### Log out
+- If you are already signed in, Click on Log out button at the left side, you will be logged out and redirect to main page. 
+
 ## SMS 
 1. Pre: Get twilio credential if you want to test with your phone (Note: Twilio restrict trial account to send to unverified phone)
     - Go to twilio website and register for a trial twilio account, it should ask you to verify with your phone
@@ -95,7 +109,7 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
 
 - Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key by replacing /server/.env STRIPE_SEC string. 
 
-## Subscription 
+## Plan Subscription 
 - You need to login as a valid user to subscribe our plan, If you are not, follow User Authentication section to register as our new user. 
 - Go to Dashboard, click on Plans button at the left navbar. 
 - Choose a desired plan. By clicking it, you will be redirect to a Payment page. This page is supported by Stripe. 
@@ -103,16 +117,3 @@ Note: Users do not need to create a Stripe account to make payment/subscribe. Th
 - By clicking Subscribe button, if this payment is sucess, you will be redirect to main page.
 - Go to Dashboard, there will be an updated paln shown up on top right corner of you dashboard. 
 - You can change your plan at anytime by repeating the same process.
-
-## User Authentication
-### Sign up
-- Click Register button on the top right.
-- Type in your first name, last name, email address and password. make sure all fields are valid and all checkings are passed.
-- Click Sign up, you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
-- If you already have an account, click "Already have an account? Sign in" to sign in.
-### Log in
-- If you already have an account, Log in by type in your email, and the corresponding password. 
-- If logged in sucessfully you will be redirect to dashboard page. Your email address will be shown on top right corner of the dashboard. 
-- If you do not have an account, click "Don't have an account? Sign Up" to Sign up.
-### Log out
-- If you are already signed in, Click on Log out button at the left side, you will be logged out and redirect to main page. 

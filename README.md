@@ -62,8 +62,8 @@ We used datasets from Kaggle to train our marketing system which originated at t
 
     - Server: https://b2st-server.herokuapp.com/
 
-## Demo Instruction
-### SMS 
+# Demo Instruction
+## SMS 
 1. Pre: Get twilio credential if you want to test with your phone (Note: Twilio restrict trial account to send to unverified phone)
     - Go to twilio website and register for a trial twilio account, it should ask you to verify with your phone
     - Follow the instruction on twilio dashboard to get a twilio phone number
@@ -87,3 +87,17 @@ We used datasets from Kaggle to train our marketing system which originated at t
         - Can also schedule a text in a range of 20 min after and 7 days from now
         - Click submit. If all texts send without error, you will see a green alert popup.
     - If you have sent some texts, you can click on "refresh" on the below table and should see some rows show up.
+    
+
+## Stripe Authentication:
+Note: You do not need to create a Stripe account to subscribe. This section is only for developers that wish to contribute!
+- Create a Stripe account. The Stripe API uses API keys to authenticate requests. You can view and manage your API keys in the Stripe Dashboard.
+
+- Test mode secret keys have the prefix sk_test_ and live mode secret keys have the prefix sk_live_. Use your API key by setting it in the initial configuration of stripe. The Node.js library will then automatically send this key in each request. You can update this API key to your own key by replacing /server/.env STRIPE_SEC string. 
+
+## Subscription 
+- Login as a valid user, or register as a new one.
+- Click on Plans button at the left navbar. 
+- Choose a desired plan. You will be redirect to Payment page. This page is supported by Stripe. 
+- Check whether the email and the price is correct. If so, use 4242 4242 4242 4242 as test visa card to pay. 
+- By clicking Subscribe button, if this payment is sucess, you wiil be redirect to main page and there will be a updated paln shown on top right corner of you dashboard. 
